@@ -1,4 +1,4 @@
-# Islands: A Brief Introduction to Generalized Linear Models
+# Islands: Generalized Linear Models
 
 ## Idea
 https://github.com/pxr687/islands_idea
