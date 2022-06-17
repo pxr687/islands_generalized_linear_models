@@ -3,6 +3,8 @@
 ## Idea
 https://github.com/pxr687/islands_idea
 
+Island maps: https://www.redblobgames.com/maps/mapgen4/
+
 
 ## To Do
 
