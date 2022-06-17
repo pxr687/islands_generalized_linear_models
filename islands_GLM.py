@@ -4,13 +4,66 @@ import matplotlib.pyplot as _plt
 import scipy.stats as _stats
 from scipy.optimize import minimize as _minimize
 
+# just some convenience functions (for plots etc.) for this textbook
+# may contain redundant unused functions, as there have been several revisions
+# and I may not have removed the old functions!
+
 def r_ify(fig_size = (7,6)):
     "Make plots look like R!"
     _plt.style.use('ggplot')
     _plt.rc('axes', facecolor='white', edgecolor='black',
        axisbelow=True, grid=False)
     _plt.rcParams['figure.figsize'] = fig_size
+
+def normal_pdf(y, y_hat, var):
+  
+  output = 1/_np.sqrt(var**2 * 2 * _np.pi) * _np.e**(-(y - y_hat)**2/(2*var**2))
+  
+  return output
+
+def normal_plot():
+  
+    _np.random.seed(2000)
+    n_plots = 4
+    mus = _np.random.choice(_np.arange(-20,21), replace = False, size = n_plots)
+    sigmas = _np.random.choice(_np.arange(1,11), replace = False, size = n_plots)
+    y = _np.arange(-50,50)
+    _plt.figure(figsize = (10,10))
+
+    _plt.plot(y, normal_pdf(y, 0, 5)*100,  label = r'$\hat{y_i} $ = '+str(0)+ r' and $\sigma$ = '+str(5)) 
+
+    for i in _np.arange(len(mus)):
+
+        prob = normal_pdf(y, mus[i], sigmas[i])
+
+        _plt.plot(y,prob*100, label = r'$\hat{y_i} $ = '+str(mus[i])+ r' and $\sigma$ = '+str(sigmas[i])) 
+        _plt.xlabel('Y')
+        _plt.ylabel('Probability %')
+
+    _plt.legend()
+    _plt.show()
     
+
+def savings_plot():
+	population_income = _np.random.gamma(50, 40, 1000).round()
+
+	population_savings = population_income * 0.2 + _np.random.normal(0, 50, 1000).round()
+
+	df = _pd.DataFrame({'monthly_income': population_income,
+                  'savings': population_savings})
+	
+	df['monthly_income_rounded'] = df['monthly_income'].round(-2)
+
+	conditional_mean = df.groupby('monthly_income_rounded')['savings'].mean()
+
+	_plt.scatter(population_income, population_savings, color = 'purple')
+	_plt.axhline(population_savings.mean(), color = 'darkred', label = 'savings population mean')
+	_plt.plot(conditional_mean, label = 'conditional mean', color = 'orange')
+	_plt.legend(bbox_to_anchor = (1, 1))
+	_plt.xlabel('Monthly Income')
+	_plt.ylabel('Savings')
+	_plt.show()
+
 def good_plot_bad_plot():
     _np.random.seed(3000)
 
