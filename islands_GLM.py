@@ -51,7 +51,7 @@ def normal_plot():
 
 def prestige_wealth_df():
 
-    _np.random.seed(3000)
+    _np.random.seed(300)
     
     pop_size = 10000
     
@@ -61,7 +61,7 @@ def prestige_wealth_df():
     
     religion_pop = _np.random.choice([0,1], p = [0.3, 0.7], size = pop_size)
     
-    prestige_pop = 10 + 4 * wealth_pop + -100 * religion_pop + _np.random.normal(0, 60, size = pop_size)
+    prestige_pop = 10 + 4 * wealth_pop + -100 * religion_pop + _np.random.normal(0, 40, size = pop_size)
     
     prestige_pop = prestige_pop.astype('int')
     
@@ -97,15 +97,24 @@ def plot_prestige_wealth_with_prediction(wealth, prestige, predictions):
     _plt.show()  
 
 
-def three_D_lin_reg_plot():
+def three_D_lin_reg_plot(interaction = False):
 
 	x = _np.outer(_np.linspace(-3, 3, 32), _np.ones(32))
 	y = x.copy().T # transpose
-	z = 2*x + 3*y
+
+	if interaction == False:
+		z = 2*x + 3*y
+	if interaction == True:
+		z = 2*x + 3*y + x*y
 
 	data_x = _np.random.choice(_np.linspace(-3, 3, 32), size = 100)
 	data_y = _np.random.choice(_np.linspace(-3, 3, 32), size = 100)
-	data_z = 2*data_x + 3*data_y + _np.random.normal(0, 3, size = 100)
+		
+	if interaction == False:
+		data_z = 2*data_x + 3*data_y + _np.random.normal(0, 3, size = 100)
+
+	if interaction == True:
+		data_z = 2*data_x + 3*data_y + data_x*data_y + _np.random.normal(0, 3, size = 100)
 
 	fig = _plt.figure(figsize = (12,12))
 	ax1 = fig.add_subplot(111, projection='3d')
@@ -122,49 +131,79 @@ def three_D_lin_reg_plot():
 
 def plot_prestige_wealth_with_religion(df):
 
-	_plt.scatter(df[df['religion'] == 1]['wealth'], df[df['religion'] == 1]['prestige'], label = 'Religion 1', color = 'darkred')
-	_plt.scatter(df[df['religion'] == 0]['wealth'], df[df['religion'] == 0]['prestige'], label = 'Religion 2', color = 'darkgreen')
+	_plt.scatter(df[df['religion'] == 1]['wealth'], df[df['religion'] == 1]['prestige'], label = 'religion A', color = 'darkred')
+	_plt.scatter(df[df['religion'] == 0]['wealth'], df[df['religion'] == 0]['prestige'], label = 'religion B', color = 'darkgreen')
 	_plt.xlabel('Wealth')
 	_plt.ylabel('Prestige')
 	_plt.legend()
-	_plt.show()
 
 
-def three_D_prestige_wealth_religion_plot(df):
+def three_D_prestige_wealth_religion_plot(df, azim = 185):
 
 	religion_1 = df[df['religion'] == 1]
 	religion_2 = df[df['religion'] == 0]
 
 	fig = _plt.figure(figsize = (12, 12))
 	ax1 = fig.add_subplot(111, projection='3d')
-	ax1.scatter(religion_1['wealth'], religion_1['religion'] , religion_1['prestige'], color = 'darkred', label = 'religion 1'  )
-	ax1.scatter(religion_2['wealth'], religion_2['religion'] , religion_2['prestige'], color = 'darkgreen', label = 'religion 2'  )
+	ax1.scatter(religion_1['wealth'], religion_1['religion'] , religion_1['prestige'], color = 'darkred', label = 'religion A'  )
+	ax1.scatter(religion_2['wealth'], religion_2['religion'] , religion_2['prestige'], color = 'darkgreen', label = 'religion B'  )
 	ax1.set_yticks([0,1])
 	_plt.xlabel('Wealth')
 	_plt.ylabel('Religion')
 	ax1.set_zlabel('Prestige')
-	ax1.view_init(azim = 185)
+	ax1.view_init(azim = azim)
 	_plt.legend(bbox_to_anchor = (1.2,1))
 
-def three_D_prestige_wealth_religion_plot_with_surface(df, lin_reg_model):
+def three_D_prestige_wealth_religion_plot_with_surface(df, lin_reg_model, azim = 185):
 
 	religion_1 = df[df['religion'] == 1]
 	religion_2 = df[df['religion'] == 0]
 
-	intercept, religion_slope, height_slope = lin_reg_model.params[:3]
+	intercept = lin_reg_model.params['Intercept']
+	religion_slope = lin_reg_model.params['religion']
+	wealth_slope = lin_reg_model.params['wealth']
 
-	height_x = _np.linspace(_np.min(df['wealth']), _np.max(df['wealth']), 8)
+
+	wealth_x = _np.linspace(_np.min(df['wealth']), _np.max(df['wealth']), 8)
 	religion_y = _np.linspace(_np.min(df['religion']), _np.max(df['religion']), 8)
-	height_x, religion_y = _np.meshgrid(height_x, religion_y)
-	prestige_z = intercept + height_slope * height_x.ravel() + religion_slope * religion_y.ravel()
+	wealth_x, religion_y = _np.meshgrid(wealth_x, religion_y)
+	prestige_z = intercept + wealth_slope * wealth_x.ravel() + religion_slope * religion_y.ravel()
 
 	fig = _plt.figure(figsize = (12, 12))
 	ax1 = fig.add_subplot(111, projection='3d')
-	ax1.plot_wireframe(height_x, religion_y,
-                prestige_z.reshape(height_x.shape), label = 'linear regression model', color = 'blue')
-	ax1.scatter(religion_1['wealth'], religion_1['religion'] , religion_1['prestige'], color = 'darkred', label = 'religion 1'  )
-	ax1.scatter(religion_2['wealth'], religion_2['religion'] , religion_2['prestige'], color = 'darkgreen', label = 'religion 2'  )
-	ax1.view_init(azim = 185)
+	ax1.plot_wireframe(wealth_x, religion_y,
+                prestige_z.reshape(wealth_x.shape), label = 'linear regression model', color = 'blue')
+	ax1.scatter(religion_1['wealth'], religion_1['religion'] , religion_1['prestige'], color = 'darkred', label = 'religion A'  )
+	ax1.scatter(religion_2['wealth'], religion_2['religion'] , religion_2['prestige'], color = 'darkgreen', label = 'religion B'  )
+	ax1.view_init(azim = azim)
+	ax1.set_yticks([0,1])
+	_plt.xlabel('Wealth')
+	_plt.ylabel('Religion')
+	ax1.set_zlabel('Prestige')
+	ax1.legend(bbox_to_anchor = (1.1,0.85))
+
+def three_D_prestige_wealth_religion_plot_with_surface_with_int(df, lin_reg_model, azim = 185):
+
+	religion_1 = df[df['religion'] == 1]
+	religion_2 = df[df['religion'] == 0]
+
+	intercept = lin_reg_model.params['Intercept']
+	religion_slope = lin_reg_model.params['religion']
+	wealth_slope = lin_reg_model.params['wealth']	
+	interaction_slope = lin_reg_model.params['religion:wealth']	
+
+	wealth_x = _np.linspace(_np.min(df['wealth']), _np.max(df['wealth']), 8)
+	religion_y = _np.linspace(_np.min(df['religion']), _np.max(df['religion']), 8)
+	wealth_x, religion_y = _np.meshgrid(wealth_x, religion_y)
+	prestige_z = intercept + wealth_slope * wealth_x.ravel() + religion_slope * religion_y.ravel() + interaction_slope * wealth_x.ravel() * religion_y.ravel()
+
+	fig = _plt.figure(figsize = (12, 12))
+	ax1 = fig.add_subplot(111, projection='3d')
+	ax1.plot_wireframe(wealth_x, religion_y,
+                prestige_z.reshape(wealth_x.shape), label = 'linear regression model', color = 'blue')
+	ax1.scatter(religion_1['wealth'], religion_1['religion'] , religion_1['prestige'], color = 'darkred', label = 'religion A'  )
+	ax1.scatter(religion_2['wealth'], religion_2['religion'] , religion_2['prestige'], color = 'darkgreen', label = 'religion B'  )
+	ax1.view_init(azim = azim)
 	ax1.set_yticks([0,1])
 	_plt.xlabel('Wealth')
 	_plt.ylabel('Religion')
