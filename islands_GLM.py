@@ -17,6 +17,7 @@ def r_ify(fig_size = (7,6)):
     _plt.rc('axes', facecolor='white', edgecolor='black',
        axisbelow=True, grid=False)
     _plt.rcParams['figure.figsize'] = fig_size
+   
 
 
 def normal_pdf(y, y_hat, var):
@@ -24,6 +25,12 @@ def normal_pdf(y, y_hat, var):
   output = 1/_np.sqrt(var**2 * 2 * _np.pi) * _np.e**(-(y - y_hat)**2/(2*var**2))
   
   return output
+  
+  
+def normal_labels():
+    _plt.xlabel('Y')
+    _plt.ylabel('Probability %')
+    _plt.legend()
 
 
 def normal_plot():
@@ -47,6 +54,7 @@ def normal_plot():
 
     _plt.legend()
     _plt.show()
+    
     
 
 def prestige_wealth_df():
