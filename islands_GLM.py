@@ -5,6 +5,7 @@ import scipy.stats as _stats
 from scipy.optimize import minimize as _minimize
 from mpl_toolkits import mplot3d as _mplot3d
 from mpl_toolkits.mplot3d import axes3d as _axes3d
+from scipy.special import factorial as _factorial
 
 # just some convenience functions (for plots etc.) for this textbook
 # may contain redundant unused functions, as there have been several revisions
@@ -218,4 +219,61 @@ def three_D_prestige_wealth_religion_plot_with_surface_with_int(df, lin_reg_mode
 	ax1.set_zlabel('Prestige')
 	ax1.legend(bbox_to_anchor = (1.1,0.85))
 
+
+
+def poisson_func(lambd, x):
+  
+    return (lambd**x * _np.exp(-lambd))/_factorial(x)
+    
+def poisson_plot(lambdas, max_x):
+
+    x_values = _np.linspace(0, max_x)
+    
+    for lambd in lambdas:
+        _plt.plot(x_values, poisson_func(lambd, x_values), label = 'mean = %.d' % lambd)
+        _plt.xlabel('Count')
+        _plt.ylabel('Probability')
+        _plt.legend();
    
+def generate_poisson_data():
+
+    pop_size = 100
+    
+    _np.random.seed(100)
+    
+    hormone_level = _np.random.normal(0, 80, pop_size)
+
+    bio_sex = _np.random.choice([0,1], size = pop_size)
+
+    number_of_predation_events =  _np.random.uniform(low =0.03, high = 0.05) * hormone_level + 5 * bio_sex
+
+    error = _np.random.poisson(3, pop_size)
+
+
+    number_of_predation_events = number_of_predation_events  + error
+
+    number_of_predation_events[number_of_predation_events < 0] = _np.random.poisson(3, 
+                                                                                   len(number_of_predation_events[number_of_predation_events < 0]))
+
+
+    df = _pd.DataFrame({'hormone_level_change': _np.round(hormone_level,2),
+                       'biological_sex': bio_sex,
+                       'number_of_predation_events': number_of_predation_events.astype('int') })
+                       
+    return df
+    
+def count_hist(df):
+    _plt.hist(df['number_of_predation_events'])
+    _plt.xlabel('Number of Predation Events')
+    _plt.ylabel('Frequency');
+    
+def hormone_predation_plot(df, with_predictions = False, predictions = None, model_name = 'linear regression'):
+
+    _plt.scatter(df['hormone_level_change'], df['number_of_predation_events'])
+    _plt.xlabel('Hormone Level Change')
+    _plt.ylabel('Number of Predation Events')
+    
+    if with_predictions == True:
+        _plt.scatter(df['hormone_level_change'], predictions, color = 'gold', label = 'predicted number of predation events\n('+model_name+')')
+        _plt.legend(bbox_to_anchor = (1,1))
+    
