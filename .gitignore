@@ -2,3 +2,5 @@
 *.Rmd
 
 .ipynb_checkpoints
+
+__pycache__
