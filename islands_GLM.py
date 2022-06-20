@@ -267,13 +267,25 @@ def count_hist(df):
     _plt.xlabel('Number of Predation Events')
     _plt.ylabel('Frequency');
     
-def hormone_predation_plot(df, with_predictions = False, predictions = None, model_name = 'linear regression'):
+def hormone_predation_plot(df, with_predictions = False, predictions = None, model_name = 'linear regression', log_scale = False):
 
-    _plt.scatter(df['hormone_level_change'], df['number_of_predation_events'])
-    _plt.xlabel('Hormone Level Change')
-    _plt.ylabel('Number of Predation Events')
+    if log_scale == False:
+
+        _plt.scatter(df['hormone_level_change'], df['number_of_predation_events'])
+        _plt.xlabel('Hormone Level Change')
+        _plt.ylabel('Number of Predation Events')
     
-    if with_predictions == True:
-        _plt.scatter(df['hormone_level_change'], predictions, color = 'gold', label = 'predicted number of predation events\n('+model_name+')')
-        _plt.legend(bbox_to_anchor = (1,1))
+        if with_predictions == True:
+            _plt.scatter(df['hormone_level_change'], predictions, color = 'gold', label = 'predicted number of predation events\n('+model_name+')')
+            _plt.legend(bbox_to_anchor = (1,1))
+            
+    if log_scale == True:
+    
+        _plt.scatter(df['hormone_level_change'], _np.log(df['number_of_predation_events']))
+        _plt.xlabel('Hormone Level Change')
+        _plt.ylabel('Number of Predation Events \n(log scale)')
+    
+        if with_predictions == True:
+            _plt.scatter(df['hormone_level_change'], predictions, color = 'gold', label = 'predicted number of predation events\n('+model_name+')')
+            _plt.legend(bbox_to_anchor = (1,1))
     
