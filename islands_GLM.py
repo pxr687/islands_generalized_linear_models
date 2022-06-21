@@ -20,7 +20,6 @@ def r_ify(fig_size = (7,6)):
     _plt.rcParams['figure.figsize'] = fig_size
    
 
-
 def normal_pdf(y, y_hat, var):
   
   output = 1/_np.sqrt(var**2 * 2 * _np.pi) * _np.e**(-(y - y_hat)**2/(2*var**2))
@@ -57,7 +56,6 @@ def normal_plot():
     _plt.show()
     
     
-
 def prestige_wealth_df():
 
     _np.random.seed(300)
@@ -289,3 +287,51 @@ def hormone_predation_plot(df, with_predictions = False, predictions = None, mod
             _plt.scatter(df['hormone_level_change'], predictions, color = 'gold', label = 'predicted number of predation events\n('+model_name+')')
             _plt.legend(bbox_to_anchor = (1,1))
     
+def addiction_data_gen():
+
+	_np.random.seed(200)
+
+	slopes =  [-2, 1.2] # <-- this works!
+
+	pop_size = 100
+
+	number_of_social_contacts = _np.random.gamma(5, size = pop_size) 
+
+	number_of_social_contacts[number_of_social_contacts > _np.quantile(number_of_social_contacts, .25)] = number_of_social_contacts[number_of_social_contacts > 	_np.quantile(number_of_social_contacts, .25)] + _np.abs(_np.random.normal(0, 5, size = len(number_of_social_contacts[number_of_social_contacts > _np.quantile			(number_of_social_contacts, .25)])))
+        
+	drug_alone = _np.random.choice([0,1], p = [0.5, 0.5], size = pop_size) 
+
+	linear_predictor =  slopes[0] * number_of_social_contacts + slopes[1] * drug_alone + _np.random.normal(0, 20, size = pop_size)
+
+	addiction_p = (_np.exp(linear_predictor))/(1 + _np.exp(linear_predictor))
+
+	addiction_status = _np.repeat('', len(addiction_p))
+	addiction_status = _np.where(addiction_p >= 0.5, 'addict', addiction_status)
+	addiction_status = _np.where(addiction_p < 0.5, 'not_addict', addiction_status)
+
+        
+	df = _pd.DataFrame({'number_of_social_contacts': number_of_social_contacts.astype('int'), 'drug_alone': drug_alone,
+                   'addiction_status': addiction_status})
+
+	df['addiction_status'] =  df['addiction_status'].replace(['addict', 'not_addict'], [1,0])
+
+	return df
+
+def addiction_plot(df, predictions = [], plot_predictions = False):
+
+	addiction_color = {0: 'blue',
+              1: 'red'}
+
+	fig, ax = _plt.subplots()
+	ax.scatter(df['number_of_social_contacts'], df['addiction_status'] , c = df['addiction_status'].map(addiction_color))
+	ax.set_yticks([0,1])
+	ax.set_ylabel('Addiction Status\n (1 == Addict)')
+	ax.set_xlabel('Number of Social Contacts')
+	ax.scatter([], [], color = 'blue', label = 'NOT addict' )
+	ax.scatter([], [],  color = 'red', label = 'Addict')
+
+	if plot_predictions == True:
+		ax.scatter(df['number_of_social_contacts'], predictions, color = 'darkred', label = 'Predicted probability of being an addict')
+
+	_plt.legend(bbox_to_anchor = (1,1))
+	
