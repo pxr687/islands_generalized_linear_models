@@ -317,21 +317,31 @@ def addiction_data_gen():
 
 	return df
 
-def addiction_plot(df, predictions = [], plot_predictions = False):
+def addiction_plot(df, predictions = [], plot_predictions = False, log_scale = False, plot_other = False):
 
 	addiction_color = {0: 'blue',
               1: 'red'}
 
-	fig, ax = _plt.subplots()
-	ax.scatter(df['number_of_social_contacts'], df['addiction_status'] , c = df['addiction_status'].map(addiction_color))
-	ax.set_yticks([0,1])
-	ax.set_ylabel('Addiction Status\n (1 == Addict)')
-	ax.set_xlabel('Number of Social Contacts')
-	ax.scatter([], [], color = 'blue', label = 'NOT addict' )
-	ax.scatter([], [],  color = 'red', label = 'Addict')
+	if log_scale == False:
+		fig, ax = _plt.subplots()
+		ax.scatter(df['number_of_social_contacts'], df['addiction_status'] , c = df['addiction_status'].map(addiction_color))
+		ax.set_yticks([0,1])
+		ax.set_ylabel('Addiction Status\n (1 == Addict)')
+		ax.set_xlabel('Number of Social Contacts')
+		ax.scatter([], [], color = 'blue', label = 'NOT addict' )
+		ax.scatter([], [],  color = 'red', label = 'Addict')
+		if plot_predictions == True:
+			ax.scatter(df['number_of_social_contacts'], predictions, color = 'darkred', label = 'Predicted probability of being an addict')
 
-	if plot_predictions == True:
-		ax.scatter(df['number_of_social_contacts'], predictions, color = 'darkred', label = 'Predicted probability of being an addict')
+		if plot_other == True:
+			ax.scatter(df['number_of_social_contacts'], 1 - predictions, color = 'black', label = 'Predicted probability of NOT being an addict')
+
+	if log_scale == True:
+		fig, ax = _plt.subplots()
+		ax.scatter(df['number_of_social_contacts'], predictions, color = 'darkred', label = 'Predicted log odds of being an addict')
+		ax.set_ylabel('Log Odds (Addiction Status == 1)')
+		ax.set_xlabel('Number of Social Contacts')
+
 
 	_plt.legend(bbox_to_anchor = (1,1))
 	
