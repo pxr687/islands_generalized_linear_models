@@ -217,6 +217,35 @@ def three_D_prestige_wealth_religion_plot_with_surface_with_int(df, lin_reg_mode
 	ax1.set_zlabel('Prestige')
 	ax1.legend(bbox_to_anchor = (1.1,0.85))
 
+def three_D_model_plot(x_name, y_name, z_name, intercept, x_slope, y_slope, df, model_name, y1_name, y2_name, legend_loc = (1.1,0.85), azim = 185):
+    group_1 = df[df[y_name] == 1]
+    group_2 = df[df[y_name] == 0]
+    x = _np.linspace(_np.min(df[x_name]), _np.max(df[x_name]), 8)
+    y = _np.linspace(_np.min(df[y_name]), _np.max(df[y_name]), 8)
+    x, y = _np.meshgrid(x, y)
+    
+    if model_name == 'linear_regression_model':
+        z = intercept + x_slope * x.ravel() + y_slope * y.ravel()
+    
+    if model_name == 'poisson_regression_model':
+        z = _np.exp(intercept + x_slope * x.ravel() + y_slope * y.ravel())
+    
+    if model_name == 'logistic_regression_model':
+        z = (_np.exp(intercept + x_slope * x.ravel() + y_slope * y.ravel()))/(1 + _np.exp(intercept + x_slope * x.ravel() + y_slope * y.ravel()))
+
+    fig = _plt.figure(figsize = (12, 12))
+    ax1 = fig.add_subplot(111, projection='3d')
+    ax1.plot_wireframe(x, y,
+                    z.reshape(x.shape), label = model_name, color = 'blue')
+    ax1.scatter( group_1[x_name],  group_1[y_name] ,  group_1[z_name], color = 'darkred', label = y1_name  )
+    ax1.scatter(group_2[x_name],  group_2[y_name] ,  group_2[z_name], color = 'darkgreen', label =  y2_name  )
+    ax1.view_init(azim = azim)
+    ax1.set_yticks([0,1])
+    _plt.xlabel(x_name)
+    _plt.ylabel(y_name)
+    ax1.set_zlabel(z_name)
+    ax1.legend(bbox_to_anchor = legend_loc)
+    _plt.show()
 
 
 def poisson_func(lambd, x):
@@ -286,6 +315,101 @@ def hormone_predation_plot(df, with_predictions = False, predictions = None, mod
         if with_predictions == True:
             _plt.scatter(df['hormone_level_change'], predictions, color = 'gold', label = 'predicted number of predation events\n('+model_name+')')
             _plt.legend(bbox_to_anchor = (1,1))
+
+def odds_original_intercept_plot(b0, b1, df):
+
+	_plt.figure(figsize = (10, 5))
+	_plt.subplot(1,2,1)
+	_plt.title('Log scale')
+	_plt.xlabel('x1')
+	_plt.ylabel('log(y)')
+	for intercept in [-6, -7, -8]:
+    		_plt.plot(df['hormone_level_change'],
+            intercept + b1 * df['hormone_level_change'],
+            linewidth=1,
+            linestyle=':')
+    
+	_plt.subplot(1,2,2)
+	_plt.title('Original scale')
+	_plt.xlabel('x1')
+	_plt.ylabel('y')
+	for intercept in [-6, -7, -8]:
+    		_plt.scatter(df['hormone_level_change'],
+           _np.exp(intercept + b1 * df['hormone_level_change']),
+            linewidth=1,
+            linestyle=':',
+            label='intercept=%d' % intercept)
+
+	_plt.legend(bbox_to_anchor = (1,1))
+
+def odds_original_slope_plot(b0, b1, df):
+
+	_plt.figure(figsize = (10, 5))
+	_plt.subplot(1,2,1)
+	_plt.title('Log scale')
+	_plt.xlabel('x1')
+	_plt.ylabel('log(y)')
+	for slope in [0.01, 0.02, 0.025]:
+    		_plt.plot(df['hormone_level_change'],
+            	b0 + slope * df['hormone_level_change'],
+            	linewidth=1,
+            	linestyle=':')
+    
+	_plt.subplot(1,2,2)
+	_plt.title('Original scale')
+	_plt.xlabel('x1')
+	_plt.ylabel('y')
+	for slope in [0.01, 0.02, 0.025]:
+    		_plt.scatter(df['hormone_level_change'],
+            	_np.exp(b0 + slope * df['hormone_level_change']),
+            	linewidth=1,
+            	linestyle=':',
+            	label='slope =%.3f' % slope)
+
+	_plt.legend(bbox_to_anchor = (1,1))
+
+
+def three_D_pois_reg_plot(interaction = False):
+
+	x = _np.outer(_np.linspace(-3, 3, 32), _np.ones(32))
+	y = x.copy().T # transpose
+	if interaction == False:
+		z = _np.exp(0.2*x + 0.3*y)
+	if interaction == True:
+		z = _np.exp(0.2*x + 0.3*y + -0.2*x*y)
+
+	data_x = _np.random.choice(_np.linspace(-3, 3, 32), size = 100)
+	data_y = _np.random.choice(_np.linspace(-3, 3, 32), size = 100)
+
+	if interaction == False:
+		data_z = _np.exp(0.2*data_x + 0.3*data_y + _np.random.normal(0, 0.3, size = 100))
+
+	if interaction == True:
+		data_z = _np.exp(0.2*data_x + 0.3*data_y + -0.2 *data_x*data_y + _np.random.normal(0, 0.3, size = 100))
+
+
+
+	fig = _plt.figure(figsize = (12,12))
+	ax1 = fig.add_subplot(111, projection='3d')
+	ax1.plot_wireframe(x,y,z, color = 'blue', label = 'poisson regression model')
+	ax1.scatter(data_x, data_y, data_z, color = 'red', label = 'data'  )
+	_plt.xlabel('Predictor 1')
+	_plt.ylabel('Predictor 2')
+	ax1.set_zlabel('Outcome Variable')
+	ax1.set_xticks([])
+	ax1.set_yticks([])
+	ax1.set_zticks([])
+	_plt.legend(bbox_to_anchor = (1.1,0.9))
+	_plt.show()
+
+def pois_group_plot(df):
+
+	_plt.scatter(df[df['biological_sex'] == 1]['hormone_level_change'], df[df['biological_sex'] == 1]['number_of_predation_events'], label = 'Males', color = 'darkred')
+	_plt.scatter(df[df['biological_sex'] == 0]['hormone_level_change'], df[df['biological_sex'] == 0]['number_of_predation_events'], label = 'Females', color = 	'darkgreen')
+	_plt.xlabel('average_hormone_change')
+	_plt.ylabel('number_of_predation_events')
+	_plt.legend()
+	_plt.show()
     
 def addiction_data_gen():
 
@@ -345,3 +469,94 @@ def addiction_plot(df, predictions = [], plot_predictions = False, log_scale = F
 
 	_plt.legend(bbox_to_anchor = (1,1))
 	
+
+def odds_prob_intercept_plot(b0, b1, df):
+
+	_plt.figure(figsize = (10, 5))
+	_plt.subplot(1,2,1)
+	_plt.title('Log odds scale')
+	_plt.xlabel('x1')
+	_plt.ylabel('log odds of being in category 1')
+	for intercept in [-6, -7, -8]:
+   		_plt.plot(df['number_of_social_contacts'],
+            	intercept + b1 * df['number_of_social_contacts'],
+            	linewidth=1,
+            	linestyle=':')
+    
+	_plt.subplot(1,2,2)
+	_plt.title('Probability scale')
+	_plt.xlabel('x1')
+	_plt.ylabel('y')
+	for intercept in [-6, -7, -8]:
+    		_plt.scatter(df['number_of_social_contacts'],
+            	_np.exp(intercept + b1 * df['number_of_social_contacts'])/(1 + _np.exp(intercept + b1 * df['number_of_social_contacts'])),
+            	linewidth=1,
+            	linestyle=':',
+            	label='intercept=%d' % intercept)
+
+	_plt.legend(bbox_to_anchor = (1,1))
+
+def odds_prob_slope_plot(b0, b1, df):
+
+	_plt.figure(figsize = (10, 5))
+	_plt.subplot(1,2,1)
+	_plt.title('Log scale')
+	_plt.xlabel('x1')
+	_plt.ylabel('log(y)')
+	for slope in [0.3, 0.5, 0.7]:
+    		_plt.plot(df['number_of_social_contacts'],
+            	b0 + slope * df['number_of_social_contacts'],
+            	linewidth=1,
+            	linestyle=':')
+    
+	_plt.subplot(1,2,2)
+	_plt.title('Probability scale')
+	_plt.xlabel('x1')
+	_plt.ylabel('y')
+	for slope in [0.3, 0.5, 0.7]:
+    		_plt.scatter(df['number_of_social_contacts'],
+            	_np.exp(b0 + slope * df['number_of_social_contacts'])/(1 + _np.exp(b0 + slope * df['number_of_social_contacts'])),
+            	linewidth=1,
+            	linestyle=':',
+            	label='slope =%.3f' % slope)
+
+	_plt.legend(bbox_to_anchor = (1,1))
+
+def bin_log_reg_plot(interaction = False):
+
+	x_slope = 0.2
+	y_slope = 3
+ 
+	x = _np.outer(_np.linspace(-3, 3, 32), _np.ones(32))
+	y = x.copy().T # transpose
+	
+	if interaction == False:
+		lin_pop_z = x_slope*x + y_slope*y
+
+	if interaction == True:
+		lin_pop_z = x_slope*x + y_slope*y + 1*x*y
+	z = _np.exp(lin_pop_z)/(1 + _np.exp(lin_pop_z))
+
+	data_x = _np.random.choice(_np.linspace(-3, 3, 32), size = 100)
+	data_y = _np.random.choice(_np.linspace(-3, 3, 32), size = 100)
+	if interaction == False:
+		lin_pred = x_slope*data_x + y_slope*data_y + _np.random.normal(0, 0.3, size = 100)
+	if interaction == True:
+		lin_pred = x_slope*data_x + y_slope*data_y + 1*data_x*data_y + _np.random.normal(0, 0.3, size = 100)
+	data_z = (_np.exp(lin_pred))/(1 + _np.exp(lin_pred))
+	data_z = _np.where(data_z >= 0.5, 1, 0)
+
+	fig = _plt.figure(figsize = (12,12))
+	ax1 = fig.add_subplot(111, projection='3d')
+	ax1.plot_wireframe(x,y,z, color = 'blue', label = 'binary logistic regression model')
+	ax1.scatter(data_x[data_z >= 0.5], data_y[data_z >= 0.5], data_z[data_z >= 0.5], color = 'red', label = 'outcome = 1')
+	ax1.scatter(data_x[data_z < 0.5], data_y[data_z < 0.5], data_z[data_z < 0.5], color = 'green', label = 'outcome = 0'  )
+	ax1.set_zticks([0,1])
+	_plt.xlabel('Predictor 1')
+	_plt.ylabel('Predictor 2')
+	ax1.set_zlabel('Outcome Variable')
+	ax1.set_xticks([])
+	ax1.set_yticks([])
+	ax1.set_zticks([])
+	_plt.legend(bbox_to_anchor = (1.1,0.9))
+	_plt.show()
