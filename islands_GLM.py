@@ -6,6 +6,7 @@ from scipy.optimize import minimize as _minimize
 from mpl_toolkits import mplot3d as _mplot3d
 from mpl_toolkits.mplot3d import axes3d as _axes3d
 from scipy.special import factorial as _factorial
+import statsmodels.api as _sm
 
 # just some convenience functions (for plots etc.) for this textbook
 # may contain redundant unused functions, as there have been several revisions
@@ -561,8 +562,8 @@ def bin_log_reg_plot(interaction = False):
 	_plt.legend(bbox_to_anchor = (1.1,0.9))
 	_plt.show()
 
-def data_gen_multinomial():
-	_np.random.seed(1000)
+def data_gen_multinomial(seed = 1000):
+	_np.random.seed(seed)
 
 	pop_size = 100
 
@@ -592,7 +593,7 @@ def data_gen_multinomial():
 
 	return df
 
-def relig_scatter(df):
+def relig_scatter(df, legend_loc = (1.4,1)):
 
 	relig_color = {0: 'darkblue',
               1: 'darkred',
@@ -606,7 +607,7 @@ def relig_scatter(df):
 	ax.scatter([], [], color = 'darkblue', label = 'Symmetrians' )
 	ax.scatter([], [],  color = 'darkred', label = 'Lamothians')
 	ax.scatter([], [],  color = 'darkgreen', label = 'Communionists')
-	_plt.legend(bbox_to_anchor = (1.4,1))
+	_plt.legend(bbox_to_anchor = legend_loc)
 
 def scatter_prob_subplots(mod, df):
 	
@@ -679,3 +680,56 @@ def three_D_model_plot_multinomial(x_name, y_name, z_name, intercept, x_slope, y
     _plt.ylabel(y_name)
     ax2.set_zlabel(z_name)
    
+def multinomial_wireframe():
+
+	x_slope = 0.2
+	y_slope = 3
+ 
+	x = _np.outer(_np.linspace(-3, 3, 32), _np.ones(32))
+	y = x.copy().T # transpose
+	lin_pop_z = x_slope*x + y_slope*y
+	z = _np.exp(lin_pop_z)/(1 + _np.exp(lin_pop_z))
+
+	x_slope2 = -1
+	y_slope2 = -6
+ 
+	lin_pop_z2 = x_slope2*x + y_slope2*y
+	z2 = _np.exp(lin_pop_z2)/(1 + _np.exp(lin_pop_z2))
+
+	x_slope3 = -0.1
+	y_slope3 = -1.5
+ 
+	lin_pop_z3 = x_slope3*x + y_slope3*y
+	z3 = _np.exp(lin_pop_z3)/(1 + _np.exp(lin_pop_z3))
+
+	fig = _plt.figure(figsize = (12,12))
+	ax1 = fig.add_subplot(111, projection='3d')
+	ax1.plot_wireframe(x,y,z, color = 'blue', label = 'multinomial logistic regression model (category 1)')
+	ax1.plot_wireframe(x,y,z2, color = 'red', label = 'multinomial logistic regression model (category 2)')
+	ax1.plot_wireframe(x,y,z3, color = 'green', label = 'multinomial logistic regression model (category 3)')
+	_plt.xlabel('Predictor 1')
+	_plt.ylabel('Predictor 2')
+	ax1.set_zlabel('Probability')
+	_plt.legend(bbox_to_anchor = (1.4,0.9))
+
+
+def multinomial_illustration(legend_loc = (1.3,1)):
+
+	x_axis = _np.linspace(-500, 500)
+	lin_pred_1 = -0.2535 + 0.0058 * x_axis 	
+	lin_pred_2 = -0.3686 + 0.0038 * x_axis 
+
+	pp_1 = _np.e**(lin_pred_1)/(1 + _np.e**(lin_pred_1) + _np.e**(lin_pred_2))
+	pp_2 = _np.e**(lin_pred_2)/(1 + _np.e**(lin_pred_1) + _np.e**(lin_pred_2))
+	pp_ref = 1 - pp_1 - pp_2
+
+
+	_plt.plot(x_axis, pp_1, label = 'Category A', color = 'purple')
+	_plt.plot(x_axis, pp_2, label = 'Category B', color = 'red')
+	_plt.plot(x_axis, pp_ref, label = 'Category C', color = 'blue')
+	_plt.xticks([])
+	_plt.yticks([])
+	_plt.xlabel('Predictor')
+	_plt.ylabel('Predicted Probability')
+	_plt.legend(bbox_to_anchor = legend_loc)
+	
