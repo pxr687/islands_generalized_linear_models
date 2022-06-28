@@ -560,3 +560,122 @@ def bin_log_reg_plot(interaction = False):
 	ax1.set_zticks([])
 	_plt.legend(bbox_to_anchor = (1.1,0.9))
 	_plt.show()
+
+def data_gen_multinomial():
+	_np.random.seed(1000)
+
+	pop_size = 100
+
+	religions = _np.array(['Symmetrians', 'Communionists', 'Lamothians'])
+
+	income = _np.random.gamma(1, size = pop_size) * 100
+
+	religion = _np.array([])
+	bio_sex = _np.array([])
+
+	for inc in income:
+    
+    		if inc < _np.median(income):
+        
+        		religion = _np.append(religion, _np.random.choice(['Symmetrians', 'Communionists', 'Lamothians'], 
+                                                       p = [3.5/6, 2.4/6, 0.1/6]))
+        		bio_sex = _np.append(bio_sex, _np.random.choice(['male', 'female'], p = [0.7, 0.3]))
+        
+    		elif inc >= _np.median(income):
+        
+        		religion = _np.append(religion, _np.random.choice(['Symmetrians', 'Communionists', 'Lamothians'], 
+                                                       p = [0.5/6, 2/6, 3.5/6]))
+        		bio_sex = _np.append(bio_sex, _np.random.choice(['male', 'female'], p = [0.3, 0.7]))
+        
+        
+	df = _pd.DataFrame({'income': income.astype('int'), 'religion': religion, 'biological_sex': bio_sex})
+
+	return df
+
+def relig_scatter(df):
+
+	relig_color = {0: 'darkblue',
+              1: 'darkred',
+              2: 'darkgreen'}
+
+	fig, ax = _plt.subplots()
+	ax.scatter(df['income'], df['religion_dummy'] , c = df['religion_dummy'].map(relig_color))
+	ax.set_yticks([0,1,2])
+	ax.set_ylabel('Religion Dummy')
+	ax.set_xlabel('Income')
+	ax.scatter([], [], color = 'darkblue', label = 'Symmetrians' )
+	ax.scatter([], [],  color = 'darkred', label = 'Lamothians')
+	ax.scatter([], [],  color = 'darkgreen', label = 'Communionists')
+	_plt.legend(bbox_to_anchor = (1.4,1))
+
+def scatter_prob_subplots(mod, df):
+	
+	log_odds_predictions_1 = mod.params.loc['const', 0] +  mod.params.loc['income', 0] * df['income']
+	log_odds_predictions_2 = mod.params.loc['const', 1] +  mod.params.loc['income', 1] * df['income']
+
+	probability_predictions_1 = _np.exp(log_odds_predictions_1)/(1 + _np.exp(log_odds_predictions_1) + _np.exp(log_odds_predictions_2))
+
+	probability_predictions_2 = _np.exp(log_odds_predictions_2)/(1 + _np.exp(log_odds_predictions_1) + _np.exp(log_odds_predictions_2))
+
+	probability_predictions_0 = 1 - probability_predictions_1 - probability_predictions_2
+
+	relig_color = {0: 'darkblue',
+              	1: 'darkred',
+              	2: 'darkgreen'}
+
+	fig, ax = _plt.subplots(nrows =1, ncols=2, figsize = (16, 8))
+	ax[0].scatter(df['income'], df['religion_dummy'] , c = df['religion_dummy'].map(relig_color))
+	ax[0].set_yticks([0,1,2])
+	ax[0].set_ylabel('Religion Dummy')
+	ax[0].set_xlabel('Income')
+	ax[1].scatter(df['income'], probability_predictions_0, color = 'darkblue', label = 'Symmetrians' )
+	ax[1].scatter(df['income'], probability_predictions_1, color = 'darkred', label = 'Lamothians')
+	ax[1].scatter(df['income'], probability_predictions_2, color = 'darkgreen', label = 'Communionists')
+	ax[1].set_ylabel('Probability')
+	ax[1].set_xlabel('Income')
+	_plt.legend(bbox_to_anchor = (0.1,-0.1))
+
+def three_D_model_plot_multinomial(x_name, y_name, z_name, intercept, x_slope, y_slope,  intercept_2, x_slope_2, y_slope_2, 
+                                   df, model_name):
+  
+    relig_color = {0: 'darkblue',
+              1: 'darkred',
+              2: 'darkgreen'}
+    
+    x = _np.linspace(_np.min(df[x_name]), _np.max(df[x_name]), 8)
+    y = _np.linspace(_np.min(df[y_name]), _np.max(df[y_name]), 8)
+    x, y = _np.meshgrid(x, y)
+  
+        
+    
+    z = (_np.exp(intercept + x_slope * x.ravel() + y_slope * y.ravel()))/(1 + _np.exp(intercept + x_slope * x.ravel() + y_slope * y.ravel()) + _np.exp(intercept_2 + x_slope_2 	* x.ravel() + y_slope_2 * y.ravel()))
+    z2 = (_np.exp(intercept_2 + x_slope_2 * x.ravel() + y_slope_2 * y.ravel()))/(1 + _np.exp(intercept + x_slope * x.ravel() + y_slope * y.ravel()) + _np.exp(intercept_2 + 		x_slope_2 * x.ravel() + y_slope_2 * y.ravel()))
+    z3 = 1 - z - z2
+
+    
+    fig = _plt.figure(figsize = (16, 8))
+    ax1 = fig.add_subplot(121, projection='3d')
+    ax1.plot_wireframe(x, y,
+                    z.reshape(x.shape), label = model_name+' (Lamothians)', color = 'red', alpha = 0.5)
+    ax1.plot_wireframe(x, y,
+                    z2.reshape(x.shape), label = model_name+ ' (Communionists)', color = 'green', alpha = 0.5)
+    ax1.plot_wireframe(x, y,
+                    z3.reshape(x.shape), label = model_name+ ' Symmetrians)', color = 'blue')
+    ax1.view_init(azim = 30)
+    ax1.set_yticks([0,1])
+    ax1.set_zticks([0,1])
+    _plt.xlabel(x_name)
+    _plt.ylabel(y_name)
+    ax1.set_zlabel('Probability')
+    ax1.legend(bbox_to_anchor = (1,0))
+ 
+    
+    ax2 = fig.add_subplot(122, projection='3d')
+    ax2.scatter(df[x_name], df[y_name], df[z_name], c = df['religion_dummy'].map(relig_color))
+    ax2.view_init(azim = 30)
+    ax2.set_yticks([0,1])
+    ax2.set_zticks([0,1, 2])
+    _plt.xlabel(x_name)
+    _plt.ylabel(y_name)
+    ax2.set_zlabel(z_name)
+   
