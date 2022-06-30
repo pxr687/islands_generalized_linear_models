@@ -555,14 +555,14 @@ def bin_log_reg_plot(interaction = False):
 	ax1.set_zticks([0,1])
 	_plt.xlabel('Predictor 1')
 	_plt.ylabel('Predictor 2')
-	ax1.set_zlabel('Outcome Variable')
+	ax1.set_zlabel('Outcome Variable / Probability')
 	ax1.set_xticks([])
 	ax1.set_yticks([])
-	ax1.set_zticks([])
+	ax1.set_zticks([0, 1])
 	_plt.legend(bbox_to_anchor = (1.1,0.9))
 	_plt.show()
 
-def data_gen_multinomial(seed = 1000):
+def data_gen_multinomial(seed = 100):
 	_np.random.seed(seed)
 
 	pop_size = 100
@@ -637,7 +637,7 @@ def scatter_prob_subplots(mod, df):
 	_plt.legend(bbox_to_anchor = (0.1,-0.1))
 
 def three_D_model_plot_multinomial(x_name, y_name, z_name, intercept, x_slope, y_slope,  intercept_2, x_slope_2, y_slope_2, 
-                                   df, legend_loc = (1.2,0)):
+                                   df, legend_loc = (1.2,0), wireframe_only = False, azim = 30):
   
     relig_color = {0: 'darkblue',
               1: 'darkred',
@@ -653,68 +653,54 @@ def three_D_model_plot_multinomial(x_name, y_name, z_name, intercept, x_slope, y
     z2 = (_np.exp(intercept_2 + x_slope_2 * x.ravel() + y_slope_2 * y.ravel()))/(1 + _np.exp(intercept + x_slope * x.ravel() + y_slope * y.ravel()) + _np.exp(intercept_2 + 		x_slope_2 * x.ravel() + y_slope_2 * y.ravel()))
     z3 = 1 - z - z2
 
+    if wireframe_only == True:
     
-    fig = _plt.figure(figsize = (16, 8))
-    ax1 = fig.add_subplot(121, projection='3d')
-    ax1.plot_wireframe(x, y,
-                    z.reshape(x.shape), label =  'Symmetrianity', color = 'red', alpha = 0.5)
-    ax1.plot_wireframe(x, y,
-                    z2.reshape(x.shape), label = 'Lamothianism', color = 'green', alpha = 0.5)
-    ax1.plot_wireframe(x, y,
-                    z3.reshape(x.shape), label = 'Communionism', color = 'blue')
-    ax1.view_init(azim = 30)
-    ax1.set_yticks([0, 1])
-    ax1.set_yticklabels(['Female', 'Male'])
-    ax1.set_zticks([0,1])
-    _plt.xlabel(x_name)
-    _plt.ylabel('biological_sex')
-    ax1.set_zlabel('Probability')
-    _plt.legend(bbox_to_anchor = legend_loc)
+        fig = _plt.figure(figsize = (12, 12))
+        ax1 = fig.add_subplot(111, projection='3d')
+        ax1.plot_wireframe(x, y,
+                        z.reshape(x.shape), label =  'Category A', color = 'black', alpha = 0.5)
+        ax1.plot_wireframe(x, y,
+                        z2.reshape(x.shape), label = 'Category B', color = 'orange', alpha = 0.5)
+        ax1.plot_wireframe(x, y,
+                        z3.reshape(x.shape), label = 'Category C', color = 'cyan')
+        ax1.view_init(azim =  azim)
+        ax1.set_yticks([])
+        ax1.set_xticks([])
+        ax1.set_zticks([0, 1])
+        _plt.xlabel('Predictor 2')
+        _plt.ylabel('Predictor 1')
+        ax1.set_zlabel('Probability')
+        _plt.legend(bbox_to_anchor = legend_loc)
     
-    ax2 = fig.add_subplot(122, projection='3d')
-    ax2.scatter(df[x_name], df[y_name], df[z_name], c = df['religion_dummy'].map(relig_color))
-    ax2.view_init(azim = 30)
-    ax2.set_yticks([0, 1])
-    ax2.set_yticklabels(['Female', 'Male'])
-    ax2.set_zticks([0,1, 2])
-    _plt.xlabel(x_name)
-    _plt.ylabel('biological_sex')
-    ax2.set_zlabel(z_name)
- 
+    else:
+        fig = _plt.figure(figsize = (16, 8))
+        ax1 = fig.add_subplot(121, projection='3d')
+        ax1.plot_wireframe(x, y,
+                        z.reshape(x.shape), label =  'Symmetrianity', color = 'red', alpha = 0.5)
+        ax1.plot_wireframe(x, y,
+                        z2.reshape(x.shape), label = 'Lamothianism', color = 'green', alpha = 0.5)
+        ax1.plot_wireframe(x, y,
+                        z3.reshape(x.shape), label = 'Communionism', color = 'blue')
+        ax1.view_init(azim =  azim)
+        ax1.set_yticks([0, 1])
+        ax1.set_yticklabels(['Female', 'Male'])
+        ax1.set_zticks([0,1])
+        _plt.xlabel(x_name)
+        _plt.ylabel('biological_sex')
+        ax1.set_zlabel('Probability')
+        _plt.legend(bbox_to_anchor = legend_loc)
+        
+        ax2 = fig.add_subplot(122, projection='3d')
+        ax2.scatter(df[x_name], df[y_name], df[z_name], c = df['religion_dummy'].map(relig_color))
+        ax2.view_init(azim = azim)
+        ax2.set_yticks([0, 1])
+        ax2.set_yticklabels(['Female', 'Male'])
+        ax2.set_zticks([0,1, 2])
+        _plt.xlabel(x_name)
+        _plt.ylabel('biological_sex')
+        ax2.set_zlabel(z_name)
+     
    
-def multinomial_wireframe():
-
-	x_slope = 0.2
-	y_slope = 3
- 
-	x = _np.outer(_np.linspace(-3, 3, 32), _np.ones(32))
-	y = x.copy().T # transpose
-	lin_pop_z = x_slope*x + y_slope*y
-	z = _np.exp(lin_pop_z)/(1 + _np.exp(lin_pop_z))
-
-	x_slope2 = -1
-	y_slope2 = -6
- 
-	lin_pop_z2 = x_slope2*x + y_slope2*y
-	z2 = _np.exp(lin_pop_z2)/(1 + _np.exp(lin_pop_z2))
-
-	x_slope3 = -0.1
-	y_slope3 = -1.5
- 
-	lin_pop_z3 = x_slope3*x + y_slope3*y
-	z3 = _np.exp(lin_pop_z3)/(1 + _np.exp(lin_pop_z3))
-
-	fig = _plt.figure(figsize = (12,12))
-	ax1 = fig.add_subplot(111, projection='3d')
-	ax1.plot_wireframe(x,y,z, color = 'blue', label = 'multinomial logistic regression model (category 1)')
-	ax1.plot_wireframe(x,y,z2, color = 'red', label = 'multinomial logistic regression model (category 2)')
-	ax1.plot_wireframe(x,y,z3, color = 'green', label = 'multinomial logistic regression model (category 3)')
-	_plt.xlabel('Predictor 1')
-	_plt.ylabel('Predictor 2')
-	ax1.set_zlabel('Probability')
-	_plt.legend(bbox_to_anchor = (1.4,0.9))
-
-
 def multinomial_illustration(legend_loc = (1.3,1)):
 
 	x_axis = _np.linspace(-500, 500)
@@ -735,3 +721,40 @@ def multinomial_illustration(legend_loc = (1.3,1)):
 	_plt.ylabel('Predicted Probability')
 	_plt.legend(bbox_to_anchor = legend_loc)
 	
+def three_D_logistic_plot(interaction = False):
+
+	x_slope = 0.2
+	y_slope = 3
+ 
+	x = _np.outer(_np.linspace(-3, 3, 32), _np.ones(32))
+	y = x.copy().T # transpose
+	
+	if interaction == False:
+		lin_pop_z = x_slope*x + y_slope*y
+
+	if interaction == True:
+		lin_pop_z = x_slope*x + y_slope*y + 1*x*y
+	z = _np.exp(lin_pop_z)/(1 + _np.exp(lin_pop_z))
+
+	data_x = _np.random.choice(_np.linspace(-3, 3, 32), size = 100)
+	data_y = _np.random.choice(_np.linspace(-3, 3, 32), size = 100)
+	if interaction == False:
+		lin_pred = x_slope*data_x + y_slope*data_y + _np.random.normal(0, 0.3, size = 100)
+	if interaction == True:
+		lin_pred = x_slope*data_x + y_slope*data_y + 1*data_x*data_y + _np.random.normal(0, 0.3, size = 100)
+	data_z = (_np.exp(lin_pred))/(1 + _np.exp(lin_pred))
+	data_z = _np.where(data_z >= 0.5, 1, 0)
+
+	fig = _plt.figure(figsize = (12,12))
+	ax1 = fig.add_subplot(111, projection='3d')
+	ax1.plot_wireframe(x,y,z, color = 'blue', label = 'logistic probability surface')
+
+	ax1.set_zticks([0,1])
+	_plt.xlabel('Predictor 1')
+	_plt.ylabel('Predictor 2')
+	ax1.set_zlabel('Probability')
+	ax1.set_xticks([])
+	ax1.set_yticks([])
+	ax1.set_zticks([0, 1])
+	_plt.legend(bbox_to_anchor = (1.1,0.9))
+	_plt.show()
