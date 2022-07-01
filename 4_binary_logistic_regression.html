@@ -1,0 +1,1189 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Binary Logistic Regression &#8212; Islands - Generalized Linear Models</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Multinomial Logistic Regression" href="5_multinomial_logistic_regression.html" />
+    <link rel="prev" title="Poisson Regression" href="3_poisson_regression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/islands_main.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Islands - Generalized Linear Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0_main_page.html">
+                    Who this book is for
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_generalized_linear_models.html">
+   What are Generalized Linear Models?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_linear_regression.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_poisson_regression.html">
+   Poisson Regression
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Binary Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_multinomial_logistic_regression.html">
+   Multinomial Logistic Regression
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/4_binary_logistic_regression.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F4_binary_logistic_regression.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/4_binary_logistic_regression.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#context">
+   Context
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameter-estimation">
+   Parameter Estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-one-predictor-model">
+   Interpretation (one predictor model)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#effect-of-the-slope-and-intercept-on-the-logistic-regression-curve">
+   Effect of the slope and intercept on the Logistic Regression curve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binary-logistic-regression-with-multiple-predictors">
+   Binary Logistic Regression with multiple predictors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-multiple-predictors">
+   Interpretation (multiple predictors)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistical-interaction-in-binary-logistic-regression">
+   Statistical interaction in Binary Logistic Regression
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Binary Logistic Regression</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#context">
+   Context
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameter-estimation">
+   Parameter Estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-one-predictor-model">
+   Interpretation (one predictor model)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#effect-of-the-slope-and-intercept-on-the-logistic-regression-curve">
+   Effect of the slope and intercept on the Logistic Regression curve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binary-logistic-regression-with-multiple-predictors">
+   Binary Logistic Regression with multiple predictors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-multiple-predictors">
+   Interpretation (multiple predictors)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistical-interaction-in-binary-logistic-regression">
+   Statistical interaction in Binary Logistic Regression
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="binary-logistic-regression">
+<h1>Binary Logistic Regression<a class="headerlink" href="#binary-logistic-regression" title="Permalink to this headline">#</a></h1>
+<br>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/island_bin_log_reg.png"><img alt="_images/island_bin_log_reg.png" class="bg-primary mb-1 align-center" src="_images/island_bin_log_reg.png" style="width: 270px;" /></a>
+<br><p>Imagine you are visiting another island, this time with a team of team of mental health researchers. There are some problems with addiction on the island, and you’re here to investigate a sample of people who frequently use one of two types of psychoactive drug. You collect a random sample of 100 drug users, and your dataset contains the following variables:</p>
+<p><code class="docutils literal notranslate"><span class="pre">number_of_social_contacts</span></code> - a count variable, indicating the number of social contacts that a person has in a week</p>
+<p><code class="docutils literal notranslate"><span class="pre">drug_alone</span></code> - a binary categorical variable, indicating whether a person uses their drug of choice alone at least twice a week (<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=</span> <span class="pre">YES</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=</span> <span class="pre">NO</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">addiction_status</span></code> -	a binary categorical variable, indicating whether a person meets the diagnostic criteria for addiction (<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=</span> <span class="pre">ADDICT</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=</span> <span class="pre">NOT</span> <span class="pre">ADDICT</span></code>)</p>
+<p>The data is shown below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importing libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits</span> <span class="kn">import</span> <span class="n">mplot3d</span>
+<span class="kn">import</span> <span class="nn">islands_GLM</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># make plots look like R</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">r_ify</span><span class="p">()</span>
+
+<span class="c1"># generate the data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">islands_GLM</span><span class="o">.</span><span class="n">addiction_data_gen</span><span class="p">()</span>
+
+<span class="c1"># show the data</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>number_of_social_contacts</th>
+      <th>drug_alone</th>
+      <th>addiction_status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>12</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>10</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>16</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>Firstly, your team will assess the relationship between <code class="docutils literal notranslate"><span class="pre">number_of_social_contacts</span></code> (predictor) and <code class="docutils literal notranslate"><span class="pre">addiction_status</span></code> (outcome). The scatterplot showing these variables is below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">addiction_plot</span><span class="p">(</span><span class="n">df</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_4_0.png" src="_images/4_binary_logistic_regression_4_0.png" />
+</div>
+</div>
+<p>From the scatterplot, it does like like the variables might be associated - it appears that addicts generally have lower numbers of social contacts.</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">addiction_status</span></code> is a binary categorical variable, most of the models we can fit to predict it will predict the probability of being in the category which is dummy-coded as 1 (in this case ADDICT).</p>
+<p>If we fit a linear regression model to this data, we are using a <em>linear probability model</em>. The graph below shows the results of using linear regression to predict <code class="docutils literal notranslate"><span class="pre">addiction_status</span> <span class="pre">~</span> <span class="pre">number_of_social_contacts</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit a linear regression model to the data, and plot the model predictions</span>
+<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;addiction_status ~ number_of_social_contacts&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">addiction_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;number_of_social_contacts&#39;</span><span class="p">],</span> <span class="n">plot_predictions</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_6_0.png" src="_images/4_binary_logistic_regression_6_0.png" />
+</div>
+</div>
+<p>The linear regression probability predictions do capture some of the trend in the data - people with a higher number of social contacts do appear to be less likely to be addicts, and this is indicated by the negative slope of the line.</p>
+<p>However, linear regression can produce predictions which range from negative to positive infinity, but probabilities are bounded between 0 and 1. We can see from the graph that for sufficiently high values of <code class="docutils literal notranslate"><span class="pre">number_of_social_contacts</span></code> the linear regression model makes negative probability predictions. (NB: negative probabilities do have a meaning in <a class="reference external" href="https://stats.stackexchange.com/questions/333610/negative-probabilities-layman-explanations">some contexts</a>, but generally not in social/life science…).</p>
+<p>The cell below uses the slope and intercept from the linear regression model to predict the probability of being an addict, for the largest value of <code class="docutils literal notranslate"><span class="pre">number_of_social_contacts</span></code> in the dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the prediction from linear regression for the largest value of `number_of_social_contacts`</span>
+<span class="n">lin_reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;number_of_social_contacts&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.13466990684487634
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the motivation for logistic regression, it produces probability predictions that are bounded between 0 and 1, and overcomes the issue with applying linear regression to this sort of data.</p>
+<div class="section" id="context">
+<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
+<p>We can use binary logistic regression when we are predicting a binary categorical variable from one or more predictor variables. As with all generalized linear models, the predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical).</p>
+<p>The predictions from binary logistic regression that we are most interested in are the predicted probabilities of being in either outcome category. As we will see, we have to transform the predictions to get them into that form. The graph below shows the classic logistic ‘S’ shape of the probability predictions of logistic regression, as a function of some predictor:</p>
+<p><img alt="" src="_images/binary_log_reg_probability.png" /></p>
+<p>Let’s assume the graph shows the probability of being in the outcome category dummy coded as 1, as the value of the predictor increases.</p>
+<p>For any value of the predictor, we can use the predicted probability of being in outcome category 1 to calculate the predicted probability of being in outcome category 0. We do this by subtracting the predicted probability of being in outcome category 1, from 1.</p>
+<p>We could then, for any value of the predictor, create a barplot of the predicted proportion of scores in either category, for a given value of the predictor. Around the middle of the S shaped curve just shown above, such a barplot might look like:</p>
+<p><img alt="" src="_images/binary_log_reg_bar.jpg" /></p>
+<p>This barplot shows the binomial distribution of the outcome categories, for a given level of the predictor. This is how binary logistic regression works from a ‘conditional distribution’ perspective: it fits a binomial distribution for every value of the predictor:</p>
+<p><img alt="" src="_images/binary_log_reg_conditional.png" /></p>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
+<p>We can denote the predicted probability of being in category 1 with:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat{P}_{(y_{i} = 1)} = \hat\pi_{1i}\)</span></p>
+<p>And the the predicted probability of being in category 0 with:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat{P}_{(y_{i} = 0)} = 1 - \hat\pi_{1i} \)</span></p>
+<p>Or:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat{P}_{(y_{i} = 0)} =\hat\pi_{0i} \)</span></p>
+<p>Binary logistic regression uses a <em>logit</em> link function and so is sometimes referred to as a logit model. The model fits a line on the log scale, where it predicts the log of the odds ratio <span class="math notranslate nohighlight">\(ln \large \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right) \)</span> of being in category 1. The prediction equation for binary logistic regression model is:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat{y}_{i} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_i = b_{0} + b_{i}x_{11} \dots + b_{k}x_{ki} \)</span></p>
+<p>The individual prediction (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span>), for all <span class="math notranslate nohighlight">\(n\)</span> observations, using <span class="math notranslate nohighlight">\(k\)</span> variables as predictors are:</p>
+<div class="math notranslate nohighlight">
+\[ \large \hat{y}_{1} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_1 = b_{0} + b_{1}x_{11} \dots + b_{k}x_{k1} \]</div>
+<div class="math notranslate nohighlight">
+\[ \large \hat{y}_{2} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_2 = b_{0} + b_{1}x_{12} \dots + b_{k}x_{k2} \]</div>
+<div class="math notranslate nohighlight">
+\[ \large \hat{y}_{3} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_3 = b_{0} + b_{1}x_{13} \dots + b_{k}x_{k3} \]</div>
+<div class="math notranslate nohighlight">
+\[ \dots \]</div>
+<div class="math notranslate nohighlight">
+\[ \large \hat{y}_{n} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_n = b_{0} + b_{1}x_{1n} \dots + b_{k}x_{kn} \]</div>
+<p>Where:</p>
+<p><span class="math notranslate nohighlight">\(\hat{y_i} \)</span> : is the predicted log odds of being in category 1, for a given set of predictor scores, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> : is the intercept term, the predicted value of the outcome variable when all predictors equal 0</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span> : is the slope of the 1st predictor variable</p>
+<p><span class="math notranslate nohighlight">\(x_{1i}\)</span> : is the score on the the first predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p><span class="math notranslate nohighlight">\(b_k\)</span> : is the slope of the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable</p>
+<p><span class="math notranslate nohighlight">\(x_{ki}\)</span> : is the score on the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p>In matrix form, the model is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Large \begin{bmatrix}
+           {\hat{y}_{1}} \\
+           {\hat{y}_{2}} \\
+           {\hat{y}_{3}} \\
+           \vdots \\
+           {\hat{y}_{n}}
+         \end{bmatrix} = \begin{bmatrix}
+           {ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_1 } \\
+           {ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_2 } \\
+           {ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_3 }  \\
+           \vdots \\
+           {\ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_n}
+         \end{bmatrix} = \begin{bmatrix}
+           {1} &amp; {x_{11}} &amp; \dots &amp; {x_{k1}}\\ 
+           {1} &amp; {x_{12}} &amp; \dots &amp; {x_{k2}}\\ 
+           {1} &amp; {x_{13}} &amp; \dots &amp; {x_{k3}}\\ 
+           \vdots &amp; \vdots &amp; \vdots &amp; \vdots\\
+           {1} &amp; {x_{1n}} &amp; \dots &amp; {x_{kn}} \\ 
+         \end{bmatrix} \begin{bmatrix}
+           {b_{0}} \\ 
+           \vdots \\
+           {b_{k}} \\ 
+         \end{bmatrix} 
+\end{split}\]</div>
+<p>Obviously, we don’t really care about predictions on the scale of the log odds ratio, and they are not intuitive to interpret. We can convert the model predictions to probabilities using the following formulas:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat\pi_{1i} =  \frac{e^{\hat{y}_{i}}}{1 + e^{\hat{y_{i}}}}\)</span></p>
+<p><span class="math notranslate nohighlight">\( \large \hat\pi_{0i} = 1 - \hat\pi_{1i} \)</span></p>
+</div>
+<div class="section" id="parameter-estimation">
+<h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
+<p>To estimate the paramters, we use the category membership of the outcome scores (0 or 1) as an indicator variable.</p>
+<p><span class="math notranslate nohighlight">\(\text{indicator}_{0} = \begin{cases}
+  \text{0 if observation is in outcome category 0}\\ 
+  \text{1 if observation is in outcome category 0}   
+\end{cases}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\text{indicator}_{1} = \begin{cases}
+  \text{0 if observation is in outcome category 1}\\ 
+  \text{1 if observation is in outcome category 1}   
+\end{cases}\)</span></p>
+<p>The cell below generates these indicator scores, for each observation in the dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create dummy variables for addiction_status</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;addiction_status&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>The model gets its parameters, by maximizing the likelihood function:</p>
+<p><span class="math notranslate nohighlight">\( \large \prod\limits_{i = 1}^{n} \hat\pi_{0i}^{\text{indicator}_{0i}}  \hat\pi_{1i}^{\text{indicator}_{1i}}  \)</span></p>
+<p>Equivalently, by minimizing the negative log-likelihood function (has the same effect, but easier for a computer to work with):</p>
+<p><span class="math notranslate nohighlight">\( \large - \sum\limits_{i = 1}^{n} \text{indicator}_{0i} \cdot ln(\hat\pi_{0i}) + \text{indicator}_{1i} \cdot ln(\hat\pi_{1i}) \)</span></p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
+<p>The cell below defines a python function that implements the negative log-likelhood function shown above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a cost function for binary logistic regression</span>
+<span class="k">def</span> <span class="nf">logit_cost</span><span class="p">(</span><span class="n">intercept_and_slope</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  
+    <span class="n">indicators</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;addiction_status&#39;</span><span class="p">])</span>
+
+    <span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">intercept_and_slope</span>
+    
+    <span class="n">predicted_log_odds_1</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span>
+   
+    <span class="n">predicted_prob_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">predicted_log_odds_1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">predicted_log_odds_1</span><span class="p">))</span>
+    
+    <span class="n">likelihoods</span> <span class="o">=</span> <span class="n">indicators</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span>  <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">predicted_prob_1</span><span class="p">)</span> <span class="o">+</span> <span class="n">indicators</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">predicted_prob_1</span><span class="p">)</span>
+     
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">likelihoods</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="n">likelihood</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The python cell below tests the the negative log likelihood function with the parameters:</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> = 0</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span> = 0</p>
+<p>for the <code class="docutils literal notranslate"><span class="pre">addiction_status</span> <span class="pre">~</span> <span class="pre">number_of_social_contacts</span></code> data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># testing the cost function</span>
+<span class="n">logit_cost</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;number_of_social_contacts&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;addiction_status&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>851.1900652501769
+</pre></div>
+</div>
+</div>
+</div>
+<p>The cell below implements code which passes the negative log-likelihood function and some intitial guesses at the parameters, to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">minimize</a> function, from the <a class="reference external" href="https://scipy.org/">SciPy</a> library.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mimimize</span></code> will try various sets of parameters until it finds the parameters which give the lowest value of the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># finding the values of the parameters that minimize the cost function</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">logit_cost</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">args</span> <span class="o">=</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;number_of_social_contacts&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;addiction_status&#39;</span><span class="p">]),</span> <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-16</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.01119212, -0.28962196])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The values in the output of the cell above are the intercept and slope (in that order) which minimize the cost function. We can see that these are the same parameters we obtain when implementing binary logistic regression via the <a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a> library (the parameter estimates from <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> are in the <code class="docutils literal notranslate"><span class="pre">coef</span></code> section of the regression table shown below):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fitting a logistic regression model with statsmodels</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;addiction_status ~ number_of_social_contacts&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># show the regression table</span>
+<span class="n">mod</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.338112
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>   <td>addiction_status</td> <th>  No. Observations:  </th>  <td>   100</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    98</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     1</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Fri, 01 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1651</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>22:04:44</td>     <th>  Log-Likelihood:    </th> <td> -33.811</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -40.496</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>0.0002556</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+              <td></td>                 <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>                 <td>   -0.0112</td> <td>    0.557</td> <td>   -0.020</td> <td> 0.984</td> <td>   -1.103</td> <td>    1.080</td>
+</tr>
+<tr>
+  <th>number_of_social_contacts</th> <td>   -0.2896</td> <td>    0.098</td> <td>   -2.969</td> <td> 0.003</td> <td>   -0.481</td> <td>   -0.098</td>
+</tr>
+</table></div></div>
+</div>
+</div>
+<div class="section" id="interpretation-one-predictor-model">
+<h2>Interpretation (one predictor model)<a class="headerlink" href="#interpretation-one-predictor-model" title="Permalink to this headline">#</a></h2>
+<p>Note: the intercept and slope are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
+<p>The coefficients tell us:</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> : the intercept, the expected log odds of falling into category 1, where the predictor equals 0.</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span>: the predicted change in the log odds of being in category 1 for a 1-unit increase in the predictor.</p>
+<p>The predictions produced by the model come to us on scale of the log odds ratio:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat{y}_{i} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_i = b_{0} + b_{i}x_{11} \dots + b_{k}x_{ki} \)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the model predictions are linear on the log scale</span>
+<span class="n">log_odds_predictions_1</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span> <span class="o">+</span>  <span class="n">mod</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;number_of_social_contacts&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;number_of_social_contacts&#39;</span><span class="p">]</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">addiction_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">log_odds_predictions_1</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_24_0.png" src="_images/4_binary_logistic_regression_24_0.png" />
+</div>
+</div>
+<p>To get the predictions on a probability scale (e.g. ranging between 0 and 1, we must convert from log odds to probability using the following formula:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat\pi_{1i} =  \frac{e^{\hat{y}_{i}}}{1 + e^{\hat{y_{i}}}}\)</span></p>
+<p>The probability prediuctions are shown on the graph below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">probability_predictions_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_odds_predictions_1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_odds_predictions_1</span><span class="p">))</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">addiction_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">probability_predictions_1</span><span class="p">,</span> <span class="n">plot_predictions</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_26_0.png" src="_images/4_binary_logistic_regression_26_0.png" />
+</div>
+</div>
+<p>We can also get the predcited probability of being the other outcome category (e.g. NOT an addict), by using the following formula:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat\pi_{0i} = 1 - \hat\pi_{1i} \)</span></p>
+<p>The graph below shows also the predcited probability of NOT being an addict:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">addiction_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">probability_predictions_1</span><span class="p">,</span> <span class="n">plot_predictions</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">plot_other</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_28_0.png" src="_images/4_binary_logistic_regression_28_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="effect-of-the-slope-and-intercept-on-the-logistic-regression-curve">
+<h2>Effect of the slope and intercept on the Logistic Regression curve<a class="headerlink" href="#effect-of-the-slope-and-intercept-on-the-logistic-regression-curve" title="Permalink to this headline">#</a></h2>
+<p>On the scale of the log odds ratio, changing the intercept moves the line up and down the y-axis. On the probability scale, this moves the logistic curve along the x-axis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">b0</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">odds_prob_intercept_plot</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_30_0.png" src="_images/4_binary_logistic_regression_30_0.png" />
+</div>
+</div>
+<p>On the scale of the log odds ratio, changing the slope changes the steepness of the line. On the probability scale, this makes the logistic curve ascend more or less steeply:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">odds_prob_slope_plot</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">df</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_32_0.png" src="_images/4_binary_logistic_regression_32_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="binary-logistic-regression-with-multiple-predictors">
+<h2>Binary Logistic Regression with multiple predictors<a class="headerlink" href="#binary-logistic-regression-with-multiple-predictors" title="Permalink to this headline">#</a></h2>
+<p>For models with more than one predictor, binary logistic regression fits a surface to the data, if there are two predictions, and a manifold to the data if there are more than two predictors.</p>
+<p>The graph below shows a binary logistic regression model fit to an outcome with two continuous predictor variables. The blue surface is the binary logistic regression model, the red dots and black dots are the hypothetical data points. The blue surface indicates the predicted probability of being in outcome category 1, for any set of predictor scores:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show how binary logistic regression works in multiple dimensions</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">bin_log_reg_plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_34_0.png" src="_images/4_binary_logistic_regression_34_0.png" />
+</div>
+</div>
+<p>The data from the island also contains a second binary categorical variable, detailed below:</p>
+<p><code class="docutils literal notranslate"><span class="pre">drug_alone</span></code>: a binary categorical variable, indicating whether a person uses their drug of choice alone at least twice a week (<code class="docutils literal notranslate"><span class="pre">1</span></code> indicates <code class="docutils literal notranslate"><span class="pre">YES</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code> indicates <code class="docutils literal notranslate"><span class="pre">NO</span></code>)</p>
+<p>We can us this as a second predictor, using the model: <code class="docutils literal notranslate"><span class="pre">addiction_status</span> <span class="pre">~</span> <span class="pre">number_of_social_contacts</span> <span class="pre">+</span> <span class="pre">drug_alone</span></code>.</p>
+<p>We’ll uses <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> to fit this model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit a logistic regression model with statsmodels</span>
+<span class="n">mod2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;addiction_status ~ number_of_social_contacts + drug_alone&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># show the regression table</span>
+<span class="n">mod2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.334882
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>   <td>addiction_status</td> <th>  No. Observations:  </th>  <td>   100</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    97</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Fri, 01 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1731</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>22:04:46</td>     <th>  Log-Likelihood:    </th> <td> -33.488</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -40.496</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>0.0009045</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+              <td></td>                 <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>                 <td>   -0.2666</td> <td>    0.643</td> <td>   -0.414</td> <td> 0.679</td> <td>   -1.528</td> <td>    0.994</td>
+</tr>
+<tr>
+  <th>number_of_social_contacts</th> <td>   -0.2891</td> <td>    0.096</td> <td>   -3.011</td> <td> 0.003</td> <td>   -0.477</td> <td>   -0.101</td>
+</tr>
+<tr>
+  <th>drug_alone</th>                <td>    0.4996</td> <td>    0.625</td> <td>    0.800</td> <td> 0.424</td> <td>   -0.725</td> <td>    1.724</td>
+</tr>
+</table></div></div>
+</div>
+<p>The graph below shows the raw data, and the logistic regression probability surface, in 3D dataspace:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">intercept</span><span class="p">,</span> <span class="n">number_of_social_contacts_slope</span><span class="p">,</span> <span class="n">drug_type_slope</span> <span class="o">=</span> <span class="n">mod2</span><span class="o">.</span><span class="n">params</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_model_plot</span><span class="p">(</span><span class="s1">&#39;number_of_social_contacts&#39;</span><span class="p">,</span> <span class="s1">&#39;drug_alone&#39;</span><span class="p">,</span> 
+                   <span class="s1">&#39;addiction_status&#39;</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">number_of_social_contacts_slope</span><span class="p">,</span> <span class="n">drug_type_slope</span><span class="p">,</span>
+                  <span class="n">df</span><span class="p">,</span> <span class="s1">&#39;logistic_regression_model&#39;</span><span class="p">,</span> <span class="s1">&#39;drug_alone = YES&#39;</span><span class="p">,</span> <span class="s1">&#39;drug_alone = NO&#39;</span><span class="p">,</span> <span class="n">azim</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_38_0.png" src="_images/4_binary_logistic_regression_38_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="interpretation-multiple-predictors">
+<h2>Interpretation (multiple predictors)<a class="headerlink" href="#interpretation-multiple-predictors" title="Permalink to this headline">#</a></h2>
+<p>Note: the intercept and slopes are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
+<p>The intercept, tells us the predicted log odds ratio of being in category 1, for an observation whose score on all other predictors is 0. The <span class="math notranslate nohighlight">\(p\)</span>-values for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
+<p>The slope of each predictor tells us the predicted difference in log odds ratio of being in category 1 when we compare between scores for two hypothetical observations which differed <em>only</em> by a one unit score in that predictor, controlling for the other variables in the model. The <span class="math notranslate nohighlight">\(p\)</span>-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
+</div>
+<div class="section" id="statistical-interaction-in-binary-logistic-regression">
+<h2>Statistical interaction in Binary Logistic Regression<a class="headerlink" href="#statistical-interaction-in-binary-logistic-regression" title="Permalink to this headline">#</a></h2>
+<p>The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).</p>
+<p>If we fit an interaction term in a binary logistic regression model, then this the logistic regression probability surface to ‘bend’, so that the effect of the predictors is not constant, but depends on the value of the other predictors. The graph below shows a logisitc probability surface with statistical interaction:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">bin_log_reg_plot</span><span class="p">(</span><span class="n">interaction</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_binary_logistic_regression_41_0.png" src="_images/4_binary_logistic_regression_41_0.png" />
+</div>
+</div>
+<p>That’s it for binary logistic regression (for now). You can visit another page/island via the links to the left.</p>
+<hr class="docutils" />
+<p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="3_poisson_regression.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Poisson Regression</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="5_multinomial_logistic_regression.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multinomial Logistic Regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

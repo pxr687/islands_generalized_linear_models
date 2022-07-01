@@ -1,0 +1,1201 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linear Regression &#8212; Islands - Generalized Linear Models</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Poisson Regression" href="3_poisson_regression.html" />
+    <link rel="prev" title="What are Generalized Linear Models?" href="1_generalized_linear_models.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/islands_main.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Islands - Generalized Linear Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0_main_page.html">
+                    Who this book is for
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_generalized_linear_models.html">
+   What are Generalized Linear Models?
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_poisson_regression.html">
+   Poisson Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_binary_logistic_regression.html">
+   Binary Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_multinomial_logistic_regression.html">
+   Multinomial Logistic Regression
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/2_linear_regression.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F2_linear_regression.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/2_linear_regression.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#context">
+   Context
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameter-estimation">
+   Parameter Estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-one-predictor-model">
+   Interpretation (one predictor model)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression-with-multiple-predictors">
+   Linear Regression with multiple predictors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-multiple-predictors">
+   Interpretation (multiple predictors)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistical-interaction-in-linear-regression">
+   Statistical interaction in Linear Regression
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Linear Regression</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#context">
+   Context
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameter-estimation">
+   Parameter Estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-one-predictor-model">
+   Interpretation (one predictor model)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression-with-multiple-predictors">
+   Linear Regression with multiple predictors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-multiple-predictors">
+   Interpretation (multiple predictors)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistical-interaction-in-linear-regression">
+   Statistical interaction in Linear Regression
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-regression">
+<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h1>
+<br>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/island_lin_reg.png"><img alt="_images/island_lin_reg.png" class="bg-primary mb-1 align-center" src="_images/island_lin_reg.png" style="width: 270px;" /></a>
+<br><p>Imagine you are conducting social research on an island inhabited by 10,000 people. The people who live on the island use a set of physical credits to represent social status. That is, the amount of social status (or lack thereof) that each islander has is represented in the number of ‘prestige credits’ that they in their posession. The prestige credits are awarded by those around them, and by the government of the island.</p>
+<p>One of the social scientists in your research team suggests that citizens of the islands who are wealthier attract a higher number of prestige credits. The statistical version of this hypothesis is that <code class="docutils literal notranslate"><span class="pre">prestige</span></code> is postiviely associated with <code class="docutils literal notranslate"><span class="pre">wealth</span></code>. One way of thinking about this statistical hypothesis is that, if you know an islander’s <code class="docutils literal notranslate"><span class="pre">wealth</span></code>, then this gives you predictive information about their social status. If you know someone is far above average <code class="docutils literal notranslate"><span class="pre">wealth</span></code>, then, if the hypothesis is true, then it’s a safe bet that also have above average <code class="docutils literal notranslate"><span class="pre">prestige</span></code>.</p>
+<p>To test this hypothesis, your research team collect <code class="docutils literal notranslate"><span class="pre">wealth</span></code> and <code class="docutils literal notranslate"><span class="pre">prestige</span></code> scores for 1000 citizens of the island. You do this via random sampling. The government of the island has granted the research team access to census data, and so your team were able to use a computer to randomly select 1000 individuals, and survey them to collect the data.</p>
+<p>The team contacted the 1000 randomly sampled islanders and asked them to complete a survey recording their <code class="docutils literal notranslate"><span class="pre">wealth</span></code> and <code class="docutils literal notranslate"><span class="pre">prestige</span></code>. The first 20 rows of the dataframe in which the team stored the <code class="docutils literal notranslate"><span class="pre">prestige</span></code> scores are shown below (each row corresponds to one islander). The variables contained in the dataframe are detailed below:</p>
+<p><code class="docutils literal notranslate"><span class="pre">prestige</span></code> - a discrete numerical variable, the number of prestige credits each islander has.</p>
+<p><code class="docutils literal notranslate"><span class="pre">wealth</span></code> - a continuous numerical variable, recorded in units of the currency of the island.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importing some python packages needed for this page</span>
+<span class="kn">import</span> <span class="nn">islands_GLM</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># generating the data for this page</span>
+<span class="n">wealth_pop</span><span class="p">,</span> <span class="n">religion_pop</span><span class="p">,</span> <span class="n">prestige_pop</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">islands_GLM</span><span class="o">.</span><span class="n">prestige_wealth_df</span><span class="p">()</span>
+
+<span class="c1"># making plots look like R!</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">r_ify</span><span class="p">()</span>
+
+<span class="c1"># show the data</span>
+<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;wealth&#39;</span><span class="p">,</span> <span class="s1">&#39;prestige&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>wealth</th>
+      <th>prestige</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>181.35</td>
+      <td>641</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>178.62</td>
+      <td>652</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>176.06</td>
+      <td>689</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>190.41</td>
+      <td>632</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>166.84</td>
+      <td>635</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>995</th>
+      <td>168.00</td>
+      <td>558</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>165.21</td>
+      <td>544</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>139.76</td>
+      <td>519</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>168.80</td>
+      <td>525</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>172.47</td>
+      <td>692</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>From inspecting the scatterplot of <code class="docutils literal notranslate"><span class="pre">wealth</span></code> against <code class="docutils literal notranslate"><span class="pre">prestige</span></code> (shown below), your team decide the trend looks roughly linear, and so decide to fit a linear regression model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">plot_prestige_wealth</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;wealth&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;prestige&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_4_0.png" src="_images/2_linear_regression_4_0.png" />
+</div>
+</div>
+<div class="section" id="context">
+<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
+<p>Linear regression is (somewhat obviously) the foundational generalized linear model. We have already seen it on the <a class="reference internal" href="1_generalized_linear_models.html"><span class="doc std std-doc">‘What are Generalized Linear Models?’</span></a> page, but now we will delve into how the parameter estimates are obtained, via the conditional distribution (aka maximum likelihood) approach.</p>
+<p>Linear regression is used to model the linear relationship between a quantitative outcome variable and one or more predictor variables. As with all generalized linear models, the predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical).</p>
+<p>The predictions from linear regression can range from positive infinity to negative infinity. So if the outcome variable is does not range from positive to negative infinity, for instance if it must be positive (e.g. number of children), then a different model should be used.</p>
+<p>In this case, the outcome variable <code class="docutils literal notranslate"><span class="pre">prestige</span></code> is  quantitative, and judging from the scatterplot, has a mean far from 0. If the mean were close to 0, we might consider fitting a different generalized linear model. Linear regression can produce negative predictions, which may not make sense for <code class="docutils literal notranslate"><span class="pre">prestige</span></code>.</p>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
+<p>As shown previously, the prediction equation for the linear regression model is:</p>
+<p><span class="math notranslate nohighlight">\(\large \hat{y}_i = b_0 + b_1x_{1i} ... + b_kx_{ki} \)</span></p>
+<p>where:</p>
+<p><span class="math notranslate nohighlight">\(\hat{y_i} \)</span> : is the predicted value of the outcome variable for a given set of predictor scores, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> : is the intercept term, the predicted value of the outcome variable when all predictors equal 0</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span> : is the slope of the 1st predictor variable</p>
+<p><span class="math notranslate nohighlight">\(x_{1i}\)</span> : is the score on the the first predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p><span class="math notranslate nohighlight">\(b_k\)</span> : is the slope of the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable</p>
+<p><span class="math notranslate nohighlight">\(x_{ki}\)</span> : is the score on the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p>The individual predictions (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span>), for all <span class="math notranslate nohighlight">\(n\)</span> observations, using <span class="math notranslate nohighlight">\(k\)</span> variables as predictors are:</p>
+<div class="math notranslate nohighlight">
+\[ \large \hat{y}_1 = b_{0} + b_{1}x1_1 \dots + b_{k}xk_1 \]</div>
+<div class="math notranslate nohighlight">
+\[ \large \hat{y}_2 = b_{0} + b_{1}x1_2 \dots + b_{k}xk_2 \]</div>
+<div class="math notranslate nohighlight">
+\[ \large \hat{y}_3 = b_{0} + b_{1}x1_3 \dots + b_{k}xk_3  \]</div>
+<div class="math notranslate nohighlight">
+\[ \dots \]</div>
+<div class="math notranslate nohighlight">
+\[ \large \hat{y}_n = b_{0} + b_{1}x1_n \dots + b_{k}xk_n  \]</div>
+<p><span class="math notranslate nohighlight">\(\hat{y}_1\)</span> is the predicted score on the outcome variable for the 1st observation in the dataset,  <span class="math notranslate nohighlight">\(\hat{y}_2\)</span> is the prediction for the second score and so on…</p>
+<p>For each predictor (<span class="math notranslate nohighlight">\(x_k\)</span>), each <span class="math notranslate nohighlight">\(b_{k}\)</span> indicates the strength and direction of the relationship between that predictor <span class="math notranslate nohighlight">\(xk\)</span> and the outcome variable <span class="math notranslate nohighlight">\(y\)</span>. If the absolute magnitude of <span class="math notranslate nohighlight">\(b_{k}\)</span> is large, then that predictor gives a lot of information about the outcome scores, and is a useful predictor. If <span class="math notranslate nohighlight">\(b_{k}\)</span> is small, the predictor does not give much information about the outcome scores.</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> indicates the predicted score on the outcome variable for an obervation with a score of 0 on all the predictors (where the predictor is categorical, the prediction is for an observation in the baseline category).</p>
+<p>In matrix form the linear regression model is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Large \begin{bmatrix}
+           {\hat{y}_{1}} \\
+           \vdots \\
+           {\hat{y}_{n}}
+         \end{bmatrix} = \begin{bmatrix}
+           {1} &amp; {x_{11}} &amp; \dots &amp; {x_{k1}}\\ 
+           \vdots &amp; \vdots &amp; \vdots &amp; \vdots\\
+           {1} &amp; {x_{1n}} &amp; \dots &amp; {x_{kn}} \\ 
+         \end{bmatrix} \begin{bmatrix}
+           {b_{0}} \\ 
+           \vdots \\
+           {b_{k}} \\ 
+         \end{bmatrix} 
+\end{split}\]</div>
+<p>Or, more compactly:</p>
+<p><span class="math notranslate nohighlight">\( \large \hat{Y} = \beta X\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\hat{Y}\)</span> is a vector containing the predicted outcome scores. <span class="math notranslate nohighlight">\(\beta\)</span> is a vector containing the parameter estimates (the intercept and slopes) and  <span class="math notranslate nohighlight">\(X\)</span> is a matrix containing the predictor scores and a column of 1s (as shown above).</p>
+<p>For the data that your research term have collected on the island, the linear regression model predicting <code class="docutils literal notranslate"><span class="pre">prestige</span></code> from <code class="docutils literal notranslate"><span class="pre">wealth</span></code> is:</p>
+<p><span class="math notranslate nohighlight">\(\large \hat{\text{prestige}}_i = b_0 + b_1\text{wealth}_{i} \)</span></p>
+</div>
+<div class="section" id="parameter-estimation">
+<h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
+<p>The model gets its parameters, by maximizing the likelihood function, the formula for which is:</p>
+<p><span class="math notranslate nohighlight">\(  \huge \prod\limits_{i = 1}^{n} \left(\frac{1}{(2\pi\sigma^{2})^{^{\frac{1}{2}}}}\right)^n e^{\frac{-\sum{(y_{i} - \hat{y_{i}})^{2}}}{2\sigma^{2}}}  \)</span></p>
+<p>If you don’t recognize that formula it might look formidable. It is in fact a version of the probability density function for the famous Gaussian (normal) distribution. The mean of the normal distribution is <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and the variance is <span class="math notranslate nohighlight">\(\sigma\)</span>. For a given value of <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, the likelihood function computes the probability of randomly sampling a particular observation <span class="math notranslate nohighlight">\(y_i\)</span> from a normal distribution with that particular mean and variance ( <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>).</p>
+<p>Essentially, this formula translates as “let’s assume each observation is sampled from a normal distribution with a given mean and variance. We use the linear prediction equation to model the mean of the normal distribution from which a each observation was sampled. We find the intercept and slope values such that the means of the normal distributions are closer to the datapoints than for any other line”. That is a lot to get your head around, so consider it in the context of this image:</p>
+<p><img alt="" src="_images/GLM_normal_identity.png" />
+(Image from: <a class="reference external" href="https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html">https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html</a>)</p>
+<p>The python cell below defines a function which implements the probability density function of the normal distribution, on a given set of <span class="math notranslate nohighlight">\(y\)</span> values, and for a normal distribution with a particular mean (<span class="math notranslate nohighlight">\(\hat{y}\)</span>) and standard deviation (<span class="math notranslate nohighlight">\(\sigma\)</span>). This is very similar to the likelihood formula shown above, only it returns a vector of probabilities, rather than the product of the probabilities. Each element of the vector returned by the function is the probability of randomly sampling each of the <span class="math notranslate nohighlight">\(y\)</span> values from a normal distribution with the specified mean (<span class="math notranslate nohighlight">\(\hat{y}\)</span>) and standard deviation (<span class="math notranslate nohighlight">\(\sigma\)</span>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining a function which implements the probability density function of the normal distribution</span>
+<span class="k">def</span> <span class="nf">normal_pdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+  
+      <span class="n">output</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_hat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+      <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The python cell below applies this function to each element of a vector containing integers ranging from -15 to 15, and plots the results. The y-axis shows the probability of getting each of those scores, if randomly sampling from a normal distribution with a mean of 0 and a standard deviation of 5:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot a normal distribution, using the function defined above</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">normal_pdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">prob</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$\hat</span><span class="si">{y_i}</span><span class="s2"> = 0 $ and $\sigma = 5$&quot;</span><span class="p">)</span> 
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">normal_labels</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_8_0.png" src="_images/2_linear_regression_8_0.png" />
+</div>
+</div>
+<p>We can see that randomly sampling scores around the mean is more probable than scores in the tails of the distribution, far from the mean.</p>
+<p>The cell below re-runs the function, and this time also shows the probability of obtaining each score ranging from -15 to 15 if randomly sampling from a normal distribution with  mean of -5 and a variance of 5 (this graph is shown in blue):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># also plot a normal distribution with different parameters</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">normal_pdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">prob</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$\hat</span><span class="si">{y_i}</span><span class="s2"> = 0 $ and $\sigma = 5$&quot;</span><span class="p">)</span> 
+<span class="n">prob</span> <span class="o">=</span> <span class="n">normal_pdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">prob</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$\hat</span><span class="si">{y_i}</span><span class="s2"> = -5 $ and $\sigma = 5$&quot;</span><span class="p">)</span> 
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">normal_labels</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_10_0.png" src="_images/2_linear_regression_10_0.png" />
+</div>
+</div>
+<p>We can see that as we vary the parameters (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>) the probability of getting a given score changes. Scores closer to -5 are more probable if sampling from a normal distribution with a mean of -5, than if randomly sampling from a normal distribution with a mean of 0.</p>
+<p>The graph below shows the effect of applying this functon, with a variety of different <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> pairings:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">normal_plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_12_0.png" src="_images/2_linear_regression_12_0.png" />
+</div>
+</div>
+<p>As we saw on the <a class="reference internal" href="1_generalized_linear_models.html"><span class="doc std std-doc">‘What are Generalized Linear Models?’</span></a> page, linear regression involves fitting a set of conditional normal distributions to the outcome data, as a function of the predictor variables. This is shown again in the image below:</p>
+<p><img alt="" src="_images/GLM_normal_identity.png" />
+(Image from: <a class="reference external" href="https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html">https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html</a>)</p>
+<p>The likelihood function shown above fits these conditional normal distributions to the data. The likelihood function allows the mean (<span class="math notranslate nohighlight">\(\hat{y}\)</span>) of each normal distribution to vary as a function of the predictor variables (<span class="math notranslate nohighlight">\(\hat{y} = b_0 + b_1x_{1i} ... + b_kx_{ki})\)</span>. The function takes the dataset (the predictor scores and outcome scores), and two parameters (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and ?<span class="math notranslate nohighlight">\(\sigma\)</span>) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and those particular parameters. (NB: <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> is a parameter vector, containing each of the predictions from the linear prediction equation, for a given intercept/slope set).</p>
+<p>By finding the values of of <span class="math notranslate nohighlight">\(b_0\)</span>,  <span class="math notranslate nohighlight">\(b_k\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> which maximize the likelihood function (e.g. values of of <span class="math notranslate nohighlight">\(b_0\)</span>,  <span class="math notranslate nohighlight">\(b_k\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> which yield a higher value of the function than any other values of of <span class="math notranslate nohighlight">\(b_0\)</span>,  <span class="math notranslate nohighlight">\(b_k\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>), we find the set of linearly positioned normal distributions which best fit the data. It is because <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> is obtained from the linear prediction equation, that the normal distributions which are fit to the data fall on a straight line.</p>
+<p>Because maximizing the likelihood formula involves multiplying together probabilities, the numbers can get very small very quickly, and this can lead to computational errors. In practice, we get around this by minimizing the <em>negative log-likelihood</em>, rather than maximizing the likelihood directly. This produces the same parameter estimates, but is less prone to numerical errors. The negative log-likelihood formula is:</p>
+<p><span class="math notranslate nohighlight">\( \huge \frac{n}{2} \ln(2\pi\sigma^{2}) +  \frac{{\sum\limits_{i = 1}^{n}(y_{i} - \hat{y_{i}})^{2}}}{2\sigma^{2}}\)</span></p>
+<p>This formula is just the result of applying the log transformation to the likelihood formula shown earlier. It is also referred to as the <em>cost function</em>, as we want it to be <em>cheap</em> e.g. we want to find the parameter values that yield it’s minimum possible value.</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
+<p>The python cell below defines a function which uses the negative log-likelihood formula just shown to calculate the negative log likelihood for a given set of parameters (<span class="math notranslate nohighlight">\(b_0,\)</span> <span class="math notranslate nohighlight">\(b_1\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span>) for a given dataset (a vector of outcome <span class="math notranslate nohighlight">\(y_i\)</span> values and a vector of predictor <span class="math notranslate nohighlight">\(x_i\)</span> values):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code defines a function which implements the negative log-likelihood function for linear regression</span>
+<span class="k">def</span> <span class="nf">lin_reg_neg_likelihood</span><span class="p">(</span><span class="n">intercept_slope_sigma</span><span class="p">,</span> <span class="n">predictor</span><span class="p">,</span> <span class="n">outcome</span><span class="p">):</span>
+  
+    <span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">intercept_slope_sigma</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">intercept_slope_sigma</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">intercept_slope_sigma</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">predictor</span>
+    
+    <span class="n">y</span> <span class="o">=</span> <span class="n">outcome</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span>  <span class="n">n</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_hat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The python cell below tests the the negative log likelihood function with the parameters:</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> = 1</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span> = 1</p>
+<p><span class="math notranslate nohighlight">\(\sigma\)</span> = 1</p>
+<p>for the <code class="docutils literal notranslate"><span class="pre">prestige</span> <span class="pre">~</span> <span class="pre">wealth</span></code> data, with <code class="docutils literal notranslate"><span class="pre">wealth</span></code> as the predictor and <code class="docutils literal notranslate"><span class="pre">prestige</span></code> as the outcome:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># testing the negative log-likelihood function defined above</span>
+<span class="n">lin_reg_neg_likelihood</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;wealth&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;prestige&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>101943530.8938332
+</pre></div>
+</div>
+</div>
+</div>
+<p>The maximum likelihood estimates can be found via calculus, by finding the parameter values which give the global minimum of the negative log-likelihood function. Using python, we can pass the cost function, and a set of parameters, to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">minimize</a> function, from the <a class="reference external" href="https://scipy.org/">SciPy</a> library to find the parameters which give the global minimum of the cost function. The <code class="docutils literal notranslate"><span class="pre">minimize</span></code> function will try various sets of parameters until it finds the parameters which give the lowest value of the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># finding the paramter values that minimize the negative log-likelihood function</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">lin_reg_neg_likelihood</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>  <span class="n">args</span> <span class="o">=</span> <span class="p">(</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;wealth&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;prestige&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-62.98373952,   4.00515213,  60.9655072 ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The values in the array above are (in order) the intercept, slope and sigma value which give the lowest negative loglikelihood, and are the parameters which give the line of normal distributions which best fit the data:</p>
+<p><img alt="" src="_images/GLM_normal_identity.png" />
+(Image from: <a class="reference external" href="https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html">https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html</a>)</p>
+<p>The graph below shows a line generated using this slope and intercept, alongside the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">lin_reg_neg_likelihood</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>  <span class="n">args</span> <span class="o">=</span> <span class="p">(</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;wealth&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;prestige&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">x</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">plot_prestige_wealth_with_prediction</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;wealth&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;prestige&#39;</span><span class="p">],</span> <span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;wealth&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_21_0.png" src="_images/2_linear_regression_21_0.png" />
+</div>
+</div>
+<p>The cell below shows again the parameter estimates obtained from minimizing the cost function using <code class="docutils literal notranslate"><span class="pre">minimize</span></code>. The second cell below fits a linear regression with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>, the parameter estimates are shown in the <code class="docutils literal notranslate"><span class="pre">coef</span></code> section of the regression table below the cell:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># finding the paramter values that minimize the negative log-likelihood function</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">lin_reg_neg_likelihood</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>  <span class="n">args</span> <span class="o">=</span> <span class="p">(</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;wealth&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;prestige&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-62.98373952,   4.00515213,  60.9655072 ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fitting a linear regression model using statsmodels</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;prestige ~ wealth&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># show the regression table</span>
+<span class="n">mod</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>prestige</td>     <th>  R-squared:         </th> <td>   0.288</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.287</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   403.8</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Fri, 01 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>1.08e-75</td> 
+</tr>
+<tr>
+  <th>Time:</th>                 <td>22:04:24</td>     <th>  Log-Likelihood:    </th> <td> -5529.2</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  1000</td>      <th>  AIC:               </th> <td>1.106e+04</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   998</td>      <th>  BIC:               </th> <td>1.107e+04</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>  -62.9928</td> <td>   33.908</td> <td>   -1.858</td> <td> 0.063</td> <td> -129.531</td> <td>    3.546</td>
+</tr>
+<tr>
+  <th>wealth</th>    <td>    4.0052</td> <td>    0.199</td> <td>   20.096</td> <td> 0.000</td> <td>    3.614</td> <td>    4.396</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>50.454</td> <th>  Durbin-Watson:     </th> <td>   2.032</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  45.067</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.455</td> <th>  Prob(JB):          </th> <td>1.64e-10</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.498</td> <th>  Cond. No.          </th> <td>2.99e+03</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 2.99e+03. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>We can see that the parameter values obtained by minimizing the negative log-likelihood function are identical to the parameter estimates we get from carrying out a linear regression using the <a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a> library.</p>
+</div>
+<div class="section" id="interpretation-one-predictor-model">
+<h2>Interpretation (one predictor model)<a class="headerlink" href="#interpretation-one-predictor-model" title="Permalink to this headline">#</a></h2>
+<p>Note: the intercept and slope are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
+<p>The intercept value tells us the predicted value of the outcome (<code class="docutils literal notranslate"><span class="pre">prestige</span></code>) for a predictor (<code class="docutils literal notranslate"><span class="pre">wealth</span></code>) score of 0. This may or may not be a meaningful prediction, depending on the dataset and how many very low values of the predictor are actually observed (a lot of extrapolation is going on there are not many observations with low predictor scores!). The <span class="math notranslate nohighlight">\(p\)</span>-values for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
+<p>The slope tells us the expected in increase in the outcome for a 1 unit change in the predictor. In this case, based on this dataset, we expect a 4 unit increase in <code class="docutils literal notranslate"><span class="pre">prestige</span></code> for a 1 unit increase in <code class="docutils literal notranslate"><span class="pre">wealth</span></code>. The <span class="math notranslate nohighlight">\(p\)</span>-values for the predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
+</div>
+<div class="section" id="linear-regression-with-multiple-predictors">
+<h2>Linear Regression with multiple predictors<a class="headerlink" href="#linear-regression-with-multiple-predictors" title="Permalink to this headline">#</a></h2>
+<p>In more than two dimensions, linear regression fits a (hyper)plane, rather than a line, to the data.</p>
+<p>The graph below shows a hypothetical multiple regression model fit to an outcome with two continuous predictor variables. The blue surface is the linear regression model, the red dots are the hypothetical data points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_lin_reg_plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_28_0.png" src="_images/2_linear_regression_28_0.png" />
+</div>
+</div>
+<p>Generalized linear models, of which linear regression is a special case, are a flexible framework that allow for all types of predictor variable. Returning to the data from the current island, let’s say your research team is also interested in investigating whether religious group membership is also associated with <code class="docutils literal notranslate"><span class="pre">prestige</span></code>.</p>
+<p>There are two major religions on the island, so membership of either can be indicated with a 0 or a 1 (<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=</span> <span class="pre">religion</span> <span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=</span> <span class="pre">religion</span> <span class="pre">B</span></code> or vice versa). Religious group membership was recorded during data collection, and a dataframe whcih also shows the variable <code class="docutils literal notranslate"><span class="pre">religion</span></code> is below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show the dataframe</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>wealth</th>
+      <th>religion</th>
+      <th>prestige</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>181.35</td>
+      <td>1</td>
+      <td>641</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>178.62</td>
+      <td>1</td>
+      <td>652</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>176.06</td>
+      <td>0</td>
+      <td>689</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>190.41</td>
+      <td>1</td>
+      <td>632</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>166.84</td>
+      <td>0</td>
+      <td>635</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>995</th>
+      <td>168.00</td>
+      <td>1</td>
+      <td>558</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>165.21</td>
+      <td>1</td>
+      <td>544</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>139.76</td>
+      <td>0</td>
+      <td>519</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>168.80</td>
+      <td>1</td>
+      <td>525</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>172.47</td>
+      <td>0</td>
+      <td>692</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>The graph below shows a 2D scatterplot which depicts <code class="docutils literal notranslate"><span class="pre">wealth</span></code>, <code class="docutils literal notranslate"><span class="pre">prestige</span></code> and <code class="docutils literal notranslate"><span class="pre">religion</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code just generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">plot_prestige_wealth_with_religion</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_32_0.png" src="_images/2_linear_regression_32_0.png" />
+</div>
+</div>
+<p>From graphical inspection, it does appear that the religious groups might differ in their average prestige. Because of what <a class="reference external" href="https://us.sagepub.com/en-us/nam/applied-regression-analysis-and-generalized-linear-models/book237254">John Fox</a> calls the ‘geometric trick’ of using indicator variables, we can also show the data in a 3D data-space. Because of the dummy coding (<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=</span> <span class="pre">religion</span> <span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=</span> <span class="pre">religion</span> <span class="pre">B</span></code>), all of the datapoints line up at either 0 or 1 on one of the axes, rather than being distributed all along the axis, as they are with the continuous predictor:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_prestige_wealth_religion_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">azim</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_34_0.png" src="_images/2_linear_regression_34_0.png" />
+</div>
+</div>
+<p>I’ll fit a regression model using <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>, and then use this 3D space to show the regression model alongside the data.</p>
+<p>The regression model will mode <code class="docutils literal notranslate"><span class="pre">prestige</span></code> as a linear function of <code class="docutils literal notranslate"><span class="pre">religion</span></code> and <code class="docutils literal notranslate"><span class="pre">wealth</span></code>, so the model is - <code class="docutils literal notranslate"><span class="pre">prestige</span> <span class="pre">~</span> <span class="pre">religion</span> <span class="pre">+</span> <span class="pre">wealth</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit a linear regression model with statsmodels</span>
+<span class="n">lin_reg_model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;prestige ~ religion + wealth&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># show the regression table</span>
+<span class="n">lin_reg_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>prestige</td>     <th>  R-squared:         </th> <td>   0.687</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.686</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   1094.</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Fri, 01 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>3.72e-252</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>22:04:24</td>     <th>  Log-Likelihood:    </th> <td> -5118.5</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  1000</td>      <th>  AIC:               </th> <td>1.024e+04</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   997</td>      <th>  BIC:               </th> <td>1.026e+04</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   10.1766</td> <td>   22.590</td> <td>    0.450</td> <td> 0.652</td> <td>  -34.153</td> <td>   54.506</td>
+</tr>
+<tr>
+  <th>religion</th>  <td>  -99.6753</td> <td>    2.797</td> <td>  -35.640</td> <td> 0.000</td> <td> -105.163</td> <td>  -94.187</td>
+</tr>
+<tr>
+  <th>wealth</th>    <td>    3.9858</td> <td>    0.132</td> <td>   30.142</td> <td> 0.000</td> <td>    3.726</td> <td>    4.245</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>14.181</td> <th>  Durbin-Watson:     </th> <td>   2.013</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.001</td> <th>  Jarque-Bera (JB):  </th> <td>   9.726</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.108</td> <th>  Prob(JB):          </th> <td> 0.00773</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.568</td> <th>  Cond. No.          </th> <td>3.00e+03</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large,  3e+03. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Here is the <code class="docutils literal notranslate"><span class="pre">prestige</span> <span class="pre">~</span> <span class="pre">religion</span> <span class="pre">+</span> <span class="pre">wealth</span></code> linear regression model shown in 3D dataspace, along with the raw data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_prestige_wealth_religion_plot_with_surface</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">lin_reg_model</span><span class="p">,</span> <span class="n">azim</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_38_0.png" src="_images/2_linear_regression_38_0.png" />
+</div>
+</div>
+<p>The above graph shows the ‘geometric trick’ mentioned earlier: because <code class="docutils literal notranslate"><span class="pre">religion</span></code> is an indicator variable defined only at 0 or 1, all of the datapoints fall at either 0 or 1. But the regression surface covers the space between 0 and 1, this allows us to use the linear regression model with categorical predictors.</p>
+</div>
+<div class="section" id="interpretation-multiple-predictors">
+<h2>Interpretation (multiple predictors)<a class="headerlink" href="#interpretation-multiple-predictors" title="Permalink to this headline">#</a></h2>
+<p>How do we interpret the linear regression model parameter estimates, when there are multiple predictors?</p>
+<p>Note: the intercept and slopes are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
+<p>The intercept tells us the predicted score on the outcome variable for an observation whose score on all other predictors was 0. The <span class="math notranslate nohighlight">\(p\)</span>-values for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
+<p>The slope of each predictor tells us the predicted difference in the outcome variable scores for two hypothetical observations which differed <em>only</em> by a one unit score in that predictor. E.g. which had the same score on all other predictors. Sometimes this is referred to <em>statistical control</em>. We might say each slope tells us the estimated change in the outcome for a 1 unit increase in that predictor, <em>controlling</em> for other predictors in the model.</p>
+<p>This ‘statistical control’ interpretation of the slopes s is easy to explain via the graph above (the graph showing the linear regression surface and the datapoints). If we ‘hold <code class="docutils literal notranslate"><span class="pre">religion</span></code> constant’ by looking only at the graph where <code class="docutils literal notranslate"><span class="pre">religion</span> <span class="pre">=</span> <span class="pre">1</span></code>, then we compare points where <code class="docutils literal notranslate"><span class="pre">wealth</span></code> varies, the regression surface let’s us predict the change in <code class="docutils literal notranslate"><span class="pre">prestige</span></code> as a function of wealth, whilst ‘controlling for’ (e.g. holding constant) <code class="docutils literal notranslate"><span class="pre">religion</span></code>. Obviously, the validity of this interpretation depends on how well the <a class="reference external" href="https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/R/R5_Correlation-Regression/R5_Correlation-Regression4.html#:~:text=There%20are%20four%20assumptions%20associated,are%20independent%20of%20each%20other">assumptions of the linear regression model</a> are met…</p>
+<p>The <span class="math notranslate nohighlight">\(p\)</span>-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
+</div>
+<div class="section" id="statistical-interaction-in-linear-regression">
+<h2>Statistical interaction in Linear Regression<a class="headerlink" href="#statistical-interaction-in-linear-regression" title="Permalink to this headline">#</a></h2>
+<p>The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).</p>
+<p>If we fit an interaction term in linear regression this involves taking the cross product of two predictors. So if the we wanted to look for an interaction between <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> we would include <span class="math notranslate nohighlight">\(x_1 * x_2\)</span> as a predictor in the model. So the model would be:</p>
+<p><span class="math notranslate nohighlight">\(\large \hat{y}_i = b_0 + b_1x_{1i} + b_2x_{2i}...  + b_kx_{1i}x_{2i}  \)</span></p>
+<p>Geometrically, this allows the linear regression surface to ‘bend’, so that the effect of the predictors is not constant, but depends on the value of the other predictor. This is shown on the graph below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_lin_reg_plot</span><span class="p">(</span><span class="n">interaction</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_linear_regression_42_0.png" src="_images/2_linear_regression_42_0.png" />
+</div>
+</div>
+<p>That’s it for linear regression from the conditional distribution/maximum likelihood perspective. You can visit another page/island via the links to the left.</p>
+<hr class="docutils" />
+<p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="1_generalized_linear_models.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">What are Generalized Linear Models?</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="3_poisson_regression.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Poisson Regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

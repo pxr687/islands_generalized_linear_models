@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What are Generalized Linear Models? &#8212; Islands - Generalized Linear Models</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linear Regression" href="2_linear_regression.html" />
+    <link rel="prev" title="Who this book is for" href="0_main_page.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/islands_main.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Islands - Generalized Linear Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0_main_page.html">
+                    Who this book is for
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   What are Generalized Linear Models?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_linear_regression.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_poisson_regression.html">
+   Poisson Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_binary_logistic_regression.html">
+   Binary Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_multinomial_logistic_regression.html">
+   Multinomial Logistic Regression
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/1_generalized_linear_models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F1_generalized_linear_models.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/1_generalized_linear_models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-conditional-distribution-view-of-regression-models">
+   The ‘Conditional Distribution’ view of regression models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-structure-of-this-book">
+   The structure of this book
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>What are Generalized Linear Models?</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-conditional-distribution-view-of-regression-models">
+   The ‘Conditional Distribution’ view of regression models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-structure-of-this-book">
+   The structure of this book
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="what-are-generalized-linear-models">
+<h1>What are Generalized Linear Models?<a class="headerlink" href="#what-are-generalized-linear-models" title="Permalink to this headline">#</a></h1>
+<p>Generalized linear models are extensions of linear regression, and the linear regression model itself is a specific type of generalized linear model. Generalized linear models relax some of the assumptions of linear regression and as a result, they can be applied to a wider variety of datasets. This page will serve as a refresher to linear regression, and will explain how generalized linear models work, by reference to linear regression.</p>
+<p>Linear regression involves modelling the linear relationship between a set of scores on a quantitative outcome variable (denoted <span class="math notranslate nohighlight">\(y\)</span>) and scores on a set of predictor variables (denoted with <span class="math notranslate nohighlight">\(x_1, x_2 ... x_k\)</span>). The predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical), but the outcome variable (generally) must be numerical. Linear regression uses a linear prediction equation of the form::</p>
+<p><span class="math notranslate nohighlight">\(\large \hat{y}_i = b_0 + b_1x_{1i} ... + b_kx_{ki} \)</span></p>
+<p>where:</p>
+<p><span class="math notranslate nohighlight">\(\hat{y_i} \)</span> : is the predicted value of the outcome variable for a given set of predictor scores, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> : is the intercept term, this is, the predicted value of the outcome variable for an observation where all predictor scores equal 0</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span> : is the slope of the 1st predictor variable</p>
+<p><span class="math notranslate nohighlight">\(x_{1i}\)</span> : is the score on the the first predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p><span class="math notranslate nohighlight">\(b_k\)</span> : is the slope of the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable</p>
+<p><span class="math notranslate nohighlight">\(x_{ki}\)</span> : is the score on the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p>Linear regression assumes a normal distribution of the residuals - that is, that the distribution of the differences between the model predictions and the actual datapoints <span class="math notranslate nohighlight">\((y_i - \hat{y_i})\)</span> is normal. Generalized linear models relax this (and other) assumptions, and so extend the machinery of linear regression to allow us to use a linear prediction equation to predict an outcome variable with a distributional form that is non-normal.</p>
+<div class="section" id="the-conditional-distribution-view-of-regression-models">
+<h2>The ‘Conditional Distribution’ view of regression models<a class="headerlink" href="#the-conditional-distribution-view-of-regression-models" title="Permalink to this headline">#</a></h2>
+<p>Linear regression is often introduced via the sum of squares perspective, whereby the parameter estimates (the intercept and slopes) are obtained by minimizing:</p>
+<p><span class="math notranslate nohighlight">\( \large \sum\limits_{i = 1}^{n} (y_i - \hat{y}_i)\)</span></p>
+<p>or equivalently:</p>
+<p><span class="math notranslate nohighlight">\( \large \sum\limits_{i = 1}^{n} (y_i - (b_0 + b_1x_{1i} ... + b_kx_{ki})) \)</span></p>
+<p>In the case of linear regression, minimizing the sum of the squared error provides the best linear unbiased estimates of the population parameters, when the model assumptions are met. However, minimizing the sum of squared error does not provide the best parameter estimates for other generalized linear models. A different perspective is therefore required to understand the parameter estimation employed by generalized linear models. I will refer to this other perspective as the ‘conditional distribution’ perspective. This is easiest to visualize for a linear model containing only one predictor. In the single-predictor case, the conditional distribution perspective of linear regression is that it involves fitting a normal distribution for each level of the predictor, and that the linear regression line runs through the mean of each normal distribution, as shown in the image below:</p>
+<p><img alt="" src="_images/GLM_normal_identity.png" />
+(Image from: <a class="reference external" href="https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html">https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html</a>)</p>
+<p>If the predictor is <em>useful</em> - e.g. if it gives a lot of predictive information about the outcome variable - then the conditional means of these normal distributions will change a lot as the value of the predictor changes. The image below illustrates a strong predictor-outcome relationship in a single-predictor linear regression. The conditional mean of the red distribution (high value of the predictor) is much larger than the mean of the orange distribution (low values of the predictor):</p>
+<p><img alt="" src="_images/linear_regression_ML.png" /></p>
+<p>If the predictor is not very useful, then the conditional means of the normal distributions will not change a lot as the value of the predictor changes (e.g. the predictor gives very little information about the value of the outcome variable). The image below illustrates a weak/null predictor-outcome relationship in a single-predictor linear regression. The conditional mean of the red distribution (high value of the predictor) is the same as the mean of the orange distribution (low values of the predictor):</p>
+<p><img alt="" src="_images/linear_regression_ML_null.png" /></p>
+<p>For linear regression, the conditional distribution approach and the sum of squares approach produce equivalent parameter estimates. As mentioned above, generalized linear models - other than linear regression - let us use a linear prediction equation to predict outcome variables that are not normally distributed. They do this by fitting other distributional forms (e.g. non-normal distributions) to the outcome variable. In later pages, we’ll go into detail about the how these distributions are fit to the data, from the conditional distribution perspective (which is technically called the <em>maximum likelihood</em> perspective).</p>
+<p>Some other ways of writing the linear regression model are useful here, to illustrate the conditional distribution approach. The linear regression model predicts the conditional mean of each normal distribution, as a function of the predictor variables, we can write the model as:</p>
+<p><span class="math notranslate nohighlight">\(\large \mu_i = b_0 + b_1x_{1i} ... + b_kx_{ki} \)</span></p>
+<p>Generalized linear models - of which the linear regression model is a special case - fit a linear regression equation to <em>some function of the conditional mean</em>. This function is called the <em>link function</em> because it links the linear prediction equation with the outcome variable. In the case of linear regression, the link function is just <span class="math notranslate nohighlight">\(1 *\\mu_i \)</span>, and so is referred to as the <em>identity link function</em>. Thus, the general form of generalized linear models is:</p>
+<p><span class="math notranslate nohighlight">\(\large f(\mu_i) = b_0 + b_1x_{1i} ... + b_kx_{ki} \)</span></p>
+<p>For linear regression, the predictions that the model can produce range across the entire real line <span class="math notranslate nohighlight">\((-∞, ∞)\)</span>. This can produce nonsensical predictions for certain types of outcome variable. For instance, negative valued predictions do not make sense for binary outcomes that fall into one of two categories, and are dummy-coded as 0 or 1. Nor do negative predictions make sense for count outcomes, which take only whole-number positive values.</p>
+<p>The link function in generalized linear models maps the linear prediction equation to a function of the conditional mean which theoretically ranges from <span class="math notranslate nohighlight">\((-∞, ∞)\)</span>. For instance, when dealing with binary outcome variables, we can use the logit link function <span class="math notranslate nohighlight">\(ln(\frac{μ} {1 – μ})\)</span>. This maps the linear prediction equation to the log of the odds ratio, the scale of which ranges from <span class="math notranslate nohighlight">\((-∞, ∞)\)</span>. The predictions of the logistic regression model form a straight line on the scale of the log odds ratio, but form a different curve on the scale of the original data, where they predict probabilities, bounded between 0 and 1.</p>
+<p>The table below shows some of the generalized linear models that are covered by this textbook:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model type</p></th>
+<th class="head"><p>Response distribution</p></th>
+<th class="head"><p>Range of predicted values</p></th>
+<th class="head"><p>Link name</p></th>
+<th class="head"><p>Link function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linear Regression</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>real: (-∞, ∞)</p></td>
+<td><p>Identity</p></td>
+<td><p>1 * <span class="math notranslate nohighlight">\(μ\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Logistic Regression</p></td>
+<td><p>Bernoulli</p></td>
+<td><p>Integers: {0, 1}</p></td>
+<td><p>Logit</p></td>
+<td><p><span class="math notranslate nohighlight">\(ln(\frac{μ} {1 – μ})\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Poisson Regression</p></td>
+<td><p>Poisson Distribution</p></td>
+<td><p>integers: 0, 1, 2, …</p></td>
+<td><p>Log</p></td>
+<td><p><span class="math notranslate nohighlight">\(ln(μ) \)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-structure-of-this-book">
+<h2>The structure of this book<a class="headerlink" href="#the-structure-of-this-book" title="Permalink to this headline">#</a></h2>
+<p>This book will use simulated data, which (hopefully) cleanly and clearly illustrates the principles of fitting generalized linear models. Each page will focus on a different type of generalized linear model, and will involve data from a different hypothetical island. Each model will be explained first in the one-predictor case, using a continuous predictor, then in using several predictors, one of which will be categorical.</p>
+<p>Let’s visit the islands, the links are in the table of contents…</p>
+<hr class="docutils" />
+<p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="0_main_page.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Who this book is for</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2_linear_regression.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linear Regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
