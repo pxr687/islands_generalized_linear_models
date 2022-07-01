@@ -551,7 +551,7 @@ def bin_log_reg_plot(interaction = False):
 	ax1 = fig.add_subplot(111, projection='3d')
 	ax1.plot_wireframe(x,y,z, color = 'blue', label = 'binary logistic regression model')
 	ax1.scatter(data_x[data_z >= 0.5], data_y[data_z >= 0.5], data_z[data_z >= 0.5], color = 'red', label = 'outcome = 1')
-	ax1.scatter(data_x[data_z < 0.5], data_y[data_z < 0.5], data_z[data_z < 0.5], color = 'green', label = 'outcome = 0'  )
+	ax1.scatter(data_x[data_z < 0.5], data_y[data_z < 0.5], data_z[data_z < 0.5], color = 'black', label = 'outcome = 0'  )
 	ax1.set_zticks([0,1])
 	_plt.xlabel('Predictor 1')
 	_plt.ylabel('Predictor 2')
