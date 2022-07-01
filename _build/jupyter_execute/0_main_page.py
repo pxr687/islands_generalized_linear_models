@@ -12,7 +12,7 @@
 # * Assumes familiarity with linear regression
 # * Assumes the ability to read mathematical formulae
 # * Assumes knowledge of logarithms and exponents
-# * Knowledge of Python is helpful but not essential, as the examples are all generated using python code
+# * Knowledge of [python](https://www.python.org/) is helpful but not essential, as the examples are all generated using python code
 # 
 # This book is written in the Jupyter notebook format. It contains text cells like the one you are reading, alongside code cells (like the one below) which also appear throughout this book. The code cells are used to run Python code, in order to generate the data and graphs for the examples. Anything in a code cell that comes after the `#` symbol is a *comment* and explains what the code is doing, but is not run by the computer as code:
 
