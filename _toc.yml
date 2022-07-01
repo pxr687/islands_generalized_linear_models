@@ -9,4 +9,4 @@ chapters:
 - file: 3_poisson_regression
 - file: 4_binary_logistic_regression
 - file: 5_multinomial_logistic_regression
-
+- file: 99_about_the_author

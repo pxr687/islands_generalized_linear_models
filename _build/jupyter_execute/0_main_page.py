@@ -3,9 +3,10 @@
 
 # # Who this book is for
 # 
+# 
 # Generalized linear models are commonly used in the social and life sciences. However, sometimes they are taught in a way that involves interpretting the output of statistical software without getting into how the models work at the nuts and bolts level. This book is intended for readers who have taken undergraduate statistics classes in social or life science and who want to understand how generalized linear models get their parameter estimates, in a way that goes beyond just interpretting tables from statistical software. 
 # 
-# My background is in Psychology, so this book is written from an applied statistics perspective. However, this book delves slightly deeper into the mechanics of generalized linear models than many applied statistics textbooks that I have read. My focus is on how the models estimate their parameters, by minimizing their cost functions (analogous to minimizing the sum of the squared error in linear regression). This book:
+# My background is in psychology, so this book is written from an applied statistics perspective. However, this book delves slightly deeper into the mechanics of generalized linear models than some applied statistics textbooks that I have read. My focus is on how the models estimate their parameters, by minimizing their cost functions (analogous to minimizing the sum of the squared error in linear regression). This book:
 # 
 # * Assumes familiarity with different types of variable (quantitative, nominal-categorical, ordinal-categorical)
 # * Assumes familiarity with linear regression
