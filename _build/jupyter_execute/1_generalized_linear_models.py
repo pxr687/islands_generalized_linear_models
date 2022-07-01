@@ -74,7 +74,7 @@
 # 
 # This book will use simulated data, which (hopefully) cleanly and clearly illustrates the principles of fitting generalized linear models. Each page will focus on a different type of generalized linear model, and will involve data from a different hypothetical island. Each model will be explained first in the one-predictor case, using a continuous predictor, then in using several predictors, one of which will be categorical. 
 # 
-# Let's visit the islands, the links are in the table of contents...
+# Let's visit the islands, the links are in the table of contents, and at the bottom of this page...
 
 # ***
 # By [pxr687](99_about_the_author.ipynb) 

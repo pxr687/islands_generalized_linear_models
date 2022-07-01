@@ -475,7 +475,7 @@ islands_GLM.three_D_model_plot('hormone_level_change', 'biological_sex',
 islands_GLM.three_D_pois_reg_plot(interaction = True)
 
 
-# That's it for Poisson regression (for now). You can visit another page/island via the links to the left.
+# That's it for Poisson regression (for now). You can visit another page/island via the links in the table of contents, and at the bottom of this page...
 
 # ***
 # By [pxr687](99_about_the_author.ipynb) 

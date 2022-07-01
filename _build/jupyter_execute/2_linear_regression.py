@@ -404,7 +404,7 @@ islands_GLM.three_D_prestige_wealth_religion_plot_with_surface(df, lin_reg_model
 islands_GLM.three_D_lin_reg_plot(interaction = True)
 
 
-# That's it for linear regression from the conditional distribution/maximum likelihood perspective. You can visit another page/island via the links to the left.
+# That's it for linear regression from the conditional distribution/maximum likelihood perspective. You can visit another page/island via the links in the table of contents, and at the bottom of this page...
 
 # ***
 # By [pxr687](99_about_the_author.ipynb) 

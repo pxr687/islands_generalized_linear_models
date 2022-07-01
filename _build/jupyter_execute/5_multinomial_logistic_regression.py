@@ -373,7 +373,7 @@ islands_GLM.three_D_model_plot_multinomial('income', 'biological_sex_dummy',
 islands_GLM.three_D_logistic_plot(interaction = True)
 
 
-# That's it for multinomial logistic regression (for now). You can visit another page/island via the links to the left.
+# That's it for multinomial logistic regression (for now). You can visit another page/island via the links in the table of contents, and at the bottom of this page...
 
 # ***
 # By [pxr687](99_about_the_author.ipynb) 
