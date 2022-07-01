@@ -1,0 +1,12 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: 0_main_page.ipynb
+chapters:
+- file: 1_generalized_linear_models
+- file: 2_linear_regression
+- file: 3_poisson_regression
+- file: 4_binary_logistic_regression
+- file: 5_multinomial_logistic_regression
+

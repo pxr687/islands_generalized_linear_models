@@ -1,0 +1,11 @@
+jupyter-book
+matplotlib
+numpy
+statsmodels.formula.api 
+statsmodels..api
+scipy.optimize 
+scipy
+mpl_toolkits 
+math
+sphinx
+jupytext[myst]

@@ -1,0 +1,1290 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poisson Regression &#8212; Islands - Generalized Linear Models</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Binary Logistic Regression" href="4_binary_logistic_regression.html" />
+    <link rel="prev" title="Linear Regression" href="2_linear_regression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/islands_main.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Islands - Generalized Linear Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0_main_page.html">
+                    Who this book is for
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_generalized_linear_models.html">
+   What are Generalized Linear Models?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_linear_regression.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Poisson Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_binary_logistic_regression.html">
+   Binary Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_multinomial_logistic_regression.html">
+   Multinomial Logistic Regression
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/3_poisson_regression.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F3_poisson_regression.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/3_poisson_regression.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#context">
+   Context
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameter-estimation">
+   Parameter Estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-one-predictor-model">
+   Interpretation (one predictor model)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#effect-of-the-slope-and-intercept-on-the-poisson-regression-curve">
+   Effect of the slope and intercept on the Poisson Regression curve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-regression-with-multiple-predictors">
+   Poisson Regression with multiple predictors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-multiple-predictors">
+   Interpretation (multiple predictors)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistical-interaction-in-poisson-regression">
+   Statistical interaction in Poisson Regression
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Poisson Regression</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#context">
+   Context
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameter-estimation">
+   Parameter Estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-one-predictor-model">
+   Interpretation (one predictor model)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#effect-of-the-slope-and-intercept-on-the-poisson-regression-curve">
+   Effect of the slope and intercept on the Poisson Regression curve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-regression-with-multiple-predictors">
+   Poisson Regression with multiple predictors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation-multiple-predictors">
+   Interpretation (multiple predictors)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistical-interaction-in-poisson-regression">
+   Statistical interaction in Poisson Regression
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="poisson-regression">
+<h1>Poisson Regression<a class="headerlink" href="#poisson-regression" title="Permalink to this headline">#</a></h1>
+<br>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/island_pois_reg.png"><img alt="_images/island_pois_reg.png" class="bg-primary mb-1 align-center" src="_images/island_pois_reg.png" style="width: 270px;" /></a>
+<br><p>Imagine you are visiting a new island, this time with a team of biologists. You are here to study a particular species of omnivourous animal. You’re investigating the hypothesis that changes in the level of a particular hormone predict the number of predation events carried out by the animal.</p>
+<p>You collect data across a one-week period, on 3 variables:</p>
+<p><code class="docutils literal notranslate"><span class="pre">hormone_level_change</span></code> -  a continuous numerical variable, the change in the hormone levels in the blood, from the start of the week to the end</p>
+<p><code class="docutils literal notranslate"><span class="pre">biological_sex</span></code> - a binary nominal-categorical variable, the biological sex of the animal</p>
+<p><code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code> - a discrete numerical variable, the number of predation events carried out by the animal</p>
+<p>The data your team has collected is shown in the output of the cell below. The dataframe contains the data for 100 randomly sampled animals:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importing the libraries needed for this page</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">islands_GLM</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits</span> <span class="kn">import</span> <span class="n">mplot3d</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span>
+
+<span class="c1"># make plots look like R</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">r_ify</span><span class="p">()</span>
+
+<span class="c1"># generate the data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">islands_GLM</span><span class="o">.</span><span class="n">generate_poisson_data</span><span class="p">()</span>
+
+<span class="c1"># show the data</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hormone_level_change</th>
+      <th>biological_sex</th>
+      <th>number_of_predation_events</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-139.98</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27.41</td>
+      <td>1</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>92.24</td>
+      <td>1</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-20.19</td>
+      <td>0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>78.51</td>
+      <td>1</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>0.24</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>-6.08</td>
+      <td>1</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.32</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>-14.80</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>-198.97</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>The statistical model your team is testing first is: <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span> <span class="pre">~</span> <span class="pre">hormone_level_change</span></code></p>
+<p>…or equivalently, that “the <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code> events can be predicted as a function of <code class="docutils literal notranslate"><span class="pre">hormone_level_change</span></code>”.</p>
+<p>Notably, <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code> is a <em>count</em> variable - it cannot take negative values (a negative number of predation events is nonsensical), and it occurs only in whole number values (we can’t have half a predation event, or 65.685937493 predation events, for one animal).</p>
+<p>The histogram of <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code> is shown below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">count_hist</span><span class="p">(</span><span class="n">df</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_4_0.png" src="_images/3_poisson_regression_4_0.png" />
+</div>
+</div>
+<p>Because we’re interested in whether changes in the hormone level are associated with increased number of predation events, let’s inspect a scatterplot with <code class="docutils literal notranslate"><span class="pre">hormone_level_change</span></code> on the x-axis and <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code> on the y-axis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">hormone_predation_plot</span><span class="p">(</span><span class="n">df</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_6_0.png" src="_images/3_poisson_regression_6_0.png" />
+</div>
+</div>
+<p>It might look reasonable, from the trend on the scatterplot, to apply the tools from the <a class="reference internal" href="2_linear_regression.html"><span class="doc std std-doc">Linear Regression page</span></a> here.</p>
+<p>The output of the cell below shows the results of fitting a linear regression model (<code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span> <span class="pre">~</span> <span class="pre">hormone_level_change</span></code>) to this data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit a linear regression model and plot the predictions</span>
+<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;number_of_predation_events ~ hormone_level_change&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">lin_reg_predictions</span> <span class="o">=</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">]</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">hormone_predation_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">with_predictions</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">lin_reg_predictions</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_8_0.png" src="_images/3_poisson_regression_8_0.png" />
+</div>
+</div>
+<p>That looks like it fits the data OK, but there is a problem. If you look at the prediction for at -200 on the x-axis, it is negative. The prediction is computed in the cell below, from the linear regression parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nonsensical predictions</span>
+<span class="n">lin_reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">200</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.4727070243375424
+</pre></div>
+</div>
+</div>
+</div>
+<p>This prediction is nonsense for a count outcome variable like <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code>, and is a problem for using linear regression with count data, when a lot of the values fall close to 0.</p>
+<p>Fortunately, there are several several generalized linear models for count data. We will look at the most foundational one: Poisson regression.</p>
+<div class="section" id="context">
+<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
+<p>Poisson regression  is a generalized linear model used to model the relationship between a count outcome variable (that can take only positive integer values) and one or more predictor variables. As with all generalized linear models, the predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical). The predictions from Poisson regression can range from zero to positive infinity.</p>
+<p>Poisson regression that involves fitting a set of Poisson distributions to the outcome variable, where the means of the Poisson distributions vary as a function of the predictor(s). The Poisson distribtion is a distributional form which describes count variables. The python cell below creates a graph which shows the Poisson distribution with a mean of 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">poisson_plot</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_13_0.png" src="_images/3_poisson_regression_13_0.png" />
+</div>
+</div>
+<p>Here are several Poisson distributions, with different means:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">poisson_plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_15_0.png" src="_images/3_poisson_regression_15_0.png" />
+</div>
+</div>
+<p>We can see that the Poisson distribution gets more like a normal as the mean increases. Where linear regression fits a set of normal distributions to the data, Poisson regression fits a set of Poisson distributions, as shown in the figures below:</p>
+<p><img alt="" src="_images/poiss_reg.png" />
+(image from <a class="reference external" href="https://stats.stackexchange.com/questions/542155/how-the-poisson-distribution-is-used-in-regression">https://stats.stackexchange.com/questions/542155/how-the-poisson-distribution-is-used-in-regression</a>)</p>
+<p>(The graph below shows linear regression - fitting normal distributions - on the left, and Poisson regression - fitting Poisson distributions, on the right):</p>
+<p><img alt="" src="_images/poiss_reg_2.png" />
+(image from <a class="reference external" href="https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html">https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html</a>)</p>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
+<p>Remember from the <a class="reference internal" href="1_generalized_linear_models.html"><span class="doc std std-doc">What are generalized linear models?</span></a> page that generalized linear models predict some function of the mean as a function of the linear prediction equation.</p>
+<p>In the case of linear regression, this function of the mean is just <span class="math notranslate nohighlight">\(1 * \mu\)</span>. For other generalized liner models, like Poisson regression, we use a different function of the mean.</p>
+<p>In effect, using the linear prediction equation to predict a function of the mean (other than the identity link function used in linear regression) this fits a line on some scale other than the scale of the original data. E.g. it fits a line on whatever scale the transformation of the mean is on.</p>
+<p>Poisson regression uses a logarithmic link function - it fits a line on the log scale, and is sometimes referred to as a loglinear model. The prediction equation for Poisson regression is:</p>
+<p><span class="math notranslate nohighlight">\( \Large ln(\hat{y_{i}}) = b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki}  \)</span></p>
+<p>Obviously, we aren’t really interested in the log scale, we’re interested in the original scale of the data, so we have to exponeniate the right hand side of the model to get predictions on the original scale:</p>
+<p><span class="math notranslate nohighlight">\( \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}  \)</span></p>
+<p>where:</p>
+<p><span class="math notranslate nohighlight">\(\hat{y_i} \)</span> : is the predicted value of the outcome variable for a given set of predictor scores, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> : is the intercept term, the predicted value of the outcome variable when all predictors equal 0</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span> : is the slope of the 1st predictor variable</p>
+<p><span class="math notranslate nohighlight">\(x_{1i}\)</span> : is the score on the the first predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p><span class="math notranslate nohighlight">\(b_k\)</span> : is the slope of the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable</p>
+<p><span class="math notranslate nohighlight">\(x_{ki}\)</span> : is the score on the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
+<p>The individual Poisson regression predictions (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span>), for all <span class="math notranslate nohighlight">\(n\)</span> observations, using <span class="math notranslate nohighlight">\(k\)</span> variables as predictors are:</p>
+<div class="math notranslate nohighlight">
+\[ \Large ln(\hat{y_{1}}) = b_{0} + b_{1}x_{11} + ... b_{k}x_{k1} \]</div>
+<div class="math notranslate nohighlight">
+\[ \Large ln(\hat{y_{2}}) = b_{0} + b_{1}x_{12} + ... b_{k}x_{k2}  \]</div>
+<div class="math notranslate nohighlight">
+\[ \Large ln(\hat{y_{3}}) = b_{0} + b_{1}x_{13} + ... b_{k}x_{k3}  \]</div>
+<div class="math notranslate nohighlight">
+\[ \dots \]</div>
+<div class="math notranslate nohighlight">
+\[ \Large ln(\hat{y_{n}}) = b_{0} + b_{1}x_{1n} + ... b_{k}x_{kn}  \]</div>
+<p>In matrix form the Poisson regression model is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Large \begin{bmatrix}
+           {ln(\hat{y}_{1})} \\
+           \vdots \\
+           {ln(\hat{y}_{n})}
+         \end{bmatrix} = \begin{bmatrix}
+           {1} &amp; {x_{11}} &amp; \dots &amp; {x_{k1}}\\ 
+           \vdots &amp; \vdots &amp; \vdots &amp; \vdots\\
+           {1} &amp; {x_{1n}} &amp; \dots &amp; {x_{kn}} \\ 
+         \end{bmatrix} \begin{bmatrix}
+           {b_{0}} \\ 
+           \vdots \\
+           {b_{k}} \\ 
+         \end{bmatrix} 
+\end{split}\]</div>
+</div>
+<div class="section" id="parameter-estimation">
+<h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
+<p>The parameter estimates are obtained by maximizing the likelihood function (where <span class="math notranslate nohighlight">\(\hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}\)</span>):</p>
+<p><span class="math notranslate nohighlight">\( \Huge \prod\limits_{i = 1}^{n} \frac{\hat{y}^{y_i}_i e^{-\hat{y_i}}}{y_i!}\)</span></p>
+<p>This formula is dervied from the probability mass function for Poisson distribution. The mean of the Poisson distribution is <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> (this is the only parameter upon which the shape of the Poisson distribution depends). For a given value of <span class="math notranslate nohighlight">\(\hat{y_i}\)</span>, the probability mass formula computes the probability of randomly sampling a particular observation <span class="math notranslate nohighlight">\(y_i\)</span> from a Poisson distribution with that particular mean. The python cell below defines a function which implements the formula, aside from the product operator (so it returns a vector of probabilities, rather than the product of the probabilities):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># a function to implement the PMF of the Poisson distribution</span>
+<span class="k">def</span> <span class="nf">poisson_func</span><span class="p">(</span><span class="n">lambd</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+  
+    <span class="k">return</span> <span class="p">(</span><span class="n">lambd</span><span class="o">**</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">lambd</span><span class="p">))</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The cell below uses this formula to plot a Poisson distribution with a mean of 1, where the input values to the function range from 0 to 15 (remember that the Poisson distribution cannot take negative values):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">poisson_func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_20_0.png" src="_images/3_poisson_regression_20_0.png" />
+</div>
+</div>
+<p>The cell below uses this formula to plot a Poisson distribution with a mean of 4, where the input values to the function range from 0 to 15:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">poisson_func</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_22_0.png" src="_images/3_poisson_regression_22_0.png" />
+</div>
+</div>
+<p>The likelihood function for Poisson regression takes the dataset (the predictor scores and outcome scores), and one parameter vector (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span>) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and the values in the parameter vector. The parameter vector <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> contains the predictions obtained from the linear prediction equation <span class="math notranslate nohighlight">\(b_0 + b_1x_{1i} ... + b_kx_{ki} \)</span>.</p>
+<p>By finding the values of of <span class="math notranslate nohighlight">\(b_0\)</span>,  <span class="math notranslate nohighlight">\(b_k\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> which maximize the likelihood function shown above, we find the set of Poisson distributions which best fit the data, as shown in the image above. The formula is called the <em>maximum likelihood</em> formula, and using it yields the maximum likelihood estimates of the intercept and slopes. These intercept and slopes will yield a straight line if the data is log-transformed.</p>
+<p>As with linear regression, because maximizing the likelihood formula involves multiplying together probabilities, the numbers involved are so small it can lead to computational errors. In practice, again we minimize the <em>negative log-likelihood</em>, rather than directly maximizing the likelihood. This produces the same parameter estimates, but is less prone to numerical errors. The negative log-likelihood formula is:</p>
+<p><span class="math notranslate nohighlight">\( \Huge - \sum\limits_{i = 1}^{n} {y_i} ln(\hat{y}) -\hat{y_i} -ln(y_i!) \)</span></p>
+<p>This formula is just the result of applying the log transformation to the likelihood formula shown earlier (and multiplying it by -1).</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
+<p>The cell below defines a function which implements the negative log-likelihood formula:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the cost function for Poisson regression</span>
+<span class="k">def</span> <span class="nf">neg_log_like_pois</span><span class="p">(</span><span class="n">intercept_slope</span><span class="p">,</span> <span class="n">predictor</span><span class="p">,</span> <span class="n">outcome</span><span class="p">):</span>
+  
+  <span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">intercept_slope</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">intercept_slope</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+  
+  <span class="n">predicted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">predictor</span><span class="p">)</span>
+  
+  <span class="n">neg_log_like</span> <span class="o">=</span> <span class="n">outcome</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">predicted</span><span class="p">)</span> <span class="o">-</span> <span class="n">predicted</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">outcome</span><span class="p">))</span>
+  
+  <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">neg_log_like</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The python cell below tests the the negative log likelihood function with the parameters:</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> = 0</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span> = 0</p>
+<p>for the <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span> <span class="pre">~</span> <span class="pre">hormone_level_change</span></code> data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test the cost function, with intercept = 0 and slope = 0</span>
+<span class="n">neg_log_like_pois</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;number_of_predation_events&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>809.489446579875
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again we can pass this function and the initially guessed parameters, to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">minimize</a> function, from the <a class="reference external" href="https://scipy.org/">SciPy</a> library.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">minimize</span></code> function will try various sets of parameters until it finds the parameters which give the lowest value of the function. This is carried out in the cell below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find the parameters which minimize the cost function</span>
+<span class="n">pois_reg_minimize</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">neg_log_like_pois</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.017</span><span class="p">],</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;number_of_predation_events&#39;</span><span class="p">]))</span>
+<span class="n">pois_reg_minimize</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.67842088, 0.00579493])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The values in the array above are (in order) the intercept and slope values which give the lowest negative loglikelihood, and are the parameters which give the set of Poisson distributions which best fit the data:</p>
+<p><img alt="" src="_images/poiss_reg.png" />
+(image from <a class="reference external" href="https://stats.stackexchange.com/questions/542155/how-the-poisson-distribution-is-used-in-regression">https://stats.stackexchange.com/questions/542155/how-the-poisson-distribution-is-used-in-regression</a>)</p>
+<p>The predictions from the Poisson regression are shown on the scatterplot below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">pois_reg_minimize</span><span class="o">.</span><span class="n">x</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">hormone_predation_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">with_predictions</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">]),</span>
+                                  <span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;poisson regression&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_31_0.png" src="_images/3_poisson_regression_31_0.png" />
+</div>
+</div>
+<p>We can see that they fit the curved trend of the data better than the liner regression did. And they also will not produce nonsensical negative predictions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sensical predictions!</span>
+<span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="o">-</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6810760018358772
+</pre></div>
+</div>
+</div>
+</div>
+<p>We get the same parameters and predictions if we use the Poisson regression model from the <a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a> library. The parameter estimates we got from minimizing the cost function were <code class="docutils literal notranslate"><span class="pre">[1.67842089,</span> <span class="pre">0.00579493]</span></code>. The output of the cell below shows the Poisson regression table from <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>, the parameter estimates are in the <code class="docutils literal notranslate"><span class="pre">coef</span></code> section:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit a Poissin regression model using the statsmodels library</span>
+<span class="n">pois_mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">glm</span><span class="p">(</span><span class="s1">&#39;number_of_predation_events ~ hormone_level_change&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">Poisson</span><span class="p">())</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># show the regression table</span>
+<span class="n">pois_mod</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>Generalized Linear Model Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>   <td>number_of_predation_events</td> <th>  No. Observations:  </th>  <td>   100</td> 
+</tr>
+<tr>
+  <th>Model:</th>                       <td>GLM</td>            <th>  Df Residuals:      </th>  <td>    98</td> 
+</tr>
+<tr>
+  <th>Model Family:</th>              <td>Poisson</td>          <th>  Df Model:          </th>  <td>     1</td> 
+</tr>
+<tr>
+  <th>Link Function:</th>               <td>log</td>            <th>  Scale:             </th> <td>  1.0000</td>
+</tr>
+<tr>
+  <th>Method:</th>                     <td>IRLS</td>            <th>  Log-Likelihood:    </th> <td> -242.86</td>
+</tr>
+<tr>
+  <th>Date:</th>                 <td>Fri, 01 Jul 2022</td>      <th>  Deviance:          </th> <td>  159.05</td>
+</tr>
+<tr>
+  <th>Time:</th>                     <td>22:04:34</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
+</tr>
+<tr>
+  <th>No. Iterations:</th>               <td>4</td>             <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>          <td>nonrobust</td>         <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+            <td></td>              <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>            <td>    1.6784</td> <td>    0.045</td> <td>   37.705</td> <td> 0.000</td> <td>    1.591</td> <td>    1.766</td>
+</tr>
+<tr>
+  <th>hormone_level_change</th> <td>    0.0058</td> <td>    0.001</td> <td>   10.313</td> <td> 0.000</td> <td>    0.005</td> <td>    0.007</td>
+</tr>
+</table></div></div>
+</div>
+</div>
+<div class="section" id="interpretation-one-predictor-model">
+<h2>Interpretation (one predictor model)<a class="headerlink" href="#interpretation-one-predictor-model" title="Permalink to this headline">#</a></h2>
+<p>Note: the intercept and slope are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
+<p>The parameter estimates tell us:</p>
+<p><span class="math notranslate nohighlight">\(b_0\)</span> : the intercept, the expected value of the outcome,  on a log scale, for an observation where the predictor equals 0.</p>
+<p><span class="math notranslate nohighlight">\(b_1\)</span>: the predicted change in the outcome variable, on a log scale, for a 1-unit increase in the predictor.</p>
+<p>The parameters, without transformation, refer to the log scale, on which the Poisson regression model fits a straight line:</p>
+<p><span class="math notranslate nohighlight">\( \Large ln(\hat{y_{i}}) = b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki}  \)</span></p>
+<p>The predictions, on the log scale, are shown on the graph below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span> <span class="o">=</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">hormone_predation_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">with_predictions</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">],</span>
+                                  <span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;poisson regression&#39;</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_37_0.png" src="_images/3_poisson_regression_37_0.png" />
+</div>
+</div>
+<p>To get the predictions on the original scale we have to exponeniate them:</p>
+<p><span class="math notranslate nohighlight">\( \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}  \)</span></p>
+<p>The predictions, on the original scale, are shown on the graph below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">hormone_predation_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">with_predictions</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">]),</span>
+                                  <span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;poisson regression&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_39_0.png" src="_images/3_poisson_regression_39_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="effect-of-the-slope-and-intercept-on-the-poisson-regression-curve">
+<h2>Effect of the slope and intercept on the Poisson Regression curve<a class="headerlink" href="#effect-of-the-slope-and-intercept-on-the-poisson-regression-curve" title="Permalink to this headline">#</a></h2>
+<p>On the log scale, changing the intercept moves the prediction line up and down the y-axis. On the original scale, changing the intercept moves the poisson regression curve up and down the y-axis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plots below</span>
+<span class="n">b0</span> <span class="o">=</span> <span class="n">pois_mod</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">pois_mod</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">odds_original_intercept_plot</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">df</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_41_0.png" src="_images/3_poisson_regression_41_0.png" />
+</div>
+</div>
+<p>Changingt the slope changes the steepness of the line/curve, on each scale:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plots below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">odds_original_slope_plot</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">df</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_43_0.png" src="_images/3_poisson_regression_43_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="poisson-regression-with-multiple-predictors">
+<h2>Poisson Regression with multiple predictors<a class="headerlink" href="#poisson-regression-with-multiple-predictors" title="Permalink to this headline">#</a></h2>
+<p>For models with more than one predictor, Poisson regression fits a surface to the data if there are two predictors, and a manifold if there are more than two (higher dimensional models are hard/impossible to visualize, but are generalizations of the 3D case).</p>
+<p>The graph below shows a Poisson regression model fit to an outcome with two continuous predictor variables. The blue surface is the Poisson regression model, the red dots are the hypothetical data points. The blue surface indicates the predicted outcome scores, for any pair of scores on the predictor variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show how poisson regression works in multiple dimensions</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_pois_reg_plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_46_0.png" src="_images/3_poisson_regression_46_0.png" />
+</div>
+</div>
+<p>Recall that the data from the island consists of three variables:</p>
+<p><code class="docutils literal notranslate"><span class="pre">hormone_level_change</span></code>:  a continuous numerical variable, the change in the hormone levels in the blood, from the start of the week to the end</p>
+<p><code class="docutils literal notranslate"><span class="pre">biological_sex</span></code>: a binary nominal-categorical variable, the biological sex of the animal</p>
+<p><code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code>: a discrete numerical variable, the number of predation events carried out by the animal</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show the dataframe</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hormone_level_change</th>
+      <th>biological_sex</th>
+      <th>number_of_predation_events</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-139.98</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27.41</td>
+      <td>1</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>92.24</td>
+      <td>1</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-20.19</td>
+      <td>0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>78.51</td>
+      <td>1</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>0.24</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>-6.08</td>
+      <td>1</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.32</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>-14.80</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>-198.97</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>Your team is also interested in investigating the influence of <code class="docutils literal notranslate"><span class="pre">hormone_level</span></code> on <code class="docutils literal notranslate"><span class="pre">num_of_predation_events</span></code>, controlling for <code class="docutils literal notranslate"><span class="pre">biological_sex</span></code>.</p>
+<p>The scatterplot below shows the three variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">pois_group_plot</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_50_0.png" src="_images/3_poisson_regression_50_0.png" />
+</div>
+</div>
+<p>We’ll use <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> to fit a model with both predictors. The model is: <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span> <span class="pre">~</span> <span class="pre">hormone_level_change</span> <span class="pre">+</span> <span class="pre">biological_sex</span></code>. The output of the cell below shows the regression table:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit a Poisson regression with statsmodels</span>
+<span class="n">pois_mod_2</span> <span class="o">=</span>  <span class="n">smf</span><span class="o">.</span><span class="n">glm</span><span class="p">(</span><span class="s1">&#39;number_of_predation_events ~ hormone_level_change + biological_sex&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">Poisson</span><span class="p">())</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span> 
+
+<span class="c1"># show the regression table</span>
+<span class="n">pois_mod_2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>Generalized Linear Model Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>   <td>number_of_predation_events</td> <th>  No. Observations:  </th>  <td>   100</td> 
+</tr>
+<tr>
+  <th>Model:</th>                       <td>GLM</td>            <th>  Df Residuals:      </th>  <td>    97</td> 
+</tr>
+<tr>
+  <th>Model Family:</th>              <td>Poisson</td>          <th>  Df Model:          </th>  <td>     2</td> 
+</tr>
+<tr>
+  <th>Link Function:</th>               <td>log</td>            <th>  Scale:             </th> <td>  1.0000</td>
+</tr>
+<tr>
+  <th>Method:</th>                     <td>IRLS</td>            <th>  Log-Likelihood:    </th> <td> -218.13</td>
+</tr>
+<tr>
+  <th>Date:</th>                 <td>Fri, 01 Jul 2022</td>      <th>  Deviance:          </th> <td>  109.59</td>
+</tr>
+<tr>
+  <th>Time:</th>                     <td>22:04:36</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
+</tr>
+<tr>
+  <th>No. Iterations:</th>               <td>5</td>             <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>          <td>nonrobust</td>         <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+            <td></td>              <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>            <td>    1.3050</td> <td>    0.076</td> <td>   17.249</td> <td> 0.000</td> <td>    1.157</td> <td>    1.453</td>
+</tr>
+<tr>
+  <th>hormone_level_change</th> <td>    0.0057</td> <td>    0.001</td> <td>   10.135</td> <td> 0.000</td> <td>    0.005</td> <td>    0.007</td>
+</tr>
+<tr>
+  <th>biological_sex</th>       <td>    0.6165</td> <td>    0.090</td> <td>    6.823</td> <td> 0.000</td> <td>    0.439</td> <td>    0.794</td>
+</tr>
+</table></div></div>
+</div>
+<p>The graph below shows data in 3D dataspace, along with a blue surface showing the Poisson regression model. The regression surface shows the predicted value of the outcome for any pairing of predictor scores:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">intercept</span><span class="p">,</span> <span class="n">hormone_change_slope</span><span class="p">,</span> <span class="n">biological_sex_slope</span> <span class="o">=</span> <span class="n">pois_mod_2</span><span class="o">.</span><span class="n">params</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_model_plot</span><span class="p">(</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">,</span> <span class="s1">&#39;biological_sex&#39;</span><span class="p">,</span> 
+                   <span class="s1">&#39;number_of_predation_events&#39;</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">hormone_change_slope</span><span class="p">,</span> <span class="n">biological_sex_slope</span><span class="p">,</span>
+                  <span class="n">df</span><span class="p">,</span> <span class="s1">&#39;poisson_regression_model&#39;</span><span class="p">,</span> <span class="s1">&#39;males&#39;</span><span class="p">,</span> <span class="s1">&#39;females&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_54_0.png" src="_images/3_poisson_regression_54_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="interpretation-multiple-predictors">
+<h2>Interpretation (multiple predictors)<a class="headerlink" href="#interpretation-multiple-predictors" title="Permalink to this headline">#</a></h2>
+<p>Note: the intercept and slopes are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
+<p>The intercept, tells us the predicted outcome score (on the log scale) for an observation whose score on all other predictors is 0. The <span class="math notranslate nohighlight">\(p\)</span>-values for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
+<p>The slope of each predictor tells us the predicted difference in outcome score (on the log scale) when we compare two hypothetical observations which differed <em>only</em> by a one unit score in that predictor, controlling for the other variables in the model. The <span class="math notranslate nohighlight">\(p\)</span>-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
+</div>
+<div class="section" id="statistical-interaction-in-poisson-regression">
+<h2>Statistical interaction in Poisson Regression<a class="headerlink" href="#statistical-interaction-in-poisson-regression" title="Permalink to this headline">#</a></h2>
+<p>The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).</p>
+<p>If we fit an interaction term in  Poisson regression this allows the Poisson regression surface to ‘bend’, so that the effect of the predictors is not constant, but depends on the value of the other predictor. This is shown on the graph below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_pois_reg_plot</span><span class="p">(</span><span class="n">interaction</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_poisson_regression_57_0.png" src="_images/3_poisson_regression_57_0.png" />
+</div>
+</div>
+<p>That’s it for Poisson regression (for now). You can visit another page/island via the links to the left.</p>
+<hr class="docutils" />
+<p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2_linear_regression.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Linear Regression</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="4_binary_logistic_regression.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Binary Logistic Regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
