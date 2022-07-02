@@ -293,7 +293,7 @@ islands_GLM.scatter_prob_subplots(mod, df)
 # 
 # $ \large \hat\pi_{\text{(r)}i} = \frac{1}{1 + \sum{e^{\hat{y_{ji}}}}} = 1 - \sum \hat\pi_{ji} $
 
-# ## Multionomial logistic regression with multiple predictors
+# ## Multinomial logistic regression with multiple predictors
 # 
 # In more than two dimensions - e.g. with more than one predictor - the multinomial logistic regression model fits several probability surfaces, one for each outcome cateogory, which show the predicted probability of category membership, given the predictor variables. (In higher dimensions, a manifold is fit).
 # 
