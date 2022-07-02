@@ -857,12 +857,12 @@ title="Print to PDF"
 </div>
 </div>
 <p>The python cell below tests the the negative log likelihood function with the parameters:</p>
-<p><span class="math notranslate nohighlight">\(b_0\)</span> = 0</p>
-<p><span class="math notranslate nohighlight">\(b_1\)</span> = 0</p>
+<p><span class="math notranslate nohighlight">\(b^{j}_0\)</span> = 0.1</p>
+<p><span class="math notranslate nohighlight">\(b^{j}_1\)</span> = 0.1</p>
 <p>for the <code class="docutils literal notranslate"><span class="pre">religion</span> <span class="pre">~</span> <span class="pre">income</span></code> data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># testing the cost function with intercept = 1, slope = 1, for each linear prediction equation</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># testing the cost function with intercept = .1, slope = .1, for each linear prediction equation</span>
 <span class="n">mnlogit_cost</span><span class="p">([</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.1</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;religion_dummy&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -920,7 +920,7 @@ title="Print to PDF"
   <th>Date:</th>            <td>Sat, 02 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1872</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>08:52:59</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
+  <th>Time:</th>                <td>09:08:53</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
@@ -1158,7 +1158,7 @@ title="Print to PDF"
   <th>Date:</th>            <td>Sat, 02 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.2205</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>08:53:00</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
+  <th>Time:</th>                <td>09:08:54</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
