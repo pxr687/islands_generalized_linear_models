@@ -54,7 +54,7 @@
 # 
 # $\large \mu_i = b_0 + b_1x_{1i} ... + b_kx_{ki} $
 # 
-# Generalized linear models - of which the linear regression model is a special case - fit a linear regression equation to *some function of the conditional mean*. This function is called the *link function* because it links the linear prediction equation with the outcome variable. In the case of linear regression, the link function is just $1 *\\mu_i $, and so is referred to as the *identity link function*. Thus, the general form of generalized linear models is:
+# Generalized linear models - of which the linear regression model is a special case - fit a linear regression equation to *some function of the conditional mean*. This function is called the *link function* because it links the linear prediction equation with the outcome variable. In the case of linear regression, the link function is just $1 *\mu_i $, and so is referred to as the *identity link function*. Thus, the general form of generalized linear models is:
 # 
 # $\large f(\mu_i) = b_0 + b_1x_{1i} ... + b_kx_{ki} $
 # 
