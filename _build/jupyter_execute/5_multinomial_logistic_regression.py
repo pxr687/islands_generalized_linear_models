@@ -356,7 +356,7 @@ islands_GLM.three_D_model_plot_multinomial('income', 'biological_sex_dummy',
 # 
 # Note: the intercept and slopes are shown under the `coef` heading in the regression table above, the associated $p$-values are shown under `P>|z|`.
 # 
-# The intercept, for a given category, tells us the predicted log relative risk of being in that category, for an observation whose score on all other predictors was 0. The $p$-values for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.
+# The intercept, for a given category, tells us the predicted log relative risk of being in that category, for an observation whose score on all other predictors was 0. The $p$-value for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.
 # 
 # The slope, for a given category, of each predictor tells us the predicted difference in log relative risk of being in that category between scores for two hypothetical observations which differed *only* by a one unit score in that predictor, controlling for the other variables in the model. The $p$-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.
 
