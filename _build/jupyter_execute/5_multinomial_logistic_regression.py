@@ -226,16 +226,16 @@ def mnlogit_cost(intercept_and_slope, x, y):
 
 # The python cell below tests the the negative log likelihood function with the parameters: 
 # 
-# $b_0$ = 0
+# $b^{j}_0$ = 0.1
 # 
-# $b_1$ = 0
+# $b^{j}_1$ = 0.1
 # 
 # for the `religion ~ income` data:
 
 # In[6]:
 
 
-# testing the cost function with intercept = 1, slope = 1, for each linear prediction equation
+# testing the cost function with intercept = .1, slope = .1, for each linear prediction equation
 mnlogit_cost([.1,.1,.1,.1], df['income'], df['religion_dummy'])
 
 
