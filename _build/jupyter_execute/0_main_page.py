@@ -1,6 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# <br>
+# 
+# ```{image} images/main_page.jpg
+# :class: bg-primary mb-1
+# :width: 270px
+# :align: center
+# ```
+# 
+# <br>
+# 
+# 
 # # What this book is about
 # 
 # Generalized linear models are commonly used in the social and life sciences. They are a modelling framework which unifies $t$-tests, ANOVA, and multiple linear regression with other regression techniques like logistic regression and survival analysis. Where there $k$ predictor variables, and $n$ observations, all generalized linear models can be expressed as:
@@ -14,7 +25,7 @@
 # 
 # # Who this book is for
 # 
-# Sometimes generalized linear models are taught in a way that involves interpretting the output of statistical software without getting into how the models work at the nuts and bolts level. <b> This book is intended for readers who have taken undergraduate statistics classes in social or life science and who want to understand how generalized linear models get their parameter estimates, in a way that goes beyond just interpretting tables from statistical software.</b> 
+# Sometimes generalized linear models are taught in a way that involves interpretting the output of statistical software without getting into how the models work at the nuts and bolts level. This book is intended for readers who have taken undergraduate statistics classes in social or life science and who want to understand how generalized linear models get their parameter estimates, in a way that goes beyond just interpretting tables from statistical software. 
 # 
 # My background is in psychology, so this book is written from an applied statistics perspective. However, this book delves slightly deeper into the mechanics of generalized linear models than some applied statistics textbooks that I have read. My focus is on how the models estimate their parameters, by minimizing their cost functions (analogous to minimizing the sum of the squared error in linear regression). This book:
 # 
