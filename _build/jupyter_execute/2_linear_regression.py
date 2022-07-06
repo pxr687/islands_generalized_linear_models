@@ -70,7 +70,7 @@ islands_GLM.plot_prestige_wealth(df['wealth'], df['prestige']);
 # 
 # $\large \hat{y}_i = b_0 + b_1x_{1i} ... + b_kx_{ki} $
 # 
-# where:
+# ...where there are $k$ predictor variables, and $n$ observations, and where:
 # 
 # $\hat{y_i} $ : is the predicted value of the outcome variable for a given set of predictor scores, for the $i$th observation
 # 
@@ -143,6 +143,7 @@ islands_GLM.plot_prestige_wealth(df['wealth'], df['prestige']);
 # Essentially, this formula translates as "let's assume each observation is sampled from a normal distribution with a given mean and variance. We use the linear prediction equation to model the mean of the normal distribution from which a each observation was sampled. We find the intercept and slope values such that the means of the normal distributions are closer to the datapoints than for any other line". That is a lot to get your head around, so consider it in the context of this image:
 # 
 # ![](images/GLM_normal_identity.png)
+# 
 # (Image from: https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html)
 # 
 # The python cell below defines a function which implements the probability density function of the normal distribution, on a given set of $y$ values, and for a normal distribution with a particular mean ($\hat{y}$) and standard deviation ($\sigma$). This is very similar to the likelihood formula shown above, only it returns a vector of probabilities, rather than the product of the probabilities. Each element of the vector returned by the function is the probability of randomly sampling each of the $y$ values from a normal distribution with the specified mean ($\hat{y}$) and standard deviation ($\sigma$): 
@@ -203,7 +204,7 @@ islands_GLM.normal_plot()
 # 
 # (Image from: https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html)
 # 
-# The likelihood function shown above fits these conditional normal distributions to the data. The likelihood function allows the mean ($\hat{y}$) of each normal distribution to vary as a function of the predictor variables ($\hat{y} = b_0 + b_1x_{1i} ... + b_kx_{ki})$. The function takes the dataset (the predictor scores and outcome scores), and two parameters ($\hat{y_i}$ and $\sigma$) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and those particular parameters. (NB: $\hat{y_i}$ is a parameter vector, containing each of the predictions from the linear prediction equation, for a given intercept/slope set).
+# The likelihood function shown above fits these conditional normal distributions to the data. The likelihood function allows the mean ($\hat{y}_i$) of each normal distribution to vary as a function of the predictor variables ($\hat{y}_i = b_0 + b_1x_{1i} ... + b_kx_{ki})$. The function takes the dataset (the predictor scores and outcome scores), and two parameters ($\hat{y_i}$ and $\sigma$) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and those particular parameters. (NB: $\hat{y_i}$ is a parameter vector, containing each of the predictions from the linear prediction equation, for a given intercept/slope set).
 # 
 # By finding the values of of $b_0$,  $b_k$ and $\sigma$ which maximize the likelihood function (e.g. values of of $b_0$,  $b_k$ and $\sigma$ which yield a higher value of the function than any other values of of $b_0$,  $b_k$ and $\sigma$), we find the set of linearly positioned normal distributions which best fit the data. It is because $\hat{y_i}$ is obtained from the linear prediction equation, that the normal distributions which are fit to the data fall on a straight line.
 # 

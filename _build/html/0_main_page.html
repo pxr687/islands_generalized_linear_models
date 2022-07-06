@@ -49,6 +49,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="What are Generalized Linear Models?" href="1_generalized_linear_models.html" />
@@ -352,7 +354,11 @@ title="Print to PDF"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="who-this-book-is-for">
 <h1>Who this book is for<a class="headerlink" href="#who-this-book-is-for" title="Permalink to this headline">#</a></h1>
-<p>Generalized linear models are commonly used in the social and life sciences. However, sometimes they are taught in a way that involves interpretting the output of statistical software without getting into how the models work at the nuts and bolts level. This book is intended for readers who have taken undergraduate statistics classes in social or life science and who want to understand how generalized linear models get their parameter estimates, in a way that goes beyond just interpretting tables from statistical software.</p>
+<p>Generalized linear models are commonly used in the social and life sciences. They are a modelling framework which unifies <span class="math notranslate nohighlight">\(t\)</span>-tests, ANOVA, and multiple linear regression with other regression techniques like logistic regression and survival analysis. All generalized linear models can be expressed as:</p>
+<div class="math notranslate nohighlight">
+\[ \Large E(y_i|X_i) = b_0 + b_1x_{1i} ... + b_kx_{ki} \]</div>
+<p>…(where there 1…<span class="math notranslate nohighlight">\(k\)</span> predictor variables, and 1 … <span class="math notranslate nohighlight">\(n\)</span> observations). The above equation reads as ‘the expected value of the outcome variable is a linear function of the predictor scores, for the <span class="math notranslate nohighlight">\(i\)</span>th observation’. For some generalized linear models (like linear regression) the linear prediction equation predicts the outcome variable directly, on it’s original scale. For others, like Poisson regression, the linear prediction equation models the outcome variable on some other scale (e.g. a logarithmic scale). This flexibility - stemming from the linear prediction equation being fit on different scales - allows for generalized linear models to be applied to a wide variety of outcome variables. The array of techniques that fall within the generalized linear modelling framework, and the variety of outcome variables they can be applied to, make generalized linear modelling an essential ‘swiss army knife’ tool for statistical modelling.</p>
+<p>However, sometimes generalized linear models are taught in a way that involves interpretting the output of statistical software without getting into how the models work at the nuts and bolts level. <b> This book is intended for readers who have taken undergraduate statistics classes in social or life science and who want to understand how generalized linear models get their parameter estimates, in a way that goes beyond just interpretting tables from statistical software.</b></p>
 <p>My background is in psychology, so this book is written from an applied statistics perspective. However, this book delves slightly deeper into the mechanics of generalized linear models than some applied statistics textbooks that I have read. My focus is on how the models estimate their parameters, by minimizing their cost functions (analogous to minimizing the sum of the squared error in linear regression). This book:</p>
 <ul class="simple">
 <li><p>Assumes familiarity with different types of variable (quantitative, nominal-categorical, ordinal-categorical)</p></li>

@@ -148,7 +148,7 @@ islands_GLM.poisson_plot(np.arange(1, 11, step = 2), 20)
 # 
 # $ \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}  $
 # 
-# where:
+# ...where there are $k$ predictor variables, and $n$ observations, and where:
 # 
 # $\hat{y_i} $ : is the predicted value of the outcome variable for a given set of predictor scores, for the $i$th observation
 # 

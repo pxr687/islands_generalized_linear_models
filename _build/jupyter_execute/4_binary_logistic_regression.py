@@ -99,7 +99,7 @@ lin_reg.params[0] + lin_reg.params[1] * np.max(df['number_of_social_contacts'])
 # 
 # ![](images/binary_log_reg_bar.jpg)
 # 
-# This barplot shows the binomial distribution of the outcome categories, for a given level of the predictor. This is how binary logistic regression works from a 'conditional distribution' perspective: it fits a binomial distribution for every value of the predictor:
+# This barplot shows the Bernoulli distribution of the outcome categories, for a given level of the predictor. This is how binary logistic regression works from a 'conditional distribution' perspective: it fits a Bernoulli distribution for every value of the predictor:
 # 
 # ![](images/binary_log_reg_conditional.png)
 
@@ -133,7 +133,7 @@ lin_reg.params[0] + lin_reg.params[1] * np.max(df['number_of_social_contacts'])
 # 
 # $$ \large \hat{y}_{n} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_n = b_{0} + b_{1}x_{1n} \dots + b_{k}x_{kn} $$
 # 
-# Where:
+# ...where there are $k$ predictor variables, and $n$ observations, and where:
 # 
 # $\hat{y_i} $ : is the predicted log odds of being in category 1, for a given set of predictor scores, for the $i$th observation
 # 

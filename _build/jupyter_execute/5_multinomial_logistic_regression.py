@@ -110,7 +110,7 @@ islands_GLM.multinomial_illustration()
 # 
 # $$ \large \hat{y_{jn}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_n =  b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki}  $$
 # 
-# Where:
+# ...where there are $k$ predictor variables, and $n$ observations, and where:
 # 
 # $\hat{y_{ji}} $ : is the predicted log relative risk of falling into category $j$ for a given set of predictor scores, for the $i$th observation
 # 
