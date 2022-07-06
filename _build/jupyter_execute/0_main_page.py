@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Islands - Generalized Linear Models
+# 
 # <br>
 # 
 # ```{image} images/main_page.jpg
@@ -11,12 +13,11 @@
 # 
 # <br>
 # 
-# 
-# # Introduction
-# 
-# Generalized linear models are commonly used in the social and life sciences. They are a modelling framework which unifies $t$-tests, ANOVA, and multiple linear regression with other regression techniques like logistic regression and survival analysis. Where there are $k$ predictor variables, and $n$ observations, all generalized linear models can be expressed as:
+# This is a short textbook introducing generalized linear models. Generalized linear models are a modelling framework which unifies $t$-tests, ANOVA, ANCOVA and multiple linear regression with other regression techniques like logistic regression and survival analysis. All generalized linear models can be expressed as:
 # 
 # $$ \Large E(y_i|X_i) = b_0 + b_1x_{1i} ... + b_kx_{ki} $$
+# 
+# (Where there are $k$ predictor variables, and $n$ observations).
 # 
 # The above equation reads as 'the expected value of the outcome variable is a linear function of the predictor scores, for the $i$th observation'. For some generalized linear models (like linear regression) the linear prediction equation predicts the outcome variable directly, on it's original scale. For others, like Poisson regression, the linear prediction equation models the outcome variable on some other scale (e.g. a logarithmic scale). 
 # 
