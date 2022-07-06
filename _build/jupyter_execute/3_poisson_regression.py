@@ -125,11 +125,13 @@ islands_GLM.poisson_plot(np.arange(1, 11, step = 2), 20)
 # We can see that the Poisson distribution gets more like a normal as the mean increases. Where linear regression fits a set of normal distributions to the data, Poisson regression fits a set of Poisson distributions, as shown in the figures below:
 # 
 # ![](images/poiss_reg.png)
+# 
 # (image from https://stats.stackexchange.com/questions/542155/how-the-poisson-distribution-is-used-in-regression)
 # 
 # (The graph below shows linear regression - fitting normal distributions - on the left, and Poisson regression - fitting Poisson distributions, on the right):
 # 
 # ![](images/poiss_reg_2.png)
+# 
 # (image from https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html)
 
 # ## Model
@@ -295,6 +297,7 @@ pois_reg_minimize.x
 # The values in the array above are (in order) the intercept and slope values which give the lowest negative loglikelihood, and are the parameters which give the set of Poisson distributions which best fit the data:
 # 
 # ![](images/poiss_reg.png)
+# 
 # (image from https://stats.stackexchange.com/questions/542155/how-the-poisson-distribution-is-used-in-regression)
 # 
 # The predictions from the Poisson regression are shown on the scatterplot below:
