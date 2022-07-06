@@ -305,7 +305,7 @@ islands_GLM.scatter_prob_subplots(mod, df)
 # show how multinomial logistic regression works in multiple dimensions
 islands_GLM.three_D_model_plot_multinomial('income', 'biological_sex_dummy', 
                    'religion_dummy', 2.5185199239560534, -0.030011667415127917, -1.0302006835581514, -0.5366928830869722, 0.008857262577209785, -0.7421731046952662,
-                  df, legend_loc = (1,1), wireframe_only = True, azim = 100)
+                  df, legend_loc = (1,1), wireframe_only = True)
 
 
 # Remember that the data collected on this island contained the following variables:
