@@ -45,7 +45,7 @@
 print('This is the output of a code cell.')
 
 
-# If you want to use this textbook interactively, bu running python code yourself, playing with the data/graphs etc. You can download all of the notebooks from: https://github.com/pxr687/islands_generalized_linear_models
+# If you want to use this textbook interactively, by running python code yourself, playing with the data/graphs etc. You can download all of the notebooks from: https://github.com/pxr687/islands_generalized_linear_models
 # 
 # All the island maps were generated with: https://www.redblobgames.com/maps/mapgen4/
 
