@@ -3,6 +3,7 @@
 
 format: jb-book
 root: 0_main_page.ipynb
+title: Landing page
 chapters:
 - file: 1_generalized_linear_models
 - file: 2_linear_regression
