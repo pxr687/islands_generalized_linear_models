@@ -14,7 +14,7 @@
 # 
 # # Introduction
 # 
-# Generalized linear models are commonly used in the social and life sciences. They are a modelling framework which unifies $t$-tests, ANOVA, and multiple linear regression with other regression techniques like logistic regression and survival analysis. Where there $k$ predictor variables, and $n$ observations, all generalized linear models can be expressed as:
+# Generalized linear models are commonly used in the social and life sciences. They are a modelling framework which unifies $t$-tests, ANOVA, and multiple linear regression with other regression techniques like logistic regression and survival analysis. Where there are $k$ predictor variables, and $n$ observations, all generalized linear models can be expressed as:
 # 
 # $$ \Large E(y_i|X_i) = b_0 + b_1x_{1i} ... + b_kx_{ki} $$
 # 

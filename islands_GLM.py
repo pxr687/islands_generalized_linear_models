@@ -663,7 +663,6 @@ def three_D_model_plot_multinomial(x_name, y_name, z_name, intercept, x_slope, y
                         z2.reshape(x.shape), label = 'Category B', color = 'orange', alpha = 0.5)
         ax1.plot_wireframe(x, y,
                         z3.reshape(x.shape), label = 'Category C', color = 'cyan')
-        ax1.view_init(azim =  azim)
         ax1.set_yticks([])
         ax1.set_xticks([])
         ax1.set_zticks([0, 1])
