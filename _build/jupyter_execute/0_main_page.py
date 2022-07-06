@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Islands - Generalized Linear Models
+# <center> <h1> Islands - Generalized Linear Models </h1> </center>
 # 
 # <br>
 # 
@@ -13,7 +13,7 @@
 # 
 # <br>
 # 
-# This is a short textbook introducing generalized linear models. Generalized linear models are a modelling framework which unifies $t$-tests, ANOVA, ANCOVA and multiple linear regression with other regression techniques like logistic regression and survival analysis. All generalized linear models can be expressed as:
+# This textbook is a short introduction to generalized linear models. Generalized linear models are a modelling framework which unifies $t$-tests, ANOVA, ANCOVA and multiple linear regression with other regression techniques like logistic regression and survival analysis. All generalized linear models can be expressed as:
 # 
 # $$ \Large E(y_i|X_i) = b_0 + b_1x_{1i} ... + b_kx_{ki} $$
 # 
