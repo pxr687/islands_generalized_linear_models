@@ -523,10 +523,7 @@ def odds_prob_slope_plot(b0, b1, df):
 
 	_plt.legend(bbox_to_anchor = (1,1))
 
-def bin_log_reg_plot(interaction = False):
-
-	x_slope = 0.2
-	y_slope = 3
+def bin_log_reg_plot(interaction = False, x_slope = 0.2, y_slope = 3):
  
 	x = _np.outer(_np.linspace(-3, 3, 32), _np.ones(32))
 	y = x.copy().T # transpose

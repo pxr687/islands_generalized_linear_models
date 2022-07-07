@@ -357,7 +357,7 @@ islands_GLM.odds_prob_slope_plot(b0, b1, df);
 
 
 # show how binary logistic regression works in multiple dimensions
-islands_GLM.bin_log_reg_plot()
+islands_GLM.bin_log_reg_plot(x_slope = 0.8, y_slope =0.8)
 
 
 # The data from the island also contains a second binary categorical variable, detailed below:
