@@ -825,10 +825,10 @@ title="Print to PDF"
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   403.8</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Wed, 06 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>1.08e-75</td> 
+  <th>Date:</th>             <td>Thu, 07 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>1.08e-75</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>21:25:11</td>     <th>  Log-Likelihood:    </th> <td> -5529.2</td> 
+  <th>Time:</th>                 <td>10:28:08</td>     <th>  Log-Likelihood:    </th> <td> -5529.2</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  1000</td>      <th>  AIC:               </th> <td>1.106e+04</td>
@@ -1046,10 +1046,10 @@ title="Print to PDF"
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   1094.</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Wed, 06 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>3.72e-252</td>
+  <th>Date:</th>             <td>Thu, 07 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>3.72e-252</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>21:25:13</td>     <th>  Log-Likelihood:    </th> <td> -5118.5</td> 
+  <th>Time:</th>                 <td>10:28:09</td>     <th>  Log-Likelihood:    </th> <td> -5118.5</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  1000</td>      <th>  AIC:               </th> <td>1.024e+04</td>
@@ -1112,7 +1112,7 @@ title="Print to PDF"
 <p>How do we interpret the linear regression model parameter estimates, when there are multiple predictors?</p>
 <p>Note: the intercept and slopes are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
 <p>The intercept tells us the predicted score on the outcome variable for an observation whose score on all other predictors was 0. The <span class="math notranslate nohighlight">\(p\)</span>-value for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
-<p>The slope of each predictor tells us the predicted difference in the outcome variable scores for two hypothetical observations which differed <em>only</em> by a one unit score in that predictor. E.g. which had the same score on all other predictors. Sometimes this is referred to <em>statistical control</em>. We might say each slope tells us the estimated change in the outcome for a 1 unit increase in that predictor, <em>controlling</em> for other predictors in the model.</p>
+<p>The slope of each predictor tells us the predicted difference in the outcome variable scores for two hypothetical observations which differed <em>only</em> by a one unit score in that predictor. E.g. which had the same score on all other predictors. Sometimes this is referred to as <em>statistical control</em>. We might say each slope tells us the estimated change in the outcome for a 1 unit increase in that predictor, <em>controlling</em> for other predictors in the model.</p>
 <p>This ‘statistical control’ interpretation of the slopes s is easy to explain via the graph above (the graph showing the linear regression surface and the datapoints). If we ‘hold <code class="docutils literal notranslate"><span class="pre">religion</span></code> constant’ by looking only at the graph where <code class="docutils literal notranslate"><span class="pre">religion</span> <span class="pre">=</span> <span class="pre">1</span></code>, then we compare points where <code class="docutils literal notranslate"><span class="pre">wealth</span></code> varies, the regression surface let’s us predict the change in <code class="docutils literal notranslate"><span class="pre">prestige</span></code> as a function of wealth, whilst ‘controlling for’ (e.g. holding constant) <code class="docutils literal notranslate"><span class="pre">religion</span></code>. Obviously, the validity of this interpretation depends on how well the <a class="reference external" href="https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/R/R5_Correlation-Regression/R5_Correlation-Regression4.html#:~:text=There%20are%20four%20assumptions%20associated,are%20independent%20of%20each%20other">assumptions of the linear regression model</a> are met…</p>
 <p>The <span class="math notranslate nohighlight">\(p\)</span>-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
 </div>
