@@ -402,7 +402,7 @@ islands_GLM.three_D_model_plot('number_of_social_contacts', 'drug_alone',
 # 
 # The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).
 # 
-# If we fit an interaction term in a binary logistic regression model, then this the logistic regression probability surface to 'bend', so that the effect of the predictors is not constant, but depends on the value of the other predictors. The graph below shows a logisitc probability surface with statistical interaction:
+# If we fit an interaction term in a binary logistic regression model, then this the logistic regression probability surface to 'bend', so that the effect of one of the predictors is altered by the value of the other predictor. The graph below shows a logistic probability surface with statistical interaction:
 
 # In[18]:
 

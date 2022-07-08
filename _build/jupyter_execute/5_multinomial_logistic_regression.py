@@ -364,7 +364,7 @@ islands_GLM.three_D_model_plot_multinomial('income', 'biological_sex_dummy',
 # 
 # The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).
 # 
-# If we fit an interaction term in a multinomial logistic regression model, then this allows each logistic regression probability surfaces to 'bend', so that the effect of the predictors is not constant, but depends on the value of the other predictors. The graph below shows this for one logisitc probability surface:
+# If we fit an interaction term in a multinomial logistic regression model, then this allows each logistic regression probability surfaces to 'bend', so that the effect of one predictor depends on the value of the other predictor. The graph below shows this for one logistic probability surface:
 
 # In[14]:
 

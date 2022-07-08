@@ -469,7 +469,7 @@ islands_GLM.three_D_model_plot('hormone_level_change', 'biological_sex',
 # 
 # The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).
 # 
-# If we fit an interaction term in  Poisson regression this allows the Poisson regression surface to 'bend', so that the effect of the predictors is not constant, but depends on the value of the other predictor. This is shown on the graph below:
+# If we fit an interaction term in  Poisson regression this allows the Poisson regression surface to 'bend', so that the effect of one predictor depends on the value of the other predictor. This is shown on the graph below:
 
 # In[26]:
 
