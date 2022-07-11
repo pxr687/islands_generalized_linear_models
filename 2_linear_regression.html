@@ -464,7 +464,7 @@ title="Print to PDF"
 <h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h1>
 <br>
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/island_lin_reg.png"><img alt="_images/island_lin_reg.png" class="bg-primary mb-1 align-center" src="_images/island_lin_reg.png" style="width: 270px;" /></a>
-<br><p>Imagine you are conducting social research on an island inhabited by 10,000 people. The people who live on the island use a set of physical credits to represent social status. That is, the amount of social status (or lack thereof) that each islander has is represented in the number of ‘prestige credits’ that they in their posession. The prestige credits are awarded by those around them, and by the government of the island.</p>
+<br><p>Imagine you are conducting social research on an island inhabited by 10,000 people. The people who live on the island use a set of physical credits to represent social status. That is, the amount of social status (or lack thereof) that each islander has is represented in the number of ‘prestige credits’ that they have in their possession. The prestige credits are awarded by those around them, and by the government of the island.</p>
 <p>One of the social scientists in your research team suggests that citizens of the islands who are wealthier attract a higher number of prestige credits. The statistical version of this hypothesis is that <code class="docutils literal notranslate"><span class="pre">prestige</span></code> is postiviely associated with <code class="docutils literal notranslate"><span class="pre">wealth</span></code>. One way of thinking about this statistical hypothesis is that, if you know an islander’s <code class="docutils literal notranslate"><span class="pre">wealth</span></code>, then this gives you predictive information about their social status. If you know someone is far above average <code class="docutils literal notranslate"><span class="pre">wealth</span></code>, then, if the hypothesis is true, then it’s a safe bet that also have above average <code class="docutils literal notranslate"><span class="pre">prestige</span></code>.</p>
 <p>To test this hypothesis, your research team collect <code class="docutils literal notranslate"><span class="pre">wealth</span></code> and <code class="docutils literal notranslate"><span class="pre">prestige</span></code> scores for 1000 citizens of the island. You do this via random sampling. The government of the island has granted the research team access to census data, and so your team were able to use a computer to randomly select 1000 individuals, and survey them to collect the data.</p>
 <p>The team contacted the 1000 randomly sampled islanders and asked them to complete a survey recording their <code class="docutils literal notranslate"><span class="pre">wealth</span></code> and <code class="docutils literal notranslate"><span class="pre">prestige</span></code>. The first 20 rows of the dataframe in which the team stored the <code class="docutils literal notranslate"><span class="pre">prestige</span></code> scores are shown below (each row corresponds to one islander). The variables contained in the dataframe are detailed below:</p>
@@ -590,14 +590,13 @@ title="Print to PDF"
 <h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
 <p>Linear regression is (somewhat obviously) the foundational generalized linear model. We have already seen it on the <a class="reference internal" href="1_generalized_linear_models.html"><span class="doc std std-doc">‘What are Generalized Linear Models?’</span></a> page, but now we will delve into how the parameter estimates are obtained, via the conditional distribution (aka maximum likelihood) approach.</p>
 <p>Linear regression is used to model the linear relationship between a quantitative outcome variable and one or more predictor variables. As with all generalized linear models, the predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical).</p>
-<p>The predictions from linear regression can range from positive infinity to negative infinity. So if the outcome variable is does not range from positive to negative infinity, for instance if it must be positive (e.g. number of children), then a different model should be used.</p>
-<p>In this case, the outcome variable <code class="docutils literal notranslate"><span class="pre">prestige</span></code> is  quantitative, and judging from the scatterplot, has a mean far from 0. If the mean were close to 0, we might consider fitting a different generalized linear model. Linear regression can produce negative predictions, which may not make sense for <code class="docutils literal notranslate"><span class="pre">prestige</span></code>.</p>
+<p>The predictions from linear regression can range from positive infinity to negative infinity. So if the outcome variable is does not (theoreticall) range from positive to negative infinity, for instance if it must be positive (e.g. number of children), then the model may produce nonsensical predictions. In this case, the outcome variable <code class="docutils literal notranslate"><span class="pre">prestige</span></code> is  quantitative, and judging from the scatterplot, has a mean far from 0. If the mean were close to 0, we might consider fitting a different generalized linear model, as negative predictions may not make sense for <code class="docutils literal notranslate"><span class="pre">prestige</span></code>.</p>
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
 <p>As shown previously, the prediction equation for the linear regression model is:</p>
 <p><span class="math notranslate nohighlight">\(\large \hat{y}_i = b_0 + b_1x_{1i} ... + b_kx_{ki} \)</span></p>
-<p>…where there are <span class="math notranslate nohighlight">\(k\)</span> predictor variables, and <span class="math notranslate nohighlight">\(n\)</span> observations, and where:</p>
+<p>…where there are <span class="math notranslate nohighlight">\(k\)</span> predictor variables, and <span class="math notranslate nohighlight">\(n\)</span> observations, where an individual observation is denoted with <span class="math notranslate nohighlight">\(i\)</span>, and where:</p>
 <p><span class="math notranslate nohighlight">\(\hat{y_i} \)</span> : is the predicted value of the outcome variable for a given set of predictor scores, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
 <p><span class="math notranslate nohighlight">\(b_0\)</span> : is the intercept term, the predicted value of the outcome variable when all predictors equal 0</p>
 <p><span class="math notranslate nohighlight">\(b_1\)</span> : is the slope of the 1st predictor variable</p>
@@ -646,7 +645,7 @@ title="Print to PDF"
 <p>The model gets its parameters, by maximizing the likelihood function, the formula for which is:</p>
 <p><span class="math notranslate nohighlight">\(  \huge \prod\limits_{i = 1}^{n} \left(\frac{1}{(2\pi\sigma^{2})^{^{\frac{1}{2}}}}\right)^n e^{\frac{-\sum{(y_{i} - \hat{y_{i}})^{2}}}{2\sigma^{2}}}  \)</span></p>
 <p>If you don’t recognize that formula it might look formidable. It is in fact a version of the probability density function for the famous Gaussian (normal) distribution. The mean of the normal distribution is <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and the variance is <span class="math notranslate nohighlight">\(\sigma\)</span>. For a given value of <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, the likelihood function computes the probability of randomly sampling a particular observation <span class="math notranslate nohighlight">\(y_i\)</span> from a normal distribution with that particular mean and variance ( <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>).</p>
-<p>Essentially, this formula translates as “let’s assume each observation is sampled from a normal distribution with a given mean and variance. We use the linear prediction equation to model the mean of the normal distribution from which a each observation was sampled. We find the intercept and slope values such that the means of the normal distributions are closer to the datapoints than for any other line”. That is a lot to get your head around, so consider it in the context of this image:</p>
+<p>Essentially, this formula translates as “let’s assume each observation is sampled from a normal distribution with a given mean and variance. We use the linear prediction equation to model the mean of the normal distribution from which each observation was sampled. We find the intercept and slope values such that the means of the normal distributions are closer to the datapoints than for any other line”. That is a lot to get your head around, so consider it in the context of this image:</p>
 <p><img alt="" src="_images/GLM_normal_identity.png" /></p>
 <p>(Image from: <a class="reference external" href="https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html">https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html</a>)</p>
 <p>The python cell below defines a function which implements the probability density function of the normal distribution, on a given set of <span class="math notranslate nohighlight">\(y\)</span> values, and for a normal distribution with a particular mean (<span class="math notranslate nohighlight">\(\hat{y}\)</span>) and standard deviation (<span class="math notranslate nohighlight">\(\sigma\)</span>). This is very similar to the likelihood formula shown above, only it returns a vector of probabilities, rather than the product of the probabilities. Each element of the vector returned by the function is the probability of randomly sampling each of the <span class="math notranslate nohighlight">\(y\)</span> values from a normal distribution with the specified mean (<span class="math notranslate nohighlight">\(\hat{y}\)</span>) and standard deviation (<span class="math notranslate nohighlight">\(\sigma\)</span>):</p>
@@ -825,10 +824,10 @@ title="Print to PDF"
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   403.8</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Thu, 07 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>1.08e-75</td> 
+  <th>Date:</th>             <td>Mon, 11 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>1.08e-75</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>10:28:08</td>     <th>  Log-Likelihood:    </th> <td> -5529.2</td> 
+  <th>Time:</th>                 <td>21:00:25</td>     <th>  Log-Likelihood:    </th> <td> -5529.2</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  1000</td>      <th>  AIC:               </th> <td>1.106e+04</td>
@@ -1046,10 +1045,10 @@ title="Print to PDF"
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   1094.</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Thu, 07 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>3.72e-252</td>
+  <th>Date:</th>             <td>Mon, 11 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>3.72e-252</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>10:28:09</td>     <th>  Log-Likelihood:    </th> <td> -5118.5</td> 
+  <th>Time:</th>                 <td>21:00:25</td>     <th>  Log-Likelihood:    </th> <td> -5118.5</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  1000</td>      <th>  AIC:               </th> <td>1.024e+04</td>
