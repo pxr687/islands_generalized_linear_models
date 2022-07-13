@@ -15,18 +15,18 @@
 # 
 # This textbook is a short introduction to generalized linear models. Generalized linear models are a modelling framework which unifies $t$-tests, ANOVA, ANCOVA and multiple linear regression with other regression techniques like logistic regression and survival analysis. All generalized linear models can be expressed as:
 # 
-# $$ \Large E(y_i|X_i) = b_0 + b_1x_{1i} ... + b_kx_{ki} $$
+# $$ \Large g(\mu_i) = b_0 + b_1x_{1i} + ... + b_kx_{ki} $$
 # 
 # (Where there are $k$ predictor variables, and $n$ observations, with any individual observation denoted with $i$).
 # 
-# The above equation reads as 'for each observation, the expected value of the outcome variable is a linear function of the predictor variable scores'. For some generalized linear models (like linear regression) the linear prediction equation predicts the outcome variable directly, on its original scale. For others, like Poisson regression, the linear prediction equation models the outcome variable on some other scale (e.g. a logarithmic scale). 
+# The above equation reads as 'for each observation, some function of the the predicted value of the outcome variable is a linear function of the predictor variable scores'. For some generalized linear models (like linear regression) the linear prediction equation predicts the outcome variable directly, on its original scale. For others, like Poisson regression, the linear prediction equation models the outcome variable on some other scale (e.g. a logarithmic scale). 
 # 
 # This flexibility - stemming from the linear prediction equation being fit on different scales - allows for generalized linear models to be applied to a wide variety of outcome variables. The array of techniques that fall within the generalized linear modelling framework, and the variety of outcome variables they can be applied to, make generalized linear modelling an essential 'swiss army knife' tool for statistical modelling.
 # 
 # 
 # # Who this book is for
 # 
-# Sometimes generalized linear models are taught in a way that involves interpretting the output of statistical software without getting into how the models work at the nuts and bolts level. This book is intended for readers who have taken undergraduate statistics classes in social or life science and who want to understand how generalized linear models get their parameter estimates, in a way that goes beyond just interpretting tables from statistical software. 
+# This book is intended for readers who have taken undergraduate statistics classes in social or life science and who want to understand how generalized linear models get their parameter estimates, in a way that goes beyond just interpretting tables from statistical software. 
 # 
 # My background is in psychology, so this book is written from an applied statistics perspective. However, this book delves slightly deeper into the mechanics of generalized linear models than some applied statistics textbooks that I have read. My focus is on how the models estimate their parameters, by minimizing their cost functions (analogous to minimizing the sum of the squared error in linear regression). This book:
 # 
