@@ -119,19 +119,19 @@ lin_reg.params[0] + lin_reg.params[1] * np.max(df['number_of_social_contacts'])
 # 
 # Binary logistic regression uses a *logit* link function and so is sometimes referred to as a logit model. The model fits a line on the log scale, where it predicts the log of the odds ratio $ln \large \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right) $ of being in category 1. The prediction equation for binary logistic regression model is:
 # 
-# $ \large \hat{y}_{i} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_i = b_{0} + b_{i}x_{11} \dots + b_{k}x_{ki} $
+# $ \large \hat{y}_{i} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_i = b_{0} + b_{i}x_{11} + \dots + b_{k}x_{ki} $
 # 
 # The individual prediction ($\hat{y_i}$), for all $n$ observations, using $k$ variables as predictors are:
 # 
-# $$ \large \hat{y}_{1} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_1 = b_{0} + b_{1}x_{11} \dots + b_{k}x_{k1} $$
+# $$ \large \hat{y}_{1} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_1 = b_{0} + b_{1}x_{11} + \dots + b_{k}x_{k1} $$
 # 
-# $$ \large \hat{y}_{2} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_2 = b_{0} + b_{1}x_{12} \dots + b_{k}x_{k2} $$
+# $$ \large \hat{y}_{2} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_2 = b_{0} + b_{1}x_{12} + \dots + b_{k}x_{k2} $$
 # 
-# $$ \large \hat{y}_{3} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_3 = b_{0} + b_{1}x_{13} \dots + b_{k}x_{k3} $$
+# $$ \large \hat{y}_{3} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_3 = b_{0} + b_{1}x_{13} + \dots + b_{k}x_{k3} $$
 # 
 # $$ \dots $$
 # 
-# $$ \large \hat{y}_{n} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_n = b_{0} + b_{1}x_{1n} \dots + b_{k}x_{kn} $$
+# $$ \large \hat{y}_{n} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_n = b_{0} + b_{1}x_{1n} + \dots + b_{k}x_{kn} $$
 # 
 # ...where there are $k$ predictor variables, and $n$ observations, and where:
 # 

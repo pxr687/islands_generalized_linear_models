@@ -662,18 +662,18 @@ title="Print to PDF"
 <p>Or:</p>
 <p><span class="math notranslate nohighlight">\( \large \hat{P}_{(y_{i} = 0)} =\hat\pi_{0i} \)</span></p>
 <p>Binary logistic regression uses a <em>logit</em> link function and so is sometimes referred to as a logit model. The model fits a line on the log scale, where it predicts the log of the odds ratio <span class="math notranslate nohighlight">\(ln \large \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right) \)</span> of being in category 1. The prediction equation for binary logistic regression model is:</p>
-<p><span class="math notranslate nohighlight">\( \large \hat{y}_{i} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_i = b_{0} + b_{i}x_{11} \dots + b_{k}x_{ki} \)</span></p>
+<p><span class="math notranslate nohighlight">\( \large \hat{y}_{i} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_i = b_{0} + b_{i}x_{11} + \dots + b_{k}x_{ki} \)</span></p>
 <p>The individual prediction (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span>), for all <span class="math notranslate nohighlight">\(n\)</span> observations, using <span class="math notranslate nohighlight">\(k\)</span> variables as predictors are:</p>
 <div class="math notranslate nohighlight">
-\[ \large \hat{y}_{1} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_1 = b_{0} + b_{1}x_{11} \dots + b_{k}x_{k1} \]</div>
+\[ \large \hat{y}_{1} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_1 = b_{0} + b_{1}x_{11} + \dots + b_{k}x_{k1} \]</div>
 <div class="math notranslate nohighlight">
-\[ \large \hat{y}_{2} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_2 = b_{0} + b_{1}x_{12} \dots + b_{k}x_{k2} \]</div>
+\[ \large \hat{y}_{2} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_2 = b_{0} + b_{1}x_{12} + \dots + b_{k}x_{k2} \]</div>
 <div class="math notranslate nohighlight">
-\[ \large \hat{y}_{3} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_3 = b_{0} + b_{1}x_{13} \dots + b_{k}x_{k3} \]</div>
+\[ \large \hat{y}_{3} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_3 = b_{0} + b_{1}x_{13} + \dots + b_{k}x_{k3} \]</div>
 <div class="math notranslate nohighlight">
 \[ \dots \]</div>
 <div class="math notranslate nohighlight">
-\[ \large \hat{y}_{n} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_n = b_{0} + b_{1}x_{1n} \dots + b_{k}x_{kn} \]</div>
+\[ \large \hat{y}_{n} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_n = b_{0} + b_{1}x_{1n} + \dots + b_{k}x_{kn} \]</div>
 <p>…where there are <span class="math notranslate nohighlight">\(k\)</span> predictor variables, and <span class="math notranslate nohighlight">\(n\)</span> observations, and where:</p>
 <p><span class="math notranslate nohighlight">\(\hat{y_i} \)</span> : is the predicted log odds of being in category 1, for a given set of predictor scores, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
 <p><span class="math notranslate nohighlight">\(b_0\)</span> : is the intercept term, the predicted value of the outcome variable when all predictors equal 0</p>
@@ -906,10 +906,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     1</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 08 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1651</td>  
+  <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1651</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:37:38</td>     <th>  Log-Likelihood:    </th> <td> -33.811</td> 
+  <th>Time:</th>                <td>12:53:55</td>     <th>  Log-Likelihood:    </th> <td> -33.811</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -40.496</td> 
@@ -1057,10 +1057,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 08 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1731</td>  
+  <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1731</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:37:40</td>     <th>  Log-Likelihood:    </th> <td> -33.488</td> 
+  <th>Time:</th>                <td>12:53:57</td>     <th>  Log-Likelihood:    </th> <td> -33.488</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -40.496</td> 

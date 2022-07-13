@@ -66,7 +66,7 @@ islands_GLM.plot_prestige_wealth(df['wealth'], df['prestige']);
 # 
 # As shown previously, the prediction equation for the linear regression model is:
 # 
-# $\large \hat{y}_i = b_0 + b_1x_{1i} ... + b_kx_{ki} $
+# $\large \hat{y}_i = b_0 + b_1x_{1i} + ... + b_kx_{ki} $
 # 
 # ...where there are $k$ predictor variables, and $n$ observations, where an individual observation is denoted with $i$, and where:
 # 
@@ -85,15 +85,15 @@ islands_GLM.plot_prestige_wealth(df['wealth'], df['prestige']);
 # 
 # The individual predictions ($\hat{y_i}$), for all $n$ observations, using $k$ variables as predictors are:
 # 
-# $$ \large \hat{y}_1 = b_{0} + b_{1}x1_1 \dots + b_{k}xk_1 $$
+# $$ \large \hat{y}_1 = b_{0} + b_{1}x1_1 + \dots + b_{k}xk_1 $$
 # 
-# $$ \large \hat{y}_2 = b_{0} + b_{1}x1_2 \dots + b_{k}xk_2 $$
+# $$ \large \hat{y}_2 = b_{0} + b_{1}x1_2 + \dots + b_{k}xk_2 $$
 # 
-# $$ \large \hat{y}_3 = b_{0} + b_{1}x1_3 \dots + b_{k}xk_3  $$
+# $$ \large \hat{y}_3 = b_{0} + b_{1}x1_3 + \dots + b_{k}xk_3  $$
 # 
 # $$ \dots $$
 # 
-# $$ \large \hat{y}_n = b_{0} + b_{1}x1_n \dots + b_{k}xk_n  $$
+# $$ \large \hat{y}_n = b_{0} + b_{1}x1_n + \dots + b_{k}xk_n  $$
 # 
 # $\hat{y}_1$ is the predicted score on the outcome variable for the 1st observation in the dataset,  $\hat{y}_2$ is the prediction for the second score and so on... 
 # 
