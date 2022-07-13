@@ -920,7 +920,7 @@ title="Print to PDF"
   <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1872</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>12:57:34</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
+  <th>Time:</th>                <td>13:01:25</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
@@ -970,7 +970,7 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\(b^{j}_0\)</span> : the intercept, the expected value of the log relative risk of being in category <span class="math notranslate nohighlight">\(j\)</span> for an observation where the predictor equals 0.</p>
 <p><span class="math notranslate nohighlight">\(b^{j}_1\)</span>: the predicted change in the  the log relative risk of being in category <span class="math notranslate nohighlight">\(j\)</span>, for a 1-unit increase in the predictor.</p>
 <p>Each prediction from the model comes to us on the scale of the log relative risk. So for the <span class="math notranslate nohighlight">\(i\)</span>th observation, the predicted relative risk of falling into category <span class="math notranslate nohighlight">\(j\)</span> is:</p>
-<p><span class="math notranslate nohighlight">\( \large \hat{y_{ji}} = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_i = b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki}  \)</span></p>
+<p><span class="math notranslate nohighlight">\( \large \hat{y_{ji}} = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_i = b_{0}^{j} + b_{1}^{j}x_{1i} + ... + b_{k}^{j}x_{ki}  \)</span></p>
 <p>To get the predicted probabilities, for the <span class="math notranslate nohighlight">\(j\)</span> categories, we use the conversion formula:</p>
 <p><span class="math notranslate nohighlight">\( \large \hat\pi_{ji} = \frac{e^{\hat{y_{ji}}}}{1 + e^{\hat{y_{1}}} + ... e^{\hat{y_{ji}}}}  = \frac{e^{\hat{y_{ji}}}}{1 + \sum{e^{\hat{y_{ji}}}}} \)</span></p>
 <p>And for the predicted probability og the <span class="math notranslate nohighlight">\(i\)</span>th observation falling into the reference category:</p>
@@ -1158,7 +1158,7 @@ title="Print to PDF"
   <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.2205</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>12:57:34</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
+  <th>Time:</th>                <td>13:01:26</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
