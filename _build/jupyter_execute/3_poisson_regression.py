@@ -148,7 +148,7 @@ islands_GLM.poisson_plot(np.arange(1, 11, step = 2), 20)
 # 
 # Obviously, we aren't really interested in the log scale, we're interested in the original scale of the data, so we have to exponeniate the right hand side of the model to get predictions on the original scale:
 # 
-# $ \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}  $
+# $ \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... + b_{k}x_{ki})}  $
 # 
 # ...where there are $k$ predictor variables, and $n$ observations, and where:
 # 
@@ -167,15 +167,15 @@ islands_GLM.poisson_plot(np.arange(1, 11, step = 2), 20)
 # 
 # The individual Poisson regression predictions ($\hat{y_i}$), for all $n$ observations, using $k$ variables as predictors are:
 # 
-# $$ \Large ln(\hat{y_{1}}) = b_{0} + b_{1}x_{11} + ... b_{k}x_{k1} $$
+# $$ \Large ln(\hat{y_{1}}) = b_{0} + b_{1}x_{11} + ... + b_{k}x_{k1} $$
 # 
-# $$ \Large ln(\hat{y_{2}}) = b_{0} + b_{1}x_{12} + ... b_{k}x_{k2}  $$
+# $$ \Large ln(\hat{y_{2}}) = b_{0} + b_{1}x_{12} + ... + b_{k}x_{k2}  $$
 # 
-# $$ \Large ln(\hat{y_{3}}) = b_{0} + b_{1}x_{13} + ... b_{k}x_{k3}  $$
+# $$ \Large ln(\hat{y_{3}}) = b_{0} + b_{1}x_{13} + ... + b_{k}x_{k3}  $$
 # 
 # $$ \dots $$
 # 
-# $$ \Large ln(\hat{y_{n}}) = b_{0} + b_{1}x_{1n} + ... b_{k}x_{kn}  $$
+# $$ \Large ln(\hat{y_{n}}) = b_{0} + b_{1}x_{1n} + ... + b_{k}x_{kn}  $$
 # 
 # 
 # In matrix form the Poisson regression model is:
@@ -201,7 +201,7 @@ islands_GLM.poisson_plot(np.arange(1, 11, step = 2), 20)
 # 
 # ## Parameter Estimation
 # 
-# The parameter estimates are obtained by maximizing the likelihood function (where $\hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}$):
+# The parameter estimates are obtained by maximizing the likelihood function (where $\hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... + b_{k}x_{ki})}$):
 # 
 # $ \Huge \prod\limits_{i = 1}^{n} \frac{\hat{y}^{y_i}_i e^{-\hat{y_i}}}{y_i!}$
 # 
