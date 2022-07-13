@@ -15,7 +15,7 @@
 # 
 # This textbook is a short introduction to generalized linear models. Generalized linear models are a modelling framework which unifies $t$-tests, ANOVA, ANCOVA and multiple linear regression with other regression techniques like logistic regression and survival analysis. All generalized linear models can be expressed as:
 # 
-# $$ \Large g(\mu_i) = b_0 + b_1x_{1i} + ... + b_kx_{ki} $$
+# $$ \Large f(\mu_i) = b_0 + b_1x_{1i} + ... + b_kx_{ki} $$
 # 
 # (Where there are $k$ predictor variables, and $n$ observations, with any individual observation denoted with $i$).
 # 
