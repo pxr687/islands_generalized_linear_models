@@ -285,7 +285,7 @@ def generate_poisson_data():
 
 
     df = _pd.DataFrame({'hormone_level_change': _np.round(hormone_level,2),
-                       'biological_sex': bio_sex,
+                       'sex': bio_sex,
                        'number_of_predation_events': number_of_predation_events.astype('int') })
                        
     return df
@@ -405,8 +405,8 @@ def three_D_pois_reg_plot(interaction = False):
 
 def pois_group_plot(df):
 
-	_plt.scatter(df[df['biological_sex'] == 1]['hormone_level_change'], df[df['biological_sex'] == 1]['number_of_predation_events'], label = 'Males', color = 'darkred')
-	_plt.scatter(df[df['biological_sex'] == 0]['hormone_level_change'], df[df['biological_sex'] == 0]['number_of_predation_events'], label = 'Females', color = 	'darkgreen')
+	_plt.scatter(df[df['sex'] == 1]['hormone_level_change'], df[df['sex'] == 1]['number_of_predation_events'], label = 'Males', color = 'darkred')
+	_plt.scatter(df[df['sex'] == 0]['hormone_level_change'], df[df['sex'] == 0]['number_of_predation_events'], label = 'Females', color = 	'darkgreen')
 	_plt.xlabel('average_hormone_change')
 	_plt.ylabel('number_of_predation_events')
 	_plt.legend()
@@ -586,7 +586,7 @@ def data_gen_multinomial(seed = 100):
         		bio_sex = _np.append(bio_sex, _np.random.choice(['male', 'female'], p = [0.3, 0.7]))
         
         
-	df = _pd.DataFrame({'income': income.astype('int'), 'religion': religion, 'biological_sex': bio_sex})
+	df = _pd.DataFrame({'income': income.astype('int'), 'religion': religion, 'sex': bio_sex})
 
 	return df
 
@@ -682,7 +682,7 @@ def three_D_model_plot_multinomial(x_name, y_name, z_name, intercept, x_slope, y
         ax1.set_yticklabels(['Female', 'Male'])
         ax1.set_zticks([0,1])
         _plt.xlabel(x_name)
-        _plt.ylabel('biological_sex')
+        _plt.ylabel('sex')
         ax1.set_zlabel('Probability')
         _plt.legend(bbox_to_anchor = legend_loc)
         
@@ -693,7 +693,7 @@ def three_D_model_plot_multinomial(x_name, y_name, z_name, intercept, x_slope, y
         ax2.set_yticklabels(['Female', 'Male'])
         ax2.set_zticks([0,1, 2])
         _plt.xlabel(x_name)
-        _plt.ylabel('biological_sex')
+        _plt.ylabel('sex')
         ax2.set_zlabel(z_name)
      
    

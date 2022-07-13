@@ -19,7 +19,7 @@
 # 
 #  `hormone_level_change` -  a continuous numerical variable, the change in the hormone levels in the blood, from the start of the week to the end
 # 
-# `biological_sex` - a binary nominal-categorical variable, the biological sex of the animal
+# `sex` - a binary nominal-categorical variable, the biological sex of the animal
 # 
 # `number_of_predation_events` - a discrete numerical variable, the number of predation events carried out by the animal
 # 
@@ -411,7 +411,7 @@ islands_GLM.three_D_pois_reg_plot()
 # 
 # `hormone_level_change`:  a continuous numerical variable, the change in the hormone levels in the blood, from the start of the week to the end
 # 
-# `biological_sex`: a binary nominal-categorical variable, the biological sex of the animal
+# `sex`: a binary nominal-categorical variable, the sex of the animal
 # 
 # `number_of_predation_events`: a discrete numerical variable, the number of predation events carried out by the animal
 
@@ -422,7 +422,7 @@ islands_GLM.three_D_pois_reg_plot()
 df
 
 
-# Your team is also interested in investigating the influence of `hormone_level` on `num_of_predation_events`, controlling for `biological_sex`.
+# Your team is also interested in investigating the influence of `hormone_level` on `num_of_predation_events`, controlling for `sex`.
 # 
 # The scatterplot below shows the three variables:
 
@@ -433,13 +433,13 @@ df
 islands_GLM.pois_group_plot(df)
 
 
-# We'll use `statsmodels` to fit a model with both predictors. The model is: `number_of_predation_events ~ hormone_level_change + biological_sex`. The output of the cell below shows the regression table:
+# We'll use `statsmodels` to fit a model with both predictors. The model is: `number_of_predation_events ~ hormone_level_change + sex`. The output of the cell below shows the regression table:
 
 # In[24]:
 
 
 # fit a Poisson regression with statsmodels
-pois_mod_2 =  smf.glm('number_of_predation_events ~ hormone_level_change + biological_sex', data =df, family = sm.families.Poisson()).fit() 
+pois_mod_2 =  smf.glm('number_of_predation_events ~ hormone_level_change + sex', data =df, family = sm.families.Poisson()).fit() 
 
 # show the regression table
 pois_mod_2.summary()
@@ -451,9 +451,9 @@ pois_mod_2.summary()
 
 
 # this code generates the plot below
-intercept, hormone_change_slope, biological_sex_slope = pois_mod_2.params[:3]
-islands_GLM.three_D_model_plot('hormone_level_change', 'biological_sex', 
-                   'number_of_predation_events', intercept, hormone_change_slope, biological_sex_slope,
+intercept, hormone_change_slope, sex_slope = pois_mod_2.params[:3]
+islands_GLM.three_D_model_plot('hormone_level_change', 'sex', 
+                   'number_of_predation_events', intercept, hormone_change_slope, sex_slope,
                   df, 'poisson_regression_model', 'males', 'females')
 
 
