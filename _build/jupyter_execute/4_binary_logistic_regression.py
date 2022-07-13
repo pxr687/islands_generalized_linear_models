@@ -288,7 +288,7 @@ mod.summary()
 # 
 # The predictions produced by the model come to us on scale of the log odds ratio:
 # 
-# $ \large \hat{y}_{i} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_i = b_{0} + b_{i}x_{11} \dots + b_{k}x_{ki} $
+# $ \large \hat{y}_{i} = ln \left( \frac{\hat\pi_{1}}{\hat\pi_{0}} \right)_i = b_{0} + b_{i}x_{11} + \dots + b_{k}x_{ki} $
 
 # In[10]:
 

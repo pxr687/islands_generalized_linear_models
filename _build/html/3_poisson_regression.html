@@ -781,7 +781,7 @@ title="Print to PDF"
 <img alt="_images/3_poisson_regression_22_0.png" src="_images/3_poisson_regression_22_0.png" />
 </div>
 </div>
-<p>The likelihood function for Poisson regression takes the dataset (the predictor scores and outcome scores), and one parameter vector (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span>) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and the values in the parameter vector. The parameter vector <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> contains the predictions obtained from the linear prediction equation <span class="math notranslate nohighlight">\(b_0 + b_1x_{1i} ... + b_kx_{ki} \)</span>.</p>
+<p>The likelihood function for Poisson regression takes the dataset (the predictor scores and outcome scores), and one parameter vector (<span class="math notranslate nohighlight">\(\hat{y_i}\)</span>) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and the values in the parameter vector. The parameter vector <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> contains the predictions obtained from the linear prediction equation <span class="math notranslate nohighlight">\(b_0 + b_1x_{1i} + ... + b_kx_{ki} \)</span>.</p>
 <p>By finding the values of of <span class="math notranslate nohighlight">\(b_0\)</span>,  <span class="math notranslate nohighlight">\(b_k\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> which maximize the likelihood function shown above, we find the set of Poisson distributions which best fit the data, as shown in the image above. The formula is called the <em>maximum likelihood</em> formula, and using it yields the maximum likelihood estimates of the intercept and slopes. These intercept and slopes will yield a straight line if the data is log-transformed.</p>
 <p>As with linear regression, because maximizing the likelihood formula involves multiplying together probabilities, the numbers involved are so small it can lead to computational errors. In practice, again we minimize the <em>negative log-likelihood</em>, rather than directly maximizing the likelihood. This produces the same parameter estimates, but is less prone to numerical errors. The negative log-likelihood formula is:</p>
 <p><span class="math notranslate nohighlight">\( \Huge - \sum\limits_{i = 1}^{n} {y_i} ln(\hat{y}) -\hat{y_i} -ln(y_i!) \)</span></p>
@@ -903,7 +903,7 @@ title="Print to PDF"
   <th>Date:</th>                 <td>Wed, 13 Jul 2022</td>      <th>  Deviance:          </th> <td>  159.05</td>
 </tr>
 <tr>
-  <th>Time:</th>                     <td>12:57:24</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
+  <th>Time:</th>                     <td>13:01:07</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
 </tr>
 <tr>
   <th>No. Iterations:</th>               <td>4</td>             <th>  Pseudo R-squ. (CS):</th>  <td>0.6670</td> 
@@ -932,7 +932,7 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\(b_0\)</span> : the intercept, the expected value of the outcome,  on a log scale, for an observation where the predictor equals 0.</p>
 <p><span class="math notranslate nohighlight">\(b_1\)</span>: the predicted change in the outcome variable, on a log scale, for a 1-unit increase in the predictor.</p>
 <p>The parameters, without transformation, refer to the log scale, on which the Poisson regression model fits a straight line:</p>
-<p><span class="math notranslate nohighlight">\( \Large ln(\hat{y_{i}}) = b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki}  \)</span></p>
+<p><span class="math notranslate nohighlight">\( \Large ln(\hat{y_{i}}) = b_{0} + b_{1}x_{1i} + ... + b_{k}x_{ki}  \)</span></p>
 <p>The predictions, on the log scale, are shown on the graph below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -949,7 +949,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>To get the predictions on the original scale we have to exponeniate them:</p>
-<p><span class="math notranslate nohighlight">\( \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}  \)</span></p>
+<p><span class="math notranslate nohighlight">\( \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... + b_{k}x_{ki})}  \)</span></p>
 <p>The predictions, on the original scale, are shown on the graph below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1161,7 +1161,7 @@ title="Print to PDF"
   <th>Date:</th>                 <td>Wed, 13 Jul 2022</td>      <th>  Deviance:          </th> <td>  109.59</td>
 </tr>
 <tr>
-  <th>Time:</th>                     <td>12:57:26</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
+  <th>Time:</th>                     <td>13:01:08</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
 </tr>
 <tr>
   <th>No. Iterations:</th>               <td>5</td>             <th>  Pseudo R-squ. (CS):</th>  <td>0.7969</td> 

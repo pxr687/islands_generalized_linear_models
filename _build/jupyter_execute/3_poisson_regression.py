@@ -238,7 +238,7 @@ plt.xlabel('X')
 plt.ylabel('Probability');
 
 
-# The likelihood function for Poisson regression takes the dataset (the predictor scores and outcome scores), and one parameter vector ($\hat{y_i}$) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and the values in the parameter vector. The parameter vector $\hat{y_i}$ contains the predictions obtained from the linear prediction equation $b_0 + b_1x_{1i} ... + b_kx_{ki} $. 
+# The likelihood function for Poisson regression takes the dataset (the predictor scores and outcome scores), and one parameter vector ($\hat{y_i}$) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and the values in the parameter vector. The parameter vector $\hat{y_i}$ contains the predictions obtained from the linear prediction equation $b_0 + b_1x_{1i} + ... + b_kx_{ki} $. 
 # 
 # By finding the values of of $b_0$,  $b_k$ and $\sigma$ which maximize the likelihood function shown above, we find the set of Poisson distributions which best fit the data, as shown in the image above. The formula is called the *maximum likelihood* formula, and using it yields the maximum likelihood estimates of the intercept and slopes. These intercept and slopes will yield a straight line if the data is log-transformed.
 # 
@@ -344,7 +344,7 @@ pois_mod.summary()
 # 
 # The parameters, without transformation, refer to the log scale, on which the Poisson regression model fits a straight line:
 # 
-# $ \Large ln(\hat{y_{i}}) = b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki}  $
+# $ \Large ln(\hat{y_{i}}) = b_{0} + b_{1}x_{1i} + ... + b_{k}x_{ki}  $
 # 
 # The predictions, on the log scale, are shown on the graph below:
 
@@ -360,7 +360,7 @@ islands_GLM.hormone_predation_plot(df, with_predictions = True, predictions = in
 
 # To get the predictions on the original scale we have to exponeniate them:
 # 
-# $ \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}  $
+# $ \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... + b_{k}x_{ki})}  $
 # 
 # The predictions, on the original scale, are shown on the graph below:
 

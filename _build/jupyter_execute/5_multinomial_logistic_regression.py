@@ -283,7 +283,7 @@ islands_GLM.scatter_prob_subplots(mod, df)
 # 
 # Each prediction from the model comes to us on the scale of the log relative risk. So for the $i$th observation, the predicted relative risk of falling into category $j$ is:
 # 
-# $ \large \hat{y_{ji}} = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_i = b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki}  $
+# $ \large \hat{y_{ji}} = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_i = b_{0}^{j} + b_{1}^{j}x_{1i} + ... + b_{k}^{j}x_{ki}  $
 # 
 # To get the predicted probabilities, for the $j$ categories, we use the conversion formula:
 # 
