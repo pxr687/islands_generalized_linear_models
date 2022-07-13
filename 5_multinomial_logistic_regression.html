@@ -746,20 +746,20 @@ title="Print to PDF"
 <p>We use one of the categories as a reference category (we do this because probabilities sum to 1, so if we have <span class="math notranslate nohighlight">\(c\)</span> categories, we only need to predict probabilities for <span class="math notranslate nohighlight">\(c - 1\)</span> categores. We can get the predcited probability for the remaining category by subtracting the other predicted probabilities from 1). The probability of each observation (<span class="math notranslate nohighlight">\(y_i\)</span>) falling into the reference category can be written as:</p>
 <p><span class="math notranslate nohighlight">\( \large \hat{P}_{(y_{i} = ref)} = \hat\pi_{\text{(r)}i} \)</span></p>
 <p>For every category (<span class="math notranslate nohighlight">\(j\)</span>) apart from the reference category, a separate linear prediction equation predicts the log of the ratio of the probability of falling into that category vs the reference category, for each observation. This is called the log relative risk:</p>
-<p><span class="math notranslate nohighlight">\( \Large \hat{y_{ji}} = ln\left(\frac{Pr(Y=j)}{Pr(Y=\text{Reference})}\right)_{i} = b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki}  \)</span></p>
+<p><span class="math notranslate nohighlight">\( \Large \hat{y_{ji}} = ln\left(\frac{Pr(Y=j)}{Pr(Y=\text{Reference})}\right)_{i} = b_{0}^{j} + b_{1}^{j}x_{1i} + ... + b_{k}^{j}x_{ki}  \)</span></p>
 <p>So, each category apart from the reference category gets its own parameter estimates (intercept and slope(s)). Using the probability symbols from above, we can also write this as:</p>
-<p><span class="math notranslate nohighlight">\( \large \hat{y_{ji}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_i = b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki}  \)</span></p>
+<p><span class="math notranslate nohighlight">\( \large \hat{y_{ji}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_i = b_{0}^{j} + b_{1}^{j}x_{1i} + ... + b_{k}^{j}x_{ki}  \)</span></p>
 <p>The individual predictions of an observation being in category <span class="math notranslate nohighlight">\(j\)</span> (<span class="math notranslate nohighlight">\(\hat{y_{j1}}\)</span>), for all <span class="math notranslate nohighlight">\(n\)</span> observations, using <span class="math notranslate nohighlight">\(k\)</span> variables as predictors are:</p>
 <div class="math notranslate nohighlight">
-\[ \large \hat{y_{j1}} = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_1 = b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki}  \]</div>
+\[ \large \hat{y_{j1}} = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_1 = b_{0}^{j} + b_{1}^{j}x_{1i} + ... + b_{k}^{j}x_{ki}  \]</div>
 <div class="math notranslate nohighlight">
-\[ \large \hat{y_{j2}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_2 = b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki}  \]</div>
+\[ \large \hat{y_{j2}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_2 = b_{0}^{j} + b_{1}^{j}x_{1i} + ... + b_{k}^{j}x_{ki}  \]</div>
 <div class="math notranslate nohighlight">
-\[ \large \hat{y_{j3}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_3 =  b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki} \]</div>
+\[ \large \hat{y_{j3}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_3 =  b_{0}^{j} + b_{1}^{j}x_{1i} + ... + b_{k}^{j}x_{ki} \]</div>
 <div class="math notranslate nohighlight">
 \[ \dots \]</div>
 <div class="math notranslate nohighlight">
-\[ \large \hat{y_{jn}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_n =  b_{0}^{j} + b_{1}^{j}x_{1i} + ... b_{k}^{j}x_{ki}  \]</div>
+\[ \large \hat{y_{jn}}  = ln \left( \frac{\hat\pi_{j}}{\hat\pi_{\text{(r)}}} \right)_n =  b_{0}^{j} + b_{1}^{j}x_{1i} + ... + b_{k}^{j}x_{ki}  \]</div>
 <p>…where there are <span class="math notranslate nohighlight">\(k\)</span> predictor variables, and <span class="math notranslate nohighlight">\(n\)</span> observations, and where:</p>
 <p><span class="math notranslate nohighlight">\(\hat{y_{ji}} \)</span> : is the predicted log relative risk of falling into category <span class="math notranslate nohighlight">\(j\)</span> for a given set of predictor scores, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
 <p><span class="math notranslate nohighlight">\(b_0\)</span> : is the intercept term, the predicted value of the outcome variable when all predictors equal 0</p>
@@ -917,10 +917,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 08 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1872</td>  
+  <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1872</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:37:49</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
+  <th>Time:</th>                <td>12:54:05</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
@@ -1155,10 +1155,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     4</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 08 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.2205</td>  
+  <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.2205</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:37:50</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
+  <th>Time:</th>                <td>12:54:05</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 

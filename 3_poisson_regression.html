@@ -699,7 +699,7 @@ title="Print to PDF"
 <p>In the case of linear regression, this function of the mean is just <span class="math notranslate nohighlight">\(1 * \mu\)</span>. For other generalized liner models, like Poisson regression, we use a different function of the mean.</p>
 <p>In effect, using the linear prediction equation to predict a function of the mean (other than the identity link function used in linear regression) this fits a line on some scale other than the scale of the original data. E.g. it fits a line on whatever scale the transformation of the mean is on.</p>
 <p>Poisson regression uses a logarithmic link function - it fits a line on the log scale, and is sometimes referred to as a loglinear model. The prediction equation for Poisson regression is:</p>
-<p><span class="math notranslate nohighlight">\( \Large ln(\hat{y_{i}}) = b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki}  \)</span></p>
+<p><span class="math notranslate nohighlight">\( \Large ln(\hat{y_{i}}) = b_{0} + b_{1}x_{1i} + ... + b_{k}x_{ki}  \)</span></p>
 <p>Obviously, we aren’t really interested in the log scale, we’re interested in the original scale of the data, so we have to exponeniate the right hand side of the model to get predictions on the original scale:</p>
 <p><span class="math notranslate nohighlight">\( \Large \hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... b_{k}x_{ki})}  \)</span></p>
 <p>…where there are <span class="math notranslate nohighlight">\(k\)</span> predictor variables, and <span class="math notranslate nohighlight">\(n\)</span> observations, and where:</p>
@@ -894,19 +894,19 @@ title="Print to PDF"
   <th>Model Family:</th>              <td>Poisson</td>          <th>  Df Model:          </th>  <td>     1</td> 
 </tr>
 <tr>
-  <th>Link Function:</th>               <td>log</td>            <th>  Scale:             </th> <td>  1.0000</td>
+  <th>Link Function:</th>               <td>Log</td>            <th>  Scale:             </th> <td>  1.0000</td>
 </tr>
 <tr>
   <th>Method:</th>                     <td>IRLS</td>            <th>  Log-Likelihood:    </th> <td> -242.86</td>
 </tr>
 <tr>
-  <th>Date:</th>                 <td>Fri, 08 Jul 2022</td>      <th>  Deviance:          </th> <td>  159.05</td>
+  <th>Date:</th>                 <td>Wed, 13 Jul 2022</td>      <th>  Deviance:          </th> <td>  159.05</td>
 </tr>
 <tr>
-  <th>Time:</th>                     <td>22:35:53</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
+  <th>Time:</th>                     <td>12:53:47</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
 </tr>
 <tr>
-  <th>No. Iterations:</th>               <td>4</td>             <th>                     </th>     <td> </td>   
+  <th>No. Iterations:</th>               <td>4</td>             <th>  Pseudo R-squ. (CS):</th>  <td>0.6670</td> 
 </tr>
 <tr>
   <th>Covariance Type:</th>          <td>nonrobust</td>         <th>                     </th>     <td> </td>   
@@ -1152,19 +1152,19 @@ title="Print to PDF"
   <th>Model Family:</th>              <td>Poisson</td>          <th>  Df Model:          </th>  <td>     2</td> 
 </tr>
 <tr>
-  <th>Link Function:</th>               <td>log</td>            <th>  Scale:             </th> <td>  1.0000</td>
+  <th>Link Function:</th>               <td>Log</td>            <th>  Scale:             </th> <td>  1.0000</td>
 </tr>
 <tr>
   <th>Method:</th>                     <td>IRLS</td>            <th>  Log-Likelihood:    </th> <td> -218.13</td>
 </tr>
 <tr>
-  <th>Date:</th>                 <td>Fri, 08 Jul 2022</td>      <th>  Deviance:          </th> <td>  109.59</td>
+  <th>Date:</th>                 <td>Wed, 13 Jul 2022</td>      <th>  Deviance:          </th> <td>  109.59</td>
 </tr>
 <tr>
-  <th>Time:</th>                     <td>22:35:54</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
+  <th>Time:</th>                     <td>12:53:49</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
 </tr>
 <tr>
-  <th>No. Iterations:</th>               <td>5</td>             <th>                     </th>     <td> </td>   
+  <th>No. Iterations:</th>               <td>5</td>             <th>  Pseudo R-squ. (CS):</th>  <td>0.7969</td> 
 </tr>
 <tr>
   <th>Covariance Type:</th>          <td>nonrobust</td>         <th>                     </th>     <td> </td>   
