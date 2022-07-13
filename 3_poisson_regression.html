@@ -477,7 +477,7 @@ title="Print to PDF"
 <br><p>Imagine you are visiting a new island, this time with a team of biologists. You are here to study a particular species of omnivourous animal. You’re investigating the hypothesis that changes in the level of a particular hormone predict the number of predation events carried out by the animal.</p>
 <p>You collect data across a one-week period, on 3 variables:</p>
 <p><code class="docutils literal notranslate"><span class="pre">hormone_level_change</span></code> -  a continuous numerical variable, the change in the hormone levels in the blood, from the start of the week to the end</p>
-<p><code class="docutils literal notranslate"><span class="pre">biological_sex</span></code> - a binary nominal-categorical variable, the biological sex of the animal</p>
+<p><code class="docutils literal notranslate"><span class="pre">sex</span></code> - a binary nominal-categorical variable, the biological sex of the animal</p>
 <p><code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code> - a discrete numerical variable, the number of predation events carried out by the animal</p>
 <p>The data your team has collected is shown in the output of the cell below. The dataframe contains the data for 100 randomly sampled animals:</p>
 <div class="cell docutils container">
@@ -525,7 +525,7 @@ title="Print to PDF"
     <tr style="text-align: right;">
       <th></th>
       <th>hormone_level_change</th>
-      <th>biological_sex</th>
+      <th>sex</th>
       <th>number_of_predation_events</th>
     </tr>
   </thead>
@@ -903,7 +903,7 @@ title="Print to PDF"
   <th>Date:</th>                 <td>Wed, 13 Jul 2022</td>      <th>  Deviance:          </th> <td>  159.05</td>
 </tr>
 <tr>
-  <th>Time:</th>                     <td>13:01:07</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
+  <th>Time:</th>                     <td>13:08:14</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
 </tr>
 <tr>
   <th>No. Iterations:</th>               <td>4</td>             <th>  Pseudo R-squ. (CS):</th>  <td>0.6670</td> 
@@ -1010,7 +1010,7 @@ title="Print to PDF"
 </div>
 <p>Recall that the data from the island consists of three variables:</p>
 <p><code class="docutils literal notranslate"><span class="pre">hormone_level_change</span></code>:  a continuous numerical variable, the change in the hormone levels in the blood, from the start of the week to the end</p>
-<p><code class="docutils literal notranslate"><span class="pre">biological_sex</span></code>: a binary nominal-categorical variable, the biological sex of the animal</p>
+<p><code class="docutils literal notranslate"><span class="pre">sex</span></code>: a binary nominal-categorical variable, the sex of the animal</p>
 <p><code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code>: a discrete numerical variable, the number of predation events carried out by the animal</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1039,7 +1039,7 @@ title="Print to PDF"
     <tr style="text-align: right;">
       <th></th>
       <th>hormone_level_change</th>
-      <th>biological_sex</th>
+      <th>sex</th>
       <th>number_of_predation_events</th>
     </tr>
   </thead>
@@ -1115,7 +1115,7 @@ title="Print to PDF"
 <p>100 rows × 3 columns</p>
 </div></div></div>
 </div>
-<p>Your team is also interested in investigating the influence of <code class="docutils literal notranslate"><span class="pre">hormone_level</span></code> on <code class="docutils literal notranslate"><span class="pre">num_of_predation_events</span></code>, controlling for <code class="docutils literal notranslate"><span class="pre">biological_sex</span></code>.</p>
+<p>Your team is also interested in investigating the influence of <code class="docutils literal notranslate"><span class="pre">hormone_level</span></code> on <code class="docutils literal notranslate"><span class="pre">num_of_predation_events</span></code>, controlling for <code class="docutils literal notranslate"><span class="pre">sex</span></code>.</p>
 <p>The scatterplot below shows the three variables:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1128,11 +1128,11 @@ title="Print to PDF"
 <img alt="_images/3_poisson_regression_50_0.png" src="_images/3_poisson_regression_50_0.png" />
 </div>
 </div>
-<p>We’ll use <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> to fit a model with both predictors. The model is: <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span> <span class="pre">~</span> <span class="pre">hormone_level_change</span> <span class="pre">+</span> <span class="pre">biological_sex</span></code>. The output of the cell below shows the regression table:</p>
+<p>We’ll use <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> to fit a model with both predictors. The model is: <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span> <span class="pre">~</span> <span class="pre">hormone_level_change</span> <span class="pre">+</span> <span class="pre">sex</span></code>. The output of the cell below shows the regression table:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit a Poisson regression with statsmodels</span>
-<span class="n">pois_mod_2</span> <span class="o">=</span>  <span class="n">smf</span><span class="o">.</span><span class="n">glm</span><span class="p">(</span><span class="s1">&#39;number_of_predation_events ~ hormone_level_change + biological_sex&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">Poisson</span><span class="p">())</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span> 
+<span class="n">pois_mod_2</span> <span class="o">=</span>  <span class="n">smf</span><span class="o">.</span><span class="n">glm</span><span class="p">(</span><span class="s1">&#39;number_of_predation_events ~ hormone_level_change + sex&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">Poisson</span><span class="p">())</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span> 
 
 <span class="c1"># show the regression table</span>
 <span class="n">pois_mod_2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
@@ -1161,7 +1161,7 @@ title="Print to PDF"
   <th>Date:</th>                 <td>Wed, 13 Jul 2022</td>      <th>  Deviance:          </th> <td>  109.59</td>
 </tr>
 <tr>
-  <th>Time:</th>                     <td>13:01:08</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
+  <th>Time:</th>                     <td>13:08:16</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
 </tr>
 <tr>
   <th>No. Iterations:</th>               <td>5</td>             <th>  Pseudo R-squ. (CS):</th>  <td>0.7969</td> 
@@ -1181,7 +1181,7 @@ title="Print to PDF"
   <th>hormone_level_change</th> <td>    0.0057</td> <td>    0.001</td> <td>   10.135</td> <td> 0.000</td> <td>    0.005</td> <td>    0.007</td>
 </tr>
 <tr>
-  <th>biological_sex</th>       <td>    0.6165</td> <td>    0.090</td> <td>    6.823</td> <td> 0.000</td> <td>    0.439</td> <td>    0.794</td>
+  <th>sex</th>                  <td>    0.6165</td> <td>    0.090</td> <td>    6.823</td> <td> 0.000</td> <td>    0.439</td> <td>    0.794</td>
 </tr>
 </table></div></div>
 </div>
@@ -1189,9 +1189,9 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
-<span class="n">intercept</span><span class="p">,</span> <span class="n">hormone_change_slope</span><span class="p">,</span> <span class="n">biological_sex_slope</span> <span class="o">=</span> <span class="n">pois_mod_2</span><span class="o">.</span><span class="n">params</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
-<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_model_plot</span><span class="p">(</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">,</span> <span class="s1">&#39;biological_sex&#39;</span><span class="p">,</span> 
-                   <span class="s1">&#39;number_of_predation_events&#39;</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">hormone_change_slope</span><span class="p">,</span> <span class="n">biological_sex_slope</span><span class="p">,</span>
+<span class="n">intercept</span><span class="p">,</span> <span class="n">hormone_change_slope</span><span class="p">,</span> <span class="n">sex_slope</span> <span class="o">=</span> <span class="n">pois_mod_2</span><span class="o">.</span><span class="n">params</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_model_plot</span><span class="p">(</span><span class="s1">&#39;hormone_level_change&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">,</span> 
+                   <span class="s1">&#39;number_of_predation_events&#39;</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">hormone_change_slope</span><span class="p">,</span> <span class="n">sex_slope</span><span class="p">,</span>
                   <span class="n">df</span><span class="p">,</span> <span class="s1">&#39;poisson_regression_model&#39;</span><span class="p">,</span> <span class="s1">&#39;males&#39;</span><span class="p">,</span> <span class="s1">&#39;females&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
