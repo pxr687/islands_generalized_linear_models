@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Linear Regression &#8212; Islands - Generalized Linear Models</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -460,7 +461,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="linear-regression">
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-regression">
 <h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h1>
 <br>
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/island_lin_reg.png"><img alt="_images/island_lin_reg.png" class="bg-primary mb-1 align-center" src="_images/island_lin_reg.png" style="width: 270px;" /></a>
@@ -586,13 +587,13 @@ title="Print to PDF"
 <img alt="_images/2_linear_regression_4_0.png" src="_images/2_linear_regression_4_0.png" />
 </div>
 </div>
-<div class="section" id="context">
+<section id="context">
 <h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
 <p>Linear regression is (somewhat obviously) the foundational generalized linear model. We have already seen it on the <a class="reference internal" href="1_generalized_linear_models.html"><span class="doc std std-doc">‘What are Generalized Linear Models?’</span></a> page, but now we will delve into how the parameter estimates are obtained, via the conditional distribution (aka maximum likelihood) approach.</p>
 <p>Linear regression is used to model the linear relationship between a quantitative outcome variable and one or more predictor variables. As with all generalized linear models, the predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical).</p>
 <p>The predictions from linear regression can range from positive infinity to negative infinity. So if the outcome variable is does not (theoreticall) range from positive to negative infinity, for instance if it must be positive (e.g. number of children), then the model may produce nonsensical predictions. In this case, the outcome variable <code class="docutils literal notranslate"><span class="pre">prestige</span></code> is  quantitative, and judging from the scatterplot, has a mean far from 0. If the mean were close to 0, we might consider fitting a different generalized linear model, as negative predictions may not make sense for <code class="docutils literal notranslate"><span class="pre">prestige</span></code>.</p>
-</div>
-<div class="section" id="model">
+</section>
+<section id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
 <p>As shown previously, the prediction equation for the linear regression model is:</p>
 <p><span class="math notranslate nohighlight">\(\large \hat{y}_i = b_0 + b_1x_{1i} + ... + b_kx_{ki} \)</span></p>
@@ -639,8 +640,8 @@ title="Print to PDF"
 <p>where <span class="math notranslate nohighlight">\(\hat{Y}\)</span> is a vector containing the predicted outcome scores. <span class="math notranslate nohighlight">\(\beta\)</span> is a vector containing the parameter estimates (the intercept and slopes) and  <span class="math notranslate nohighlight">\(X\)</span> is a matrix containing the predictor scores and a column of 1s (as shown above).</p>
 <p>For the data that your research term have collected on the island, the linear regression model predicting <code class="docutils literal notranslate"><span class="pre">prestige</span></code> from <code class="docutils literal notranslate"><span class="pre">wealth</span></code> is:</p>
 <p><span class="math notranslate nohighlight">\(\large \hat{\text{prestige}}_i = b_0 + b_1\text{wealth}_{i} \)</span></p>
-</div>
-<div class="section" id="parameter-estimation">
+</section>
+<section id="parameter-estimation">
 <h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
 <p>The model gets its parameters, by maximizing the likelihood function, the formula for which is:</p>
 <p><span class="math notranslate nohighlight">\(  \huge \prod\limits_{i = 1}^{n} \left(\frac{1}{(2\pi\sigma^{2})^{^{\frac{1}{2}}}}\right)^n e^{\frac{-\sum{(y_{i} - \hat{y_{i}})^{2}}}{2\sigma^{2}}}  \)</span></p>
@@ -715,8 +716,8 @@ title="Print to PDF"
 <p>Because maximizing the likelihood formula involves multiplying together probabilities, the numbers can get very small very quickly, and this can lead to computational errors. In practice, we get around this by minimizing the <em>negative log-likelihood</em>, rather than maximizing the likelihood directly. This produces the same parameter estimates, but is less prone to numerical errors. The negative log-likelihood formula is:</p>
 <p><span class="math notranslate nohighlight">\( \huge \frac{n}{2} \ln(2\pi\sigma^{2}) +  \frac{{\sum\limits_{i = 1}^{n}(y_{i} - \hat{y_{i}})^{2}}}{2\sigma^{2}}\)</span></p>
 <p>This formula is just the result of applying the log transformation to the likelihood formula shown earlier. It is also referred to as the <em>cost function</em>, as we want it to be <em>cheap</em> e.g. we want to find the parameter values that yield it’s minimum possible value.</p>
-</div>
-<div class="section" id="implementation">
+</section>
+<section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
 <p>The python cell below defines a function which uses the negative log-likelihood formula just shown to calculate the negative log likelihood for a given set of parameters (<span class="math notranslate nohighlight">\(b_0,\)</span> <span class="math notranslate nohighlight">\(b_1\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span>) for a given dataset (a vector of outcome <span class="math notranslate nohighlight">\(y_i\)</span> values and a vector of predictor <span class="math notranslate nohighlight">\(x_i\)</span> values):</p>
 <div class="cell docutils container">
@@ -766,7 +767,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-62.98373952,   4.00515213,  60.9655072 ])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-62.99292797,   4.00520603,  60.96548745])
 </pre></div>
 </div>
 </div>
@@ -796,7 +797,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-62.98373952,   4.00515213,  60.9655072 ])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-62.99292797,   4.00520603,  60.96548745])
 </pre></div>
 </div>
 </div>
@@ -824,10 +825,10 @@ title="Print to PDF"
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   403.8</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Wed, 13 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>1.08e-75</td> 
+  <th>Date:</th>             <td>Sun, 24 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>1.08e-75</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>13:00:57</td>     <th>  Log-Likelihood:    </th> <td> -5529.2</td> 
+  <th>Time:</th>                 <td>20:41:44</td>     <th>  Log-Likelihood:    </th> <td> -5529.2</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  1000</td>      <th>  AIC:               </th> <td>1.106e+04</td>
@@ -869,14 +870,14 @@ title="Print to PDF"
 </table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 2.99e+03. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
 </div>
 <p>We can see that the parameter values obtained by minimizing the negative log-likelihood function are identical to the parameter estimates we get from carrying out a linear regression using the <a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a> library.</p>
-</div>
-<div class="section" id="interpretation-one-predictor-model">
+</section>
+<section id="interpretation-one-predictor-model">
 <h2>Interpretation (one predictor model)<a class="headerlink" href="#interpretation-one-predictor-model" title="Permalink to this headline">#</a></h2>
 <p>Note: the intercept and slope are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
 <p>The intercept value tells us the predicted value of the outcome (<code class="docutils literal notranslate"><span class="pre">prestige</span></code>) for a predictor (<code class="docutils literal notranslate"><span class="pre">wealth</span></code>) score of 0. This may or may not be a meaningful prediction, depending on the dataset and how many very low values of the predictor are actually observed (a lot of extrapolation is going on there are not many observations with low predictor scores!). The <span class="math notranslate nohighlight">\(p\)</span>-value for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
 <p>The slope tells us the expected in increase in the outcome for a 1 unit change in the predictor. In this case, based on this dataset, we expect a 4 unit increase in <code class="docutils literal notranslate"><span class="pre">prestige</span></code> for a 1 unit increase in <code class="docutils literal notranslate"><span class="pre">wealth</span></code>. The <span class="math notranslate nohighlight">\(p\)</span>-values for the predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
-</div>
-<div class="section" id="linear-regression-with-multiple-predictors">
+</section>
+<section id="linear-regression-with-multiple-predictors">
 <h2>Linear Regression with multiple predictors<a class="headerlink" href="#linear-regression-with-multiple-predictors" title="Permalink to this headline">#</a></h2>
 <p>In more than two dimensions, linear regression fits a (hyper)plane, rather than a line, to the data.</p>
 <p>The graph below shows a hypothetical multiple regression model fit to an outcome with two continuous predictor variables. The blue surface is the linear regression model, the red dots are the hypothetical data points:</p>
@@ -1045,10 +1046,10 @@ title="Print to PDF"
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   1094.</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Wed, 13 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>3.72e-252</td>
+  <th>Date:</th>             <td>Sun, 24 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>3.72e-252</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>13:00:58</td>     <th>  Log-Likelihood:    </th> <td> -5118.5</td> 
+  <th>Time:</th>                 <td>20:41:45</td>     <th>  Log-Likelihood:    </th> <td> -5118.5</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  1000</td>      <th>  AIC:               </th> <td>1.024e+04</td>
@@ -1105,8 +1106,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>The above graph shows the ‘geometric trick’ mentioned earlier: because <code class="docutils literal notranslate"><span class="pre">religion</span></code> is an indicator variable defined only at 0 or 1, all of the datapoints fall at either 0 or 1. But the regression surface covers the space between 0 and 1, this allows us to use the linear regression model with categorical predictors.</p>
-</div>
-<div class="section" id="interpretation-multiple-predictors">
+</section>
+<section id="interpretation-multiple-predictors">
 <h2>Interpretation (multiple predictors)<a class="headerlink" href="#interpretation-multiple-predictors" title="Permalink to this headline">#</a></h2>
 <p>How do we interpret the linear regression model parameter estimates, when there are multiple predictors?</p>
 <p>Note: the intercept and slopes are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
@@ -1114,8 +1115,8 @@ title="Print to PDF"
 <p>The slope of each predictor tells us the predicted difference in the outcome variable scores for two hypothetical observations which differed <em>only</em> by a one unit score in that predictor. E.g. which had the same score on all other predictors. Sometimes this is referred to as <em>statistical control</em>. We might say each slope tells us the estimated change in the outcome for a 1 unit increase in that predictor, <em>controlling</em> for other predictors in the model.</p>
 <p>This ‘statistical control’ interpretation of the slopes s is easy to explain via the graph above (the graph showing the linear regression surface and the datapoints). If we ‘hold <code class="docutils literal notranslate"><span class="pre">religion</span></code> constant’ by looking only at the graph where <code class="docutils literal notranslate"><span class="pre">religion</span> <span class="pre">=</span> <span class="pre">1</span></code>, then we compare points where <code class="docutils literal notranslate"><span class="pre">wealth</span></code> varies, the regression surface let’s us predict the change in <code class="docutils literal notranslate"><span class="pre">prestige</span></code> as a function of wealth, whilst ‘controlling for’ (e.g. holding constant) <code class="docutils literal notranslate"><span class="pre">religion</span></code>. Obviously, the validity of this interpretation depends on how well the <a class="reference external" href="https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/R/R5_Correlation-Regression/R5_Correlation-Regression4.html#:~:text=There%20are%20four%20assumptions%20associated,are%20independent%20of%20each%20other">assumptions of the linear regression model</a> are met…</p>
 <p>The <span class="math notranslate nohighlight">\(p\)</span>-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
-</div>
-<div class="section" id="statistical-interaction-in-linear-regression">
+</section>
+<section id="statistical-interaction-in-linear-regression">
 <h2>Statistical interaction in Linear Regression<a class="headerlink" href="#statistical-interaction-in-linear-regression" title="Permalink to this headline">#</a></h2>
 <p>The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).</p>
 <p>If we fit an interaction term in linear regression this involves taking the cross product of two predictors. So if the we wanted to look for an interaction between <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> we would include <span class="math notranslate nohighlight">\(x_1 * x_2\)</span> as a predictor in the model. So the model would be:</p>
@@ -1135,8 +1136,8 @@ title="Print to PDF"
 <p>That’s it for linear regression from the conditional distribution/maximum likelihood perspective. You can visit another page/island via the links in the table of contents, and at the bottom of this page…</p>
 <hr class="docutils" />
 <p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
