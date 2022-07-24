@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>What are Generalized Linear Models? &#8212; Islands - Generalized Linear Models</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -400,7 +401,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="what-are-generalized-linear-models">
+  <section class="tex2jax_ignore mathjax_ignore" id="what-are-generalized-linear-models">
 <h1>What are Generalized Linear Models?<a class="headerlink" href="#what-are-generalized-linear-models" title="Permalink to this headline">#</a></h1>
 <p>Generalized linear models are extensions of linear regression, and the linear regression model itself is a specific type of generalized linear model. Generalized linear models relax some of the assumptions of linear regression and as a result, they can be applied to a wider variety of datasets. This page will serve as a refresher to linear regression, and will explain how generalized linear models work, by reference to linear regression.</p>
 <p>Linear regression involves modelling the linear relationship between a set of scores on a quantitative outcome variable (denoted <span class="math notranslate nohighlight">\(y\)</span>) and scores on a set of predictor variables (denoted with <span class="math notranslate nohighlight">\(x_1, x_2 ... x_k\)</span>). The predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical), but the outcome variable (generally) must be numerical. Linear regression uses a linear prediction equation of the form::</p>
@@ -413,7 +414,7 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\(b_k\)</span> : is the slope of the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable</p>
 <p><span class="math notranslate nohighlight">\(x_{ki}\)</span> : is the score on the <span class="math notranslate nohighlight">\(k\)</span>th predictor variable, for the <span class="math notranslate nohighlight">\(i\)</span>th observation</p>
 <p>Linear regression assumes a normal distribution of the residuals - that is, that the distribution of the differences between the model predictions and the actual datapoints <span class="math notranslate nohighlight">\((y_i - \hat{y_i})\)</span> is normal. Generalized linear models relax this (and other) assumptions, and so extend the machinery of linear regression to allow us to use a linear prediction equation to predict an outcome variable with a distributional form that is non-normal.</p>
-<div class="section" id="the-conditional-distribution-view-of-regression-models">
+<section id="the-conditional-distribution-view-of-regression-models">
 <h2>The ‘Conditional Distribution’ view of regression models<a class="headerlink" href="#the-conditional-distribution-view-of-regression-models" title="Permalink to this headline">#</a></h2>
 <p>Linear regression is often introduced via the sum of squares perspective, whereby the parameter estimates (the intercept and slopes) are obtained by find the values of <span class="math notranslate nohighlight">\(b_0, b_1 ... b_k\)</span> which give the minimum value of:</p>
 <p><span class="math notranslate nohighlight">\( \large \sum\limits_{i = 1}^{n} (y_i - \hat{y}_i)\)</span></p>
@@ -464,15 +465,15 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="the-structure-of-this-book">
+</section>
+<section id="the-structure-of-this-book">
 <h2>The structure of this book<a class="headerlink" href="#the-structure-of-this-book" title="Permalink to this headline">#</a></h2>
 <p>This book will use simulated data, which (hopefully) cleanly and clearly illustrates the principles of fitting generalized linear models. Each page will focus on a different type of generalized linear model, and will involve data from a different hypothetical island. Each model will be explained first in the one-predictor case, using a continuous predictor, then in using several predictors, one of which will be categorical.</p>
 <p>Let’s visit the islands, the links are in the table of contents, and at the bottom of this page…</p>
 <hr class="docutils" />
 <p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

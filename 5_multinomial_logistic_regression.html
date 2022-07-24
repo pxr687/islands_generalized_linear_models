@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Multinomial Logistic Regression &#8212; Islands - Generalized Linear Models</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -460,7 +461,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="multinomial-logistic-regression">
+  <section class="tex2jax_ignore mathjax_ignore" id="multinomial-logistic-regression">
 <h1>Multinomial Logistic Regression<a class="headerlink" href="#multinomial-logistic-regression" title="Permalink to this headline">#</a></h1>
 <br>
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/island_mul_log_reg.png"><img alt="_images/island_mul_log_reg.png" class="bg-primary mb-1 align-center" src="_images/island_mul_log_reg.png" style="width: 270px;" /></a>
@@ -511,7 +512,7 @@ title="Print to PDF"
       <th></th>
       <th>income</th>
       <th>religion</th>
-      <th>biological_sex</th>
+      <th>sex</th>
     </tr>
   </thead>
   <tbody>
@@ -599,126 +600,56 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\indexes\base.py:3621,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3620</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3621</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3622</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\_libs\index.pyx:136,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>income</th>
-      <th>religion</th>
-      <th>biological_sex</th>
-      <th>religion_dummy</th>
-      <th>biological_sex_dummy</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>78</td>
-      <td>Lamothianism</td>
-      <td>female</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>32</td>
-      <td>Communionism</td>
-      <td>male</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>55</td>
-      <td>Communionism</td>
-      <td>female</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>186</td>
-      <td>Lamothianism</td>
-      <td>female</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>Communionism</td>
-      <td>male</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>107</td>
-      <td>Symmetrianity</td>
-      <td>male</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>29</td>
-      <td>Symmetrianity</td>
-      <td>male</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>102</td>
-      <td>Lamothianism</td>
-      <td>female</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>22</td>
-      <td>Symmetrianity</td>
-      <td>male</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>99</th>
-      <td>107</td>
-      <td>Lamothianism</td>
-      <td>male</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<p>100 rows × 5 columns</p>
-</div></div></div>
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\_libs\index.pyx:163,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:5198,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:5206,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: &#39;biological_sex&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># generate dummy variables</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;religion_dummy&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="s1">&#39;religion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;Communionism&#39;</span><span class="p">,</span> <span class="s1">&#39;Symmetrianity&#39;</span><span class="p">,</span> <span class="s1">&#39;Lamothianism&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;biological_sex_dummy&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="s1">&#39;biological_sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># show the data</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">df</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\frame.py:3505,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3503</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3504</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3505</span> <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3506</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">indexer</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3507</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\indexes\base.py:3623,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3621</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3622</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3623</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3624</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3625</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3626</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3627</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3628</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;biological_sex&#39;
+</pre></div>
 </div>
-<div class="section" id="context">
+</div>
+</div>
+<section id="context">
 <h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
 <p>We use multinomial logistic regression when we are predicting a categorical variable with several categories, such as <code class="docutils literal notranslate"><span class="pre">religion</span></code>.  As with all generalized linear models, the predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical).</p>
 <p>Multinomial logistic regression fits a logistic curve for each outcome category, where each curve shows the predicted probability of an observation falling into that category, given the a set of predictor scores. The image below shows three logistic curves, hypothetically representing the probability of falling into one of three categories, for a given score on a predictor variable:</p>
@@ -738,8 +669,8 @@ title="Print to PDF"
 <p>This barplot shows a trinomial distribution - it shows the predicted proportion of observations falling into each of the three categories, at a given level of the predictor (a trinomial distribution is a type of multinomial distribution).</p>
 <p>From the conditional distribution perspective, multinomial logistic regression works from by fitting a multinomial distribution for every value of the predictor, as shown in the image below:</p>
 <p><img alt="" src="_images/multi_log_reg_conditional.png" /></p>
-</div>
-<div class="section" id="model">
+</section>
+<section id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
 <p>As we’ve just seen, when predicting a multinomial outcome variable, we are interested in the probability of observations falling into one of three or more categories, based on the value of the predictor variable(s). We can denote the probability of each observation (<span class="math notranslate nohighlight">\(y_i\)</span>) falling into category <span class="math notranslate nohighlight">\(j\)</span> as:</p>
 <p><span class="math notranslate nohighlight">\( \large \hat{P}_{(y_{i} = j)} = \hat\pi_{ji}\)</span></p>
@@ -794,8 +725,8 @@ title="Print to PDF"
            {b^{j}_{k}} \\ 
          \end{bmatrix} 
 \end{split}\]</div>
-</div>
-<div class="section" id="parameter-estimation">
+</section>
+<section id="parameter-estimation">
 <h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
 <p>The predicted probability of falling into class <span class="math notranslate nohighlight">\(j\)</span> for observation <span class="math notranslate nohighlight">\(i\)</span> is given by:</p>
 <p><span class="math notranslate nohighlight">\( \large \hat\pi_{ji} = \frac{e^{\hat{y_{ji}}}}{1 + e^{\hat{y_{1}}} + ... e^{\hat{y_{ji}}}}  = \frac{e^{\hat{y_{ji}}}}{1 + \sum{e^{\hat{y_{ji}}}}} \)</span></p>
@@ -821,8 +752,8 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\( \large \prod\limits_{i = 1}^{n} \hat\pi_{0i}^{\text{indicator}_{0i}} \hat\pi_{1i}^{\text{indicator}_{1i}} ...\hat\pi_{ji}^{\text{indicator}_{ji}} \)</span></p>
 <p>In practice, the parameter estimates are obtained by minimizing the negative log-likelihood function (much easier for a computer to work with!):</p>
 <p><span class="math notranslate nohighlight">\( \large - \sum\limits_{i = 1}^{n} \text{indicator}_{ji} * \large[ \hat{y_{ji}}  - \ln(1 + \sum{e^{\hat{y_{ji}}}} )\large]\)</span></p>
-</div>
-<div class="section" id="implementation">
+</section>
+<section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
 <p>Returning to the data from the island, your team want to fit a multinomial logistic regression model, predicting <code class="docutils literal notranslate"><span class="pre">religion</span></code> from <code class="docutils literal notranslate"><span class="pre">income</span></code>:</p>
 <div class="cell docutils container">
@@ -917,10 +848,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1872</td>  
+  <th>Date:</th>            <td>Wed, 06 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1872</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>13:01:25</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
+  <th>Time:</th>                <td>22:09:57</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
@@ -962,8 +893,8 @@ title="Print to PDF"
 <img alt="_images/5_multinomial_logistic_regression_21_0.png" src="_images/5_multinomial_logistic_regression_21_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="interpretation-one-predictor-model">
+</section>
+<section id="interpretation-one-predictor-model">
 <h2>Interpretation (one predictor model)<a class="headerlink" href="#interpretation-one-predictor-model" title="Permalink to this headline">#</a></h2>
 <p>Note: the intercept and slope are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
 <p>The coefficients tell us:</p>
@@ -975,8 +906,8 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\( \large \hat\pi_{ji} = \frac{e^{\hat{y_{ji}}}}{1 + e^{\hat{y_{1}}} + ... e^{\hat{y_{ji}}}}  = \frac{e^{\hat{y_{ji}}}}{1 + \sum{e^{\hat{y_{ji}}}}} \)</span></p>
 <p>And for the predicted probability og the <span class="math notranslate nohighlight">\(i\)</span>th observation falling into the reference category:</p>
 <p><span class="math notranslate nohighlight">\( \large \hat\pi_{\text{(r)}i} = \frac{1}{1 + \sum{e^{\hat{y_{ji}}}}} = 1 - \sum \hat\pi_{ji} \)</span></p>
-</div>
-<div class="section" id="multinomial-logistic-regression-with-multiple-predictors">
+</section>
+<section id="multinomial-logistic-regression-with-multiple-predictors">
 <h2>Multinomial Logistic Regression with multiple predictors<a class="headerlink" href="#multinomial-logistic-regression-with-multiple-predictors" title="Permalink to this headline">#</a></h2>
 <p>In more than two dimensions - e.g. with more than one predictor - the multinomial logistic regression model fits several probability surfaces, one for each outcome cateogory, which show the predicted probability of category membership, given the predictor variables. (In higher dimensions, a manifold is fit).</p>
 <p>The graph below shows a multinomial logisitc regression model fit to an outcome with three cateogries, as a function of two continuous predictor variables. Each surface represents the probability of being in the associate category, for any pairing of predictor scores:</p>
@@ -1155,10 +1086,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     4</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.2205</td>  
+  <th>Date:</th>            <td>Wed, 06 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.2205</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>13:01:26</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
+  <th>Time:</th>                <td>22:09:57</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
@@ -1210,14 +1141,14 @@ title="Print to PDF"
 <img alt="_images/5_multinomial_logistic_regression_30_0.png" src="_images/5_multinomial_logistic_regression_30_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="interpretation-multiple-predictors">
+</section>
+<section id="interpretation-multiple-predictors">
 <h2>Interpretation (multiple predictors)<a class="headerlink" href="#interpretation-multiple-predictors" title="Permalink to this headline">#</a></h2>
 <p>Note: the intercept and slopes are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
 <p>The intercept, for a given category, tells us the predicted log relative risk of being in that category, for an observation whose score on all other predictors was 0. The <span class="math notranslate nohighlight">\(p\)</span>-value for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
 <p>The slope, for a given category, of each predictor tells us the predicted difference in log relative risk of being in that category between scores for two hypothetical observations which differed <em>only</em> by a one unit score in that predictor, controlling for the other variables in the model. The <span class="math notranslate nohighlight">\(p\)</span>-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
-</div>
-<div class="section" id="statistical-interaction-in-multinomial-logistic-regression">
+</section>
+<section id="statistical-interaction-in-multinomial-logistic-regression">
 <h2>Statistical interaction in Multinomial Logistic Regression<a class="headerlink" href="#statistical-interaction-in-multinomial-logistic-regression" title="Permalink to this headline">#</a></h2>
 <p>The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).</p>
 <p>If we fit an interaction term in a multinomial logistic regression model, then this allows each logistic regression probability surfaces to ‘bend’, so that the effect of one predictor depends on the value of the other predictor. The graph below shows this for one logistic probability surface:</p>
@@ -1235,8 +1166,8 @@ title="Print to PDF"
 <p>That’s it for multinomial logistic regression (for now). You can visit another page/island via the links in the table of contents, and at the bottom of this page…</p>
 <hr class="docutils" />
 <p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

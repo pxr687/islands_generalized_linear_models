@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Who this book is for &#8212; Islands - Generalized Linear Models</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -358,11 +359,11 @@ title="Print to PDF"
 <br>
 <p>This textbook is a short introduction to generalized linear models. Generalized linear models are a modelling framework which unifies <span class="math notranslate nohighlight">\(t\)</span>-tests, ANOVA, ANCOVA and multiple linear regression with other regression techniques like logistic regression and survival analysis. All generalized linear models can be expressed as:</p>
 <div class="math notranslate nohighlight">
-\[ \Large f(\mu_i) = b_0 + b_1x_{1i} + ... + b_kx_{ki} \]</div>
+\[ \Large f(\hat{\mu_i}) = b_0 + b_1x_{1i} + ... + b_kx_{ki} \]</div>
 <p>(Where there are <span class="math notranslate nohighlight">\(k\)</span> predictor variables, and <span class="math notranslate nohighlight">\(n\)</span> observations, with any individual observation denoted with <span class="math notranslate nohighlight">\(i\)</span>).</p>
 <p>The above equation reads as ‘for each observation, some function of the the predicted value of the outcome variable is a linear function of the predictor variable scores’. For some generalized linear models (like linear regression) the linear prediction equation predicts the outcome variable directly, on its original scale. For others, like Poisson regression, the linear prediction equation models the outcome variable on some other scale (e.g. a logarithmic scale).</p>
 <p>This flexibility - stemming from the linear prediction equation being fit on different scales - allows for generalized linear models to be applied to a wide variety of outcome variables. The array of techniques that fall within the generalized linear modelling framework, and the variety of outcome variables they can be applied to, make generalized linear modelling an essential ‘swiss army knife’ tool for statistical modelling.</p>
-<div class="tex2jax_ignore mathjax_ignore section" id="who-this-book-is-for">
+<section class="tex2jax_ignore mathjax_ignore" id="who-this-book-is-for">
 <h1>Who this book is for<a class="headerlink" href="#who-this-book-is-for" title="Permalink to this headline">#</a></h1>
 <p>This book is intended for readers who have taken undergraduate statistics classes in social or life science and who want to understand how generalized linear models get their parameter estimates, in a way that goes beyond just interpretting tables from statistical software.</p>
 <p>My background is in psychology, so this book is written from an applied statistics perspective. However, this book delves slightly deeper into the mechanics of generalized linear models than some applied statistics textbooks that I have read. My focus is on how the models estimate their parameters, by minimizing their cost functions (analogous to minimizing the sum of the squared error in linear regression). This book:</p>
@@ -393,7 +394,7 @@ title="Print to PDF"
 <p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {

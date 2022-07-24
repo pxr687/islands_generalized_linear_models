@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Poisson Regression &#8212; Islands - Generalized Linear Models</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -470,7 +471,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="poisson-regression">
+  <section class="tex2jax_ignore mathjax_ignore" id="poisson-regression">
 <h1>Poisson Regression<a class="headerlink" href="#poisson-regression" title="Permalink to this headline">#</a></h1>
 <br>
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/island_pois_reg.png"><img alt="_images/island_pois_reg.png" class="bg-primary mb-1 align-center" src="_images/island_pois_reg.png" style="width: 270px;" /></a>
@@ -659,7 +660,7 @@ title="Print to PDF"
 </div>
 <p>This prediction is nonsense for a count outcome variable like <code class="docutils literal notranslate"><span class="pre">number_of_predation_events</span></code>, and is a problem for using linear regression with count data, when a lot of the values fall close to 0.</p>
 <p>Fortunately, there are several several generalized linear models for count data. We will look at the most foundational one: Poisson regression.</p>
-<div class="section" id="context">
+<section id="context">
 <h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
 <p>Poisson regression  is a generalized linear model used to model the relationship between a count outcome variable (that can take only positive integer values) and one or more predictor variables. As with all generalized linear models, the predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical). The predictions from Poisson regression can range from zero to positive infinity.</p>
 <p>Poisson regression that involves fitting a set of Poisson distributions to the outcome variable, where the means of the Poisson distributions vary as a function of the predictor(s). The Poisson distribtion is a distributional form which describes count variables. The python cell below creates a graph which shows the Poisson distribution with a mean of 1:</p>
@@ -692,8 +693,8 @@ title="Print to PDF"
 <p>(The graph below shows linear regression - fitting normal distributions - on the left, and Poisson regression - fitting Poisson distributions, on the right):</p>
 <p><img alt="" src="_images/poiss_reg_2.png" /></p>
 <p>(image from <a class="reference external" href="https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html">https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html</a>)</p>
-</div>
-<div class="section" id="model">
+</section>
+<section id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
 <p>Remember from the <a class="reference internal" href="1_generalized_linear_models.html"><span class="doc std std-doc">What are generalized linear models?</span></a> page that generalized linear models predict some function of the mean as a function of the linear prediction equation.</p>
 <p>In the case of linear regression, this function of the mean is just <span class="math notranslate nohighlight">\(1 * \mu\)</span>. For other generalized liner models, like Poisson regression, we use a different function of the mean.</p>
@@ -737,8 +738,8 @@ title="Print to PDF"
            {b_{k}} \\ 
          \end{bmatrix} 
 \end{split}\]</div>
-</div>
-<div class="section" id="parameter-estimation">
+</section>
+<section id="parameter-estimation">
 <h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
 <p>The parameter estimates are obtained by maximizing the likelihood function (where <span class="math notranslate nohighlight">\(\hat{y_{i}} = e^{(b_{0} + b_{1}x_{1i} + ... + b_{k}x_{ki})}\)</span>):</p>
 <p><span class="math notranslate nohighlight">\( \Huge \prod\limits_{i = 1}^{n} \frac{\hat{y}^{y_i}_i e^{-\hat{y_i}}}{y_i!}\)</span></p>
@@ -786,8 +787,8 @@ title="Print to PDF"
 <p>As with linear regression, because maximizing the likelihood formula involves multiplying together probabilities, the numbers involved are so small it can lead to computational errors. In practice, again we minimize the <em>negative log-likelihood</em>, rather than directly maximizing the likelihood. This produces the same parameter estimates, but is less prone to numerical errors. The negative log-likelihood formula is:</p>
 <p><span class="math notranslate nohighlight">\( \Huge - \sum\limits_{i = 1}^{n} {y_i} ln(\hat{y}) -\hat{y_i} -ln(y_i!) \)</span></p>
 <p>This formula is just the result of applying the log transformation to the likelihood formula shown earlier (and multiplying it by -1).</p>
-</div>
-<div class="section" id="implementation">
+</section>
+<section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
 <p>The cell below defines a function which implements the negative log-likelihood formula:</p>
 <div class="cell docutils container">
@@ -900,10 +901,10 @@ title="Print to PDF"
   <th>Method:</th>                     <td>IRLS</td>            <th>  Log-Likelihood:    </th> <td> -242.86</td>
 </tr>
 <tr>
-  <th>Date:</th>                 <td>Wed, 13 Jul 2022</td>      <th>  Deviance:          </th> <td>  159.05</td>
+  <th>Date:</th>                 <td>Sun, 24 Jul 2022</td>      <th>  Deviance:          </th> <td>  159.05</td>
 </tr>
 <tr>
-  <th>Time:</th>                     <td>13:08:14</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
+  <th>Time:</th>                     <td>20:41:51</td>          <th>  Pearson chi2:      </th>  <td>  140.</td> 
 </tr>
 <tr>
   <th>No. Iterations:</th>               <td>4</td>             <th>  Pseudo R-squ. (CS):</th>  <td>0.6670</td> 
@@ -924,8 +925,8 @@ title="Print to PDF"
 </tr>
 </table></div></div>
 </div>
-</div>
-<div class="section" id="interpretation-one-predictor-model">
+</section>
+<section id="interpretation-one-predictor-model">
 <h2>Interpretation (one predictor model)<a class="headerlink" href="#interpretation-one-predictor-model" title="Permalink to this headline">#</a></h2>
 <p>Note: the intercept and slope are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
 <p>The parameter estimates tell us:</p>
@@ -963,8 +964,8 @@ title="Print to PDF"
 <img alt="_images/3_poisson_regression_39_0.png" src="_images/3_poisson_regression_39_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="effect-of-the-slope-and-intercept-on-the-poisson-regression-curve">
+</section>
+<section id="effect-of-the-slope-and-intercept-on-the-poisson-regression-curve">
 <h2>Effect of the slope and intercept on the Poisson Regression curve<a class="headerlink" href="#effect-of-the-slope-and-intercept-on-the-poisson-regression-curve" title="Permalink to this headline">#</a></h2>
 <p>On the log scale, changing the intercept moves the prediction line up and down the y-axis. On the original scale, changing the intercept moves the poisson regression curve up and down the y-axis:</p>
 <div class="cell docutils container">
@@ -992,8 +993,8 @@ title="Print to PDF"
 <img alt="_images/3_poisson_regression_43_0.png" src="_images/3_poisson_regression_43_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="poisson-regression-with-multiple-predictors">
+</section>
+<section id="poisson-regression-with-multiple-predictors">
 <h2>Poisson Regression with multiple predictors<a class="headerlink" href="#poisson-regression-with-multiple-predictors" title="Permalink to this headline">#</a></h2>
 <p>For models with more than one predictor, Poisson regression fits a surface to the data if there are two predictors, and a manifold if there are more than two (higher dimensional models are hard/impossible to visualize, but are generalizations of the 3D case).</p>
 <p>The graph below shows a Poisson regression model fit to an outcome with two continuous predictor variables. The blue surface is the Poisson regression model, the red dots are the hypothetical data points. The blue surface indicates the predicted outcome scores, for any pair of scores on the predictor variables:</p>
@@ -1158,10 +1159,10 @@ title="Print to PDF"
   <th>Method:</th>                     <td>IRLS</td>            <th>  Log-Likelihood:    </th> <td> -218.13</td>
 </tr>
 <tr>
-  <th>Date:</th>                 <td>Wed, 13 Jul 2022</td>      <th>  Deviance:          </th> <td>  109.59</td>
+  <th>Date:</th>                 <td>Sun, 24 Jul 2022</td>      <th>  Deviance:          </th> <td>  109.59</td>
 </tr>
 <tr>
-  <th>Time:</th>                     <td>13:08:16</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
+  <th>Time:</th>                     <td>20:41:52</td>          <th>  Pearson chi2:      </th>  <td>  103.</td> 
 </tr>
 <tr>
   <th>No. Iterations:</th>               <td>5</td>             <th>  Pseudo R-squ. (CS):</th>  <td>0.7969</td> 
@@ -1200,14 +1201,14 @@ title="Print to PDF"
 <img alt="_images/3_poisson_regression_54_0.png" src="_images/3_poisson_regression_54_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="interpretation-multiple-predictors">
+</section>
+<section id="interpretation-multiple-predictors">
 <h2>Interpretation (multiple predictors)<a class="headerlink" href="#interpretation-multiple-predictors" title="Permalink to this headline">#</a></h2>
 <p>Note: the intercept and slopes are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
 <p>The intercept, tells us the predicted outcome score (on the log scale) for an observation whose score on all other predictors is 0. The <span class="math notranslate nohighlight">\(p\)</span>-value for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
 <p>The slope of each predictor tells us the predicted difference in outcome score (on the log scale) when we compare two hypothetical observations which differed <em>only</em> by a one unit score in that predictor, controlling for the other variables in the model. The <span class="math notranslate nohighlight">\(p\)</span>-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
-</div>
-<div class="section" id="statistical-interaction-in-poisson-regression">
+</section>
+<section id="statistical-interaction-in-poisson-regression">
 <h2>Statistical interaction in Poisson Regression<a class="headerlink" href="#statistical-interaction-in-poisson-regression" title="Permalink to this headline">#</a></h2>
 <p>The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).</p>
 <p>If we fit an interaction term in  Poisson regression this allows the Poisson regression surface to ‘bend’, so that the effect of one predictor depends on the value of the other predictor. This is shown on the graph below:</p>
@@ -1225,8 +1226,8 @@ title="Print to PDF"
 <p>That’s it for Poisson regression (for now). You can visit another page/island via the links in the table of contents, and at the bottom of this page…</p>
 <hr class="docutils" />
 <p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

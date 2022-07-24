@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Binary Logistic Regression &#8212; Islands - Generalized Linear Models</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -470,7 +471,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="binary-logistic-regression">
+  <section class="tex2jax_ignore mathjax_ignore" id="binary-logistic-regression">
 <h1>Binary Logistic Regression<a class="headerlink" href="#binary-logistic-regression" title="Permalink to this headline">#</a></h1>
 <br>
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/island_bin_log_reg.png"><img alt="_images/island_bin_log_reg.png" class="bg-primary mb-1 align-center" src="_images/island_bin_log_reg.png" style="width: 270px;" /></a>
@@ -641,7 +642,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>This is the motivation for logistic regression, it produces probability predictions that are bounded between 0 and 1, and overcomes the issue with applying linear regression to this sort of data.</p>
-<div class="section" id="context">
+<section id="context">
 <h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
 <p>We can use binary logistic regression when we are predicting a binary categorical variable from one or more predictor variables. As with all generalized linear models, the predictor variables can be of any type (quantitative-continuous, quantitative-discrete, nominal-categorical, ordinal-categorical).</p>
 <p>The predictions from binary logistic regression that we are most interested in are the predicted probabilities of being in either outcome category. As we will see, we have to transform the predictions to get them into that form. The graph below shows the classic logistic ‘S’ shape of the probability predictions of logistic regression, as a function of some predictor:</p>
@@ -652,8 +653,8 @@ title="Print to PDF"
 <p><img alt="" src="_images/binary_log_reg_bar.jpg" /></p>
 <p>This barplot shows the Bernoulli distribution of the outcome categories, for a given level of the predictor. This is how binary logistic regression works from a ‘conditional distribution’ perspective: it fits a Bernoulli distribution for every value of the predictor:</p>
 <p><img alt="" src="_images/binary_log_reg_conditional.png" /></p>
-</div>
-<div class="section" id="model">
+</section>
+<section id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
 <p>We can denote the predicted probability of being in category 1 with:</p>
 <p><span class="math notranslate nohighlight">\( \large \hat{P}_{(y_{i} = 1)} = \hat\pi_{1i}\)</span></p>
@@ -711,8 +712,8 @@ title="Print to PDF"
 <p>Obviously, we don’t really care about predictions on the scale of the log odds ratio, and they are not intuitive to interpret. We can convert the model predictions to probabilities using the following formulas:</p>
 <p><span class="math notranslate nohighlight">\( \large \hat\pi_{1i} =  \frac{e^{\hat{y}_{i}}}{1 + e^{\hat{y_{i}}}}\)</span></p>
 <p><span class="math notranslate nohighlight">\( \large \hat\pi_{0i} = 1 - \hat\pi_{1i} \)</span></p>
-</div>
-<div class="section" id="parameter-estimation">
+</section>
+<section id="parameter-estimation">
 <h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
 <p>To estimate the paramters, we use the category membership of the outcome scores (0 or 1) as an indicator variable.</p>
 <p><span class="math notranslate nohighlight">\(\text{indicator}_{0} = \begin{cases}
@@ -819,8 +820,8 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\( \large \prod\limits_{i = 1}^{n} \hat\pi_{0i}^{\text{indicator}_{0i}}  \hat\pi_{1i}^{\text{indicator}_{1i}}  \)</span></p>
 <p>Equivalently, by minimizing the negative log-likelihood function (has the same effect, but easier for a computer to work with):</p>
 <p><span class="math notranslate nohighlight">\( \large - \sum\limits_{i = 1}^{n} \text{indicator}_{0i} \cdot ln(\hat\pi_{0i}) + \text{indicator}_{1i} \cdot ln(\hat\pi_{1i}) \)</span></p>
-</div>
-<div class="section" id="implementation">
+</section>
+<section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
 <p>The cell below defines a python function that implements the negative log-likelhood function shown above:</p>
 <div class="cell docutils container">
@@ -872,7 +873,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.01119212, -0.28962196])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.01119213, -0.28962196])
 </pre></div>
 </div>
 </div>
@@ -906,10 +907,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     1</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1651</td>  
+  <th>Date:</th>            <td>Sun, 24 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1651</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>13:01:16</td>     <th>  Log-Likelihood:    </th> <td> -33.811</td> 
+  <th>Time:</th>                <td>20:41:58</td>     <th>  Log-Likelihood:    </th> <td> -33.811</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -40.496</td> 
@@ -930,8 +931,8 @@ title="Print to PDF"
 </tr>
 </table></div></div>
 </div>
-</div>
-<div class="section" id="interpretation-one-predictor-model">
+</section>
+<section id="interpretation-one-predictor-model">
 <h2>Interpretation (one predictor model)<a class="headerlink" href="#interpretation-one-predictor-model" title="Permalink to this headline">#</a></h2>
 <p>Note: the intercept and slope are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
 <p>The coefficients tell us:</p>
@@ -980,8 +981,8 @@ title="Print to PDF"
 <img alt="_images/4_binary_logistic_regression_28_0.png" src="_images/4_binary_logistic_regression_28_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="effect-of-the-slope-and-intercept-on-the-logistic-regression-curve">
+</section>
+<section id="effect-of-the-slope-and-intercept-on-the-logistic-regression-curve">
 <h2>Effect of the slope and intercept on the Logistic Regression curve<a class="headerlink" href="#effect-of-the-slope-and-intercept-on-the-logistic-regression-curve" title="Permalink to this headline">#</a></h2>
 <p>On the scale of the log odds ratio, changing the intercept moves the line up and down the y-axis. On the probability scale, this moves the logistic curve along the x-axis:</p>
 <div class="cell docutils container">
@@ -1009,8 +1010,8 @@ title="Print to PDF"
 <img alt="_images/4_binary_logistic_regression_32_0.png" src="_images/4_binary_logistic_regression_32_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="binary-logistic-regression-with-multiple-predictors">
+</section>
+<section id="binary-logistic-regression-with-multiple-predictors">
 <h2>Binary Logistic Regression with multiple predictors<a class="headerlink" href="#binary-logistic-regression-with-multiple-predictors" title="Permalink to this headline">#</a></h2>
 <p>For models with more than one predictor, binary logistic regression fits a surface to the data, if there are two predictions, and a manifold to the data if there are more than two predictors.</p>
 <p>The graph below shows a binary logistic regression model fit to an outcome with two continuous predictor variables. The blue surface is the binary logistic regression model, the red dots and black dots are the hypothetical data points. The blue surface indicates the predicted probability of being in outcome category 1, for any set of predictor scores:</p>
@@ -1057,10 +1058,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Wed, 13 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1731</td>  
+  <th>Date:</th>            <td>Sun, 24 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1731</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>13:01:18</td>     <th>  Log-Likelihood:    </th> <td> -33.488</td> 
+  <th>Time:</th>                <td>20:42:00</td>     <th>  Log-Likelihood:    </th> <td> -33.488</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -40.496</td> 
@@ -1099,14 +1100,14 @@ title="Print to PDF"
 <img alt="_images/4_binary_logistic_regression_38_0.png" src="_images/4_binary_logistic_regression_38_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="interpretation-multiple-predictors">
+</section>
+<section id="interpretation-multiple-predictors">
 <h2>Interpretation (multiple predictors)<a class="headerlink" href="#interpretation-multiple-predictors" title="Permalink to this headline">#</a></h2>
 <p>Note: the intercept and slopes are shown under the <code class="docutils literal notranslate"><span class="pre">coef</span></code> heading in the regression table above, the associated <span class="math notranslate nohighlight">\(p\)</span>-values are shown under <code class="docutils literal notranslate"><span class="pre">P&gt;|z|</span></code>.</p>
 <p>The intercept, tells us the predicted log odds ratio of being in category 1, for an observation whose score on all other predictors is 0. The <span class="math notranslate nohighlight">\(p\)</span>-value for the intercept tells us how (un)likely it would be to obtain an intercpet of the value we obtained, if randomly sampling from a population where the true intercept was 0.</p>
 <p>The slope of each predictor tells us the predicted difference in log odds ratio of being in category 1 when we compare between scores for two hypothetical observations which differed <em>only</em> by a one unit score in that predictor, controlling for the other variables in the model. The <span class="math notranslate nohighlight">\(p\)</span>-values for each predictor tell us how (un)likely it would be, under repeated random sampling, to observe a slope of the size we observed if the population slope was zero.</p>
-</div>
-<div class="section" id="statistical-interaction-in-binary-logistic-regression">
+</section>
+<section id="statistical-interaction-in-binary-logistic-regression">
 <h2>Statistical interaction in Binary Logistic Regression<a class="headerlink" href="#statistical-interaction-in-binary-logistic-regression" title="Permalink to this headline">#</a></h2>
 <p>The definition of statistical interaction is: the influence of a predictor on the outcome variable depends on the value of some other predictor(s).</p>
 <p>If we fit an interaction term in a binary logistic regression model, then this the logistic regression probability surface to ‘bend’, so that the effect of one of the predictors is altered by the value of the other predictor. The graph below shows a logistic probability surface with statistical interaction:</p>
@@ -1124,8 +1125,8 @@ title="Print to PDF"
 <p>That’s it for binary logistic regression (for now). You can visit another page/island via the links in the table of contents, and at the bottom of this page…</p>
 <hr class="docutils" />
 <p>By <a class="reference internal" href="99_about_the_author.html"><span class="doc std std-doc">pxr687</span></a></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
