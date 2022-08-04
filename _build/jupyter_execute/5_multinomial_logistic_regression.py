@@ -51,7 +51,7 @@ df
 
 # generate dummy variables
 df['religion_dummy'] =  df['religion'].replace(['Communionism', 'Symmetrianity', 'Lamothianism'], [0, 1, 2])
-df['biological_sex_dummy'] =  df['biological_sex'].replace(['female', 'male'], [0, 1])
+df['sex_dummy'] =  df['sex'].replace(['female', 'male'], [0, 1])
 
 # show the data
 df
@@ -302,8 +302,8 @@ islands_GLM.scatter_prob_subplots(mod, df)
 # In[10]:
 
 
-# show how multinomial logistic regression works in multiple dimensions
-islands_GLM.three_D_model_plot_multinomial('income', 'biological_sex_dummy', 
+# show how multinomial logistic regression works in multiple dimensions~
+islands_GLM.three_D_model_plot_multinomial('income', 'sex_dummy', 
                    'religion_dummy', 2.5185199239560534, -0.030011667415127917, -1.0302006835581514, -0.5366928830869722, 0.008857262577209785, -0.7421731046952662,
                   df, legend_loc = (1,1), wireframe_only = True)
 
@@ -333,7 +333,7 @@ df
 
 
 # fit a multinomial logistic regression model using statsmodels
-mod = smf.mnlogit('religion_dummy ~ income + biological_sex_dummy', data = df).fit()
+mod = smf.mnlogit('religion_dummy ~ income + sex_dummy', data = df).fit()
 
 # show the regression table
 mod.summary()
@@ -347,7 +347,7 @@ mod.summary()
 # this code generates the plot below
 intercept_1, income_slope_1, biological_sex_dummy_slope_1 = mod.params[0][:]
 intercept_2, income_slope_2, biological_sex_dummy_slope_2 = mod.params[1][:]
-islands_GLM.three_D_model_plot_multinomial('income', 'biological_sex_dummy', 
+islands_GLM.three_D_model_plot_multinomial('income', 'sex_dummy', 
                    'religion_dummy', intercept_1, income_slope_1, biological_sex_dummy_slope_1, intercept_2, income_slope_2, biological_sex_dummy_slope_2,
                   df)
 
