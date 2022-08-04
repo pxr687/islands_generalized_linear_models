@@ -592,7 +592,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate dummy variables</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;religion_dummy&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="s1">&#39;religion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;Communionism&#39;</span><span class="p">,</span> <span class="s1">&#39;Symmetrianity&#39;</span><span class="p">,</span> <span class="s1">&#39;Lamothianism&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;biological_sex_dummy&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="s1">&#39;biological_sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sex_dummy&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># show the data</span>
 <span class="n">df</span>
@@ -600,54 +600,124 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\indexes\base.py:3621,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3620</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3621</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3622</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\_libs\index.pyx:136,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\_libs\index.pyx:163,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:5198,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:5206,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;biological_sex&#39;
-
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
-
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># generate dummy variables</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;religion_dummy&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="s1">&#39;religion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;Communionism&#39;</span><span class="p">,</span> <span class="s1">&#39;Symmetrianity&#39;</span><span class="p">,</span> <span class="s1">&#39;Lamothianism&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;biological_sex_dummy&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="s1">&#39;biological_sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># show the data</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">df</span>
-
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\frame.py:3505,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3503</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3504</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">3505</span> <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3506</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">indexer</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3507</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
-
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\pandas\core\indexes\base.py:3623,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3621</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3622</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3623</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
-<span class="g g-Whitespace">   </span><span class="mi">3624</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3625</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
-<span class="g g-Whitespace">   </span><span class="mi">3626</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
-<span class="g g-Whitespace">   </span><span class="mi">3627</span>     <span class="c1">#  the TypeError.</span>
-<span class="g g-Whitespace">   </span><span class="mi">3628</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-<span class="ne">KeyError</span>: &#39;biological_sex&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>income</th>
+      <th>religion</th>
+      <th>sex</th>
+      <th>religion_dummy</th>
+      <th>sex_dummy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>78</td>
+      <td>Lamothianism</td>
+      <td>female</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>32</td>
+      <td>Communionism</td>
+      <td>male</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>55</td>
+      <td>Communionism</td>
+      <td>female</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>186</td>
+      <td>Lamothianism</td>
+      <td>female</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>Communionism</td>
+      <td>male</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>107</td>
+      <td>Symmetrianity</td>
+      <td>male</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>29</td>
+      <td>Symmetrianity</td>
+      <td>male</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>102</td>
+      <td>Lamothianism</td>
+      <td>female</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>22</td>
+      <td>Symmetrianity</td>
+      <td>male</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>107</td>
+      <td>Lamothianism</td>
+      <td>male</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 5 columns</p>
+</div></div></div>
 </div>
 <section id="context">
 <h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h2>
@@ -848,10 +918,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Wed, 06 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1872</td>  
+  <th>Date:</th>            <td>Thu, 04 Aug 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.1872</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:09:57</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
+  <th>Time:</th>                <td>11:58:09</td>     <th>  Log-Likelihood:    </th> <td> -89.257</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
@@ -913,8 +983,8 @@ title="Print to PDF"
 <p>The graph below shows a multinomial logisitc regression model fit to an outcome with three cateogries, as a function of two continuous predictor variables. Each surface represents the probability of being in the associate category, for any pairing of predictor scores:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show how multinomial logistic regression works in multiple dimensions</span>
-<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_model_plot_multinomial</span><span class="p">(</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="s1">&#39;biological_sex_dummy&#39;</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show how multinomial logistic regression works in multiple dimensions~</span>
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_model_plot_multinomial</span><span class="p">(</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="s1">&#39;sex_dummy&#39;</span><span class="p">,</span> 
                    <span class="s1">&#39;religion_dummy&#39;</span><span class="p">,</span> <span class="mf">2.5185199239560534</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.030011667415127917</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0302006835581514</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5366928830869722</span><span class="p">,</span> <span class="mf">0.008857262577209785</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7421731046952662</span><span class="p">,</span>
                   <span class="n">df</span><span class="p">,</span> <span class="n">legend_loc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">wireframe_only</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -958,9 +1028,9 @@ title="Print to PDF"
       <th></th>
       <th>income</th>
       <th>religion</th>
-      <th>biological_sex</th>
+      <th>sex</th>
       <th>religion_dummy</th>
-      <th>biological_sex_dummy</th>
+      <th>sex_dummy</th>
     </tr>
   </thead>
   <tbody>
@@ -1061,7 +1131,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit a multinomial logistic regression model using statsmodels</span>
-<span class="n">mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mnlogit</span><span class="p">(</span><span class="s1">&#39;religion_dummy ~ income + biological_sex_dummy&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mnlogit</span><span class="p">(</span><span class="s1">&#39;religion_dummy ~ income + sex_dummy&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
 <span class="c1"># show the regression table</span>
 <span class="n">mod</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
@@ -1086,10 +1156,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     4</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Wed, 06 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.2205</td>  
+  <th>Date:</th>            <td>Thu, 04 Aug 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.2205</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:09:57</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
+  <th>Time:</th>                <td>11:58:09</td>     <th>  Log-Likelihood:    </th> <td> -85.604</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -109.82</td> 
@@ -1100,28 +1170,28 @@ title="Print to PDF"
 </table>
 <table class="simpletable">
 <tr>
-    <th>religion_dummy=1</th>      <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+  <th>religion_dummy=1</th>    <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>Intercept</th>            <td>    0.2239</td> <td>    0.631</td> <td>    0.355</td> <td> 0.723</td> <td>   -1.012</td> <td>    1.460</td>
+  <th>Intercept</th>        <td>    0.2239</td> <td>    0.631</td> <td>    0.355</td> <td> 0.723</td> <td>   -1.012</td> <td>    1.460</td>
 </tr>
 <tr>
-  <th>income</th>               <td>   -0.0228</td> <td>    0.008</td> <td>   -2.809</td> <td> 0.005</td> <td>   -0.039</td> <td>   -0.007</td>
+  <th>income</th>           <td>   -0.0228</td> <td>    0.008</td> <td>   -2.809</td> <td> 0.005</td> <td>   -0.039</td> <td>   -0.007</td>
 </tr>
 <tr>
-  <th>biological_sex_dummy</th> <td>    1.3944</td> <td>    0.613</td> <td>    2.275</td> <td> 0.023</td> <td>    0.193</td> <td>    2.596</td>
+  <th>sex_dummy</th>        <td>    1.3944</td> <td>    0.613</td> <td>    2.275</td> <td> 0.023</td> <td>    0.193</td> <td>    2.596</td>
 </tr>
 <tr>
-    <th>religion_dummy=2</th>      <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+  <th>religion_dummy=2</th>    <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>Intercept</th>            <td>   -0.6714</td> <td>    0.457</td> <td>   -1.469</td> <td> 0.142</td> <td>   -1.567</td> <td>    0.224</td>
+  <th>Intercept</th>        <td>   -0.6714</td> <td>    0.457</td> <td>   -1.469</td> <td> 0.142</td> <td>   -1.567</td> <td>    0.224</td>
 </tr>
 <tr>
-  <th>income</th>               <td>    0.0065</td> <td>    0.003</td> <td>    2.317</td> <td> 0.021</td> <td>    0.001</td> <td>    0.012</td>
+  <th>income</th>           <td>    0.0065</td> <td>    0.003</td> <td>    2.317</td> <td> 0.021</td> <td>    0.001</td> <td>    0.012</td>
 </tr>
 <tr>
-  <th>biological_sex_dummy</th> <td>   -0.2678</td> <td>    0.533</td> <td>   -0.502</td> <td> 0.616</td> <td>   -1.313</td> <td>    0.778</td>
+  <th>sex_dummy</th>        <td>   -0.2678</td> <td>    0.533</td> <td>   -0.502</td> <td> 0.616</td> <td>   -1.313</td> <td>    0.778</td>
 </tr>
 </table></div></div>
 </div>
@@ -1131,7 +1201,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code generates the plot below</span>
 <span class="n">intercept_1</span><span class="p">,</span> <span class="n">income_slope_1</span><span class="p">,</span> <span class="n">biological_sex_dummy_slope_1</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">][:]</span>
 <span class="n">intercept_2</span><span class="p">,</span> <span class="n">income_slope_2</span><span class="p">,</span> <span class="n">biological_sex_dummy_slope_2</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">][:]</span>
-<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_model_plot_multinomial</span><span class="p">(</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="s1">&#39;biological_sex_dummy&#39;</span><span class="p">,</span> 
+<span class="n">islands_GLM</span><span class="o">.</span><span class="n">three_D_model_plot_multinomial</span><span class="p">(</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="s1">&#39;sex_dummy&#39;</span><span class="p">,</span> 
                    <span class="s1">&#39;religion_dummy&#39;</span><span class="p">,</span> <span class="n">intercept_1</span><span class="p">,</span> <span class="n">income_slope_1</span><span class="p">,</span> <span class="n">biological_sex_dummy_slope_1</span><span class="p">,</span> <span class="n">intercept_2</span><span class="p">,</span> <span class="n">income_slope_2</span><span class="p">,</span> <span class="n">biological_sex_dummy_slope_2</span><span class="p">,</span>
                   <span class="n">df</span><span class="p">)</span>
 </pre></div>
