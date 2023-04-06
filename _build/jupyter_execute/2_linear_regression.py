@@ -13,15 +13,15 @@
 # 
 # <br>
 
-# Imagine you are conducting social research on an island with 10,000 people living on it. The citizens of the island use a set of physical credits to represent social status. That is, the amount of social status (or lack thereof) that each islander has is represented in the number of 'prestige credits' that they have in their possession. The prestige credits are awarded by those around them, and by the government of the island.
+# Imagine you are conducting social research on an island with 10,000 people living on it. Imagine further that the citizens of the island use physical coins to indicate social status. That is, the amount of social status (or lack thereof) that each islander has is represented in the number of 'prestige coins' that they have in their possession. The prestige coins are awarded by those around them, and by the government of the island.
 # 
-# One of the social scientists in your research team suggests that citizens of the islands who are wealthier attract a higher number of prestige credits. The statistical version of this hypothesis is that `prestige` is postiviely associated with `wealth`. One way of thinking about this statistical hypothesis is that, if you know an islander's `wealth`, then this gives you predictive information about their social status. If you know someone is far above average `wealth`, then, if the hypothesis is true, then it's a safe bet that also have above average `prestige`.
+# One of the social scientists in your research team suggests that citizens who are wealthier attract a higher number of prestige coins. The statistical version of this hypothesis is that `prestige` is postiviely associated with `wealth`. One way of thinking about this statistical hypothesis is that, if you know an islander's `wealth`, then this gives you predictive information about their social status. If you know someone is far above average `wealth`, then, if the hypothesis is true, then it's a safe bet that also have above average `prestige`.
 # 
 # To test this hypothesis, your research team collect `wealth` and `prestige` scores for 1000 citizens of the island. You do this via random sampling. The government of the island has granted the research team access to census data, and so your team were able to use a computer to randomly select 1000 individuals, and survey them to collect the data.
 # 
 # The team contacted the 1000 randomly sampled islanders and asked them to complete a survey recording their `wealth` and `prestige`. The first 20 rows of the dataframe in which the team stored the `prestige` scores are shown below (each row corresponds to one islander). The variables contained in the dataframe are detailed below:
 # 
-#  `prestige` - a discrete numerical variable, the number of prestige credits each islander has.
+#  `prestige` - a discrete numerical variable, the number of prestige coins each islander has.
 # 
 #  `wealth` - a continuous numerical variable, recorded in units of the currency of the island.
 
@@ -202,7 +202,7 @@ islands_GLM.normal_plot()
 # 
 # (Image from: https://blogs.sas.com/content/iml/2015/09/10/plot-distrib-reg-model.html)
 # 
-# The likelihood function shown above fits these conditional normal distributions to the data. The likelihood function allows the mean ($\hat{y}_i$) of each normal distribution to vary as a function of the predictor variables ($\hat{y}_i = b_0 + b_1x_{1i} ... + b_kx_{ki})$. The function takes the dataset (the predictor scores and outcome scores), and two parameters ($\hat{y_i}$ and $\sigma$) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and those particular parameters. (NB: $\hat{y_i}$ is a parameter vector, containing each of the predictions from the linear prediction equation, for a given intercept/slope set).
+# The likelihood function shown above fits these conditional normal distributions to the data. The likelihood function allows the mean ($\hat{y}_i$) of each normal distribution to vary as a function of the predictor variables ($\hat{y}_i = b_0 + b_1x_{1i} ... + b_kx_{ki})$. The function takes the dataset (the predictor scores and outcome scores), and two parameters ($\hat{y_i}$ and $\sigma$) and computes the likelihood of obtaining the outcome scores, conditional on the predictor scores and those particular parameters. (NB: $\hat{y_i}$ is a vector containing each of the predictions from the linear prediction equation, for a given intercept/slope set).
 # 
 # By finding the values of of $b_0$,  $b_k$ and $\sigma$ which maximize the likelihood function (e.g. values of of $b_0$,  $b_k$ and $\sigma$ which yield a higher value of the function than any other values of of $b_0$,  $b_k$ and $\sigma$), we find the set of linearly positioned normal distributions which best fit the data. It is because $\hat{y_i}$ is obtained from the linear prediction equation, that the normal distributions which are fit to the data fall on a straight line.
 # 
