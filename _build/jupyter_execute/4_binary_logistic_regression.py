@@ -414,4 +414,4 @@ islands_GLM.bin_log_reg_plot(interaction = True)
 # That's it for binary logistic regression (for now). You can visit another page/island via the links in the table of contents, and at the bottom of this page...
 
 # ***
-# By [pxr687](99_about_the_author.ipynb) 
+# By [Peter Rush](99_about_the_author.ipynb) 

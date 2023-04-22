@@ -8,9 +8,10 @@ from mpl_toolkits.mplot3d import axes3d as _axes3d
 from scipy.special import factorial as _factorial
 import statsmodels.api as _sm
 
-# just some convenience functions (for plots etc.) for this textbook
-# may contain redundant unused functions, as there have been several revisions
-# and I may not have removed the old functions!
+# just some convenience functions (for plots etc.) for this textbook, which:
+# - are just to generate the data for the textbook, and are not commented or
+#   documented properly
+# - may contain redundant unused functions, as there have been several revisions
 
 def r_ify(fig_size = (7,6)):
 

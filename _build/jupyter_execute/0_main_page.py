@@ -50,4 +50,4 @@ print('This is the output of a code cell.')
 # All the island maps were generated with: https://www.redblobgames.com/maps/mapgen4/
 
 # ***
-# By [pxr687](99_about_the_author.ipynb) 
+# By [Peter Rush](99_about_the_author.ipynb) 

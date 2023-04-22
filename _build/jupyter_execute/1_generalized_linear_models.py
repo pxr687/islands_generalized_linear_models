@@ -78,4 +78,4 @@
 # Let's visit the islands, the links are in the table of contents, and at the bottom of this page...
 
 # ***
-# By [pxr687](99_about_the_author.ipynb) 
+# By [Peter Rush](99_about_the_author.ipynb) 
